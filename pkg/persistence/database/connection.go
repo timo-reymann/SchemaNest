@@ -70,23 +70,15 @@ func (dbc *DBConnection) Query(ctx context.Context, rowMapper func(scan func(des
 	return nil
 }
 
-func (dbc *DBConnection) Insert(sql string, parameters ...any) (*int64, error) {
+func (dbc *DBConnection) Insert(sql string, parameters ...any) error {
 	stmt, err := dbc.sql.Prepare(sql)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	defer stmt.Close()
 
-	res, err := stmt.Exec(parameters...)
-	if err != nil {
-		return nil, err
-	}
-
-	id, err := res.LastInsertId()
-	if err != nil {
-		return nil, err
-	}
-	return &id, nil
+	_, err = stmt.Exec(parameters...)
+	return err
 }
 
 func Connect(connStr string) (*DBConnection, error) {

@@ -20,12 +20,11 @@ type JsonSchemaRepositoryImpl struct {
 }
 
 func (j *JsonSchemaRepositoryImpl) Insert(ctx context.Context, entity *JsonSchemaEntity) error {
-	id, err := j.DB.Insert("INSERT INTO json_schema (identifier) VALUES (?)", entity.Identifier)
+	err := j.DB.Insert("INSERT INTO json_schema (identifier) VALUES (?)", entity.Identifier)
 	if err != nil {
 		return err
 	}
 
-	entity.Id = id
 	return nil
 }
 

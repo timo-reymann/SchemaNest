@@ -30,14 +30,13 @@ func (j *JsonSchemaVersionRepositoryImpl) List(ctx context.Context) ([]*JsonSche
 }
 
 func (j *JsonSchemaVersionRepositoryImpl) Insert(ctx context.Context, entity *JsonSchemaVersionEntity) error {
-	id, err := j.DB.Insert(
+	err := j.DB.Insert(
 		"INSERT INTO json_schema_version (version_major, version_minor, version_patch, content, json_schema_id) VALUES (?, ?, ?, ?, ?)",
 		entity.VersionMajor, entity.VersionMinor, entity.VersionPatch, entity.Content, entity.JsonSchemaId,
 	)
 	if err != nil {
 		return err
 	}
-	entity.Id = id
 	return nil
 }
 
