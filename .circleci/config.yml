@@ -9,6 +9,7 @@ orbs:
   github-cli: circleci/github-cli@2.7.0
   docker: circleci/docker@2.8.2
   codecov: codecov/codecov@5.3.0
+  go: circleci/go@3.0.2
 
 executors:
   go:
@@ -22,15 +23,17 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - checkout
-      - run:
-          name: Run tests
-          command: |
-            gotestsum --junitfile unit-tests.xml
-            make save-coverage-report
-      - run:
-          name: Get test coverage
-          command: |
-            go test -race -coverprofile=coverage.txt -covermode=atomic  -v ./...
+      - go/with-cache:
+          steps:
+            - run:
+                name: Run tests
+                command: |
+                  gotestsum --junitfile unit-tests.xml
+                  make save-coverage-report
+            - run:
+                name: Get test coverage
+                command: |
+                  go test -race -coverprofile=coverage.txt -covermode=atomic  -v ./...
       - codecov/upload
       - store_test_results:
           path: unit-tests.xml
