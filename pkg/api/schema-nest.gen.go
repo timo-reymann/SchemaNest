@@ -19,21 +19,27 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
-// JsonSchemaList defines model for JsonSchemaList.
-type JsonSchemaList = []struct {
+// JsonSchemaInfo defines model for JsonSchemaInfo.
+type JsonSchemaInfo struct {
 	Identifier *string `json:"identifier,omitempty"`
 }
 
-// JsonSchemaVersions defines model for JsonSchemaVersions.
-type JsonSchemaVersions = []struct {
+// JsonSchemaList defines model for JsonSchemaList.
+type JsonSchemaList = []JsonSchemaInfo
+
+// JsonSchemaVersion defines model for JsonSchemaVersion.
+type JsonSchemaVersion struct {
 	Version *string `json:"version,omitempty"`
 }
 
-// PostApiSchemaJsonSchemaIdentifierJSONBody defines parameters for PostApiSchemaJsonSchemaIdentifier.
-type PostApiSchemaJsonSchemaIdentifierJSONBody = map[string]interface{}
+// JsonSchemaVersions defines model for JsonSchemaVersions.
+type JsonSchemaVersions = []JsonSchemaVersion
 
-// PostApiSchemaJsonSchemaIdentifierJSONRequestBody defines body for PostApiSchemaJsonSchemaIdentifier for application/json ContentType.
-type PostApiSchemaJsonSchemaIdentifierJSONRequestBody = PostApiSchemaJsonSchemaIdentifierJSONBody
+// PostApiSchemaJsonSchemaIdentifierVersionVersionJSONBody defines parameters for PostApiSchemaJsonSchemaIdentifierVersionVersion.
+type PostApiSchemaJsonSchemaIdentifierVersionVersionJSONBody = map[string]interface{}
+
+// PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody defines body for PostApiSchemaJsonSchemaIdentifierVersionVersion for application/json ContentType.
+type PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody = PostApiSchemaJsonSchemaIdentifierVersionVersionJSONBody
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
@@ -43,9 +49,6 @@ type ServerInterface interface {
 	// Get versions of a json schema
 	// (GET /api/schema/json-schema/{identifier})
 	GetApiSchemaJsonSchemaIdentifier(w http.ResponseWriter, r *http.Request, identifier string)
-	// Create a new json schema for a version
-	// (POST /api/schema/json-schema/{identifier})
-	PostApiSchemaJsonSchemaIdentifier(w http.ResponseWriter, r *http.Request, identifier string)
 	// Get latest version of a JSON schema for a channel
 	// (GET /api/schema/json-schema/{identifier}/channel/{channel})
 	GetApiSchemaJsonSchemaIdentifierChannelChannel(w http.ResponseWriter, r *http.Request, identifier string, channel string)
@@ -55,6 +58,9 @@ type ServerInterface interface {
 	// Get latest version of a JSON schema
 	// (GET /api/schema/json-schema/{identifier}/version/{version})
 	GetApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request, identifier string, version string)
+	// Create a new json schema for a version
+	// (POST /api/schema/json-schema/{identifier}/version/{version})
+	PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request, identifier string, version string)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -96,31 +102,6 @@ func (siw *ServerInterfaceWrapper) GetApiSchemaJsonSchemaIdentifier(w http.Respo
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.GetApiSchemaJsonSchemaIdentifier(w, r, identifier)
-	}))
-
-	for _, middleware := range siw.HandlerMiddlewares {
-		handler = middleware(handler)
-	}
-
-	handler.ServeHTTP(w, r)
-}
-
-// PostApiSchemaJsonSchemaIdentifier operation middleware
-func (siw *ServerInterfaceWrapper) PostApiSchemaJsonSchemaIdentifier(w http.ResponseWriter, r *http.Request) {
-
-	var err error
-
-	// ------------- Path parameter "identifier" -------------
-	var identifier string
-
-	err = runtime.BindStyledParameterWithOptions("simple", "identifier", r.PathValue("identifier"), &identifier, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
-	if err != nil {
-		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "identifier", Err: err})
-		return
-	}
-
-	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		siw.Handler.PostApiSchemaJsonSchemaIdentifier(w, r, identifier)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -214,6 +195,40 @@ func (siw *ServerInterfaceWrapper) GetApiSchemaJsonSchemaIdentifierVersionVersio
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.GetApiSchemaJsonSchemaIdentifierVersionVersion(w, r, identifier, version)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r)
+}
+
+// PostApiSchemaJsonSchemaIdentifierVersionVersion operation middleware
+func (siw *ServerInterfaceWrapper) PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request) {
+
+	var err error
+
+	// ------------- Path parameter "identifier" -------------
+	var identifier string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "identifier", r.PathValue("identifier"), &identifier, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "identifier", Err: err})
+		return
+	}
+
+	// ------------- Path parameter "version" -------------
+	var version string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "version", r.PathValue("version"), &version, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "version", Err: err})
+		return
+	}
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PostApiSchemaJsonSchemaIdentifierVersionVersion(w, r, identifier, version)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -345,10 +360,10 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema", wrapper.ListJSONSchemas)
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}", wrapper.GetApiSchemaJsonSchemaIdentifier)
-	m.HandleFunc("POST "+options.BaseURL+"/api/schema/json-schema/{identifier}", wrapper.PostApiSchemaJsonSchemaIdentifier)
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}/channel/{channel}", wrapper.GetApiSchemaJsonSchemaIdentifierChannelChannel)
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}/latest", wrapper.GetApiSchemaJsonSchemaIdentifierLatest)
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}/version/{version}", wrapper.GetApiSchemaJsonSchemaIdentifierVersionVersion)
+	m.HandleFunc("POST "+options.BaseURL+"/api/schema/json-schema/{identifier}/version/{version}", wrapper.PostApiSchemaJsonSchemaIdentifierVersionVersion)
 
 	return m
 }
@@ -356,17 +371,18 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/+xV32/TMBD+V6yDx6zJYE95G0OaNk1joogX4MFLLqunxPbsy6aq6v+OznabtOvQqGCA",
-	"xFPs8/l+fN93zgIq01mjUZOHcgG+mmEnw/LcGz0N2wvliS2KsAtH1hmLjhSGnapRk2oUOt7R3CKU4Mkp",
-	"fQPLZbaymOtbrAgGg3ROznk/ZPqMziuj/Q+y3UeXvVKxi9KN4cuV0SSr0JeWHTt9Up0RH3HeSa0hg961",
-	"UMKMyPoyz0l15sDFw0mNHLtGXzllKVQDx1dn4j02Sis2iMY4EXu6RE+QASlqOcuGcd0MFJNicshRjUUt",
-	"rYIS3k6KSQEZWEmz0HourcojQ/mtN/ogrvnoBkMnDJTk/Gc1lMC8nU8/XE4TqRk49NZoH5F8UxQrIFCH",
-	"69LaVlUhQEgwKIJXrx02UMKrfJBMqsbnOygMaG9iNO2rCr1v+lasKw28+b7rpJunmoVsWyHvpWrldYuC",
-	"WxArYbL3Ezjki0GJyydBOUU6tirWOlR9NmiYAXeyQ0LnofyyAMWlMwmQraSixu4O73rlsIaSXI/ZCLFt",
-	"gX57EQbCuO5APzET8YyuX4Eld1QccfRN75GXeFA0E0PPQhsSjel1vUXeKZJIkvbCNEIK7iFxx5ms8Tso",
-	"uTL+D3Ny16Ond6ae/xQdW69NgHyL38PHwJ44lIT1mIYVaEzHBqDRV0ih8WGMZXhe1teePRR5NZNaY5sv",
-	"0mL/MTmJAdLndxKU7QxWrRO/3Pg94nt7wi4koacNZuv1L+GXT1obsyURxHkbvZVJIyugnq2RGHZvYUQM",
-	"/uZX9N+i8fnEpQj5Ii32H+70p0iflx/u+3Xi/6p4UhXL5fcAAAD//znRDpK9CwAA",
+	"H4sIAAAAAAAC/+xVX0/bPhT9Ktb9/R5DEzae8saYhECIoXXay7YHk9xQo8Q29g2oivrdJ/9Jk7QglW6r",
+	"tmlPuLY599xzznU6KFSjlURJFvIObLHAhvvlpVVy7n9eyEq5HW2URkMC/bkoUZKoBBr3i5YaIQdLRsg7",
+	"WK2Sfkfd3mNBsEpGgFfCkocgbDzW/wYryOG/dGCTRirpBo8BmRvDl1Pgz2isUHKb7ONw8CqmEdDuwbbn",
+	"skXYlRRR0kJJ4oUXQ/LGXfokGsU+4rLhUkICrakhhwWRtnmakmjUkQmHsxIddom2MEKT7w5Oby7Ye6yE",
+	"FG6DVcqwwOYaLUECJKh2VSaba3Egm2WzY4eqNEquBeTwdpbNMkhAc1r47lOuRWw3vbdKHoW1O7pD34kT",
+	"nrv6FyXk4My+nH+4nsdoJWDQaiVtcOZNlvVCoPT/zrWuReEBfIEhl68W3wa1pxrN26JAa6u2ZmumPge2",
+	"bRpulpEz43XN+CMXNb+tkbkWWD8e7vYLOqTdMBirF0U5RzrVInAdBXwYKSe44Q0SGgv5lw6Eo+5MgKSP",
+	"ihhfN/jQCoMl5GRaTEaKbQb+20Ec8DP+jPrRmaBnuPoVXOROshOHPr09usWeBC3Y0DOTililWllumHeO",
+	"xGKkLVMV48z1EL3b2bq0WHApsU67uNjfzLMAEP/8SmuTZ8GKdeHDhWTjTd3OwRUntDSOASvXD9dPz0Md",
+	"qsVYhFSMJto/lJz1Qu2ckQC7dzCCBr/zrP9ZNu5uXERIu7jYf7jje9Z/7Q8+3I/rwv9S8VIqEtDKPuPt",
+	"jbJ/qbkPLVp6p8rlj/m62grK8bZtZwY5YTlxOxJ3X/aJXeEu40zi0/izHB/gvl9X+nsAAAD//4I3e4ab",
+	"DAAA",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

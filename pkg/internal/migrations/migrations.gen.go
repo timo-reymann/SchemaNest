@@ -1,6 +1,7 @@
 // Code generated for package migrations by go-bindata DO NOT EDIT. (@generated)
 // sources:
-// ../../../migrations/postgres/.todo
+// ../../../migrations/postgres/01_initialize_schema.down.sql
+// ../../../migrations/postgres/01_initialize_schema.up.sql
 // ../../../migrations/sqlite3/01_initialize_schema.down.sql
 // ../../../migrations/sqlite3/01_initialize_schema.up.sql
 package migrations
@@ -79,22 +80,42 @@ func (fi bindataFileInfo) Sys() interface{} {
 	return nil
 }
 
-var _postgresTodo = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x01\x00\x00\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00")
+var _postgres01_initialize_schemaDownSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x4a\x29\xca\x2f\x50\x28\x49\x4c\xca\x49\x55\xc8\x4c\x53\x48\xad\xc8\x2c\x2e\x29\x56\xc8\x2a\xce\xcf\x8b\x2f\x4e\xce\x48\xcd\x4d\xb4\xe6\x22\xa4\x22\xbe\x2c\xb5\xa8\x38\x33\x3f\xcf\x1a\x10\x00\x00\xff\xff\xbc\x27\x60\x32\x4b\x00\x00\x00")
 
-func postgresTodoBytes() ([]byte, error) {
+func postgres01_initialize_schemaDownSqlBytes() ([]byte, error) {
 	return bindataRead(
-		_postgresTodo,
-		"postgres/.todo",
+		_postgres01_initialize_schemaDownSql,
+		"postgres/01_initialize_schema.down.sql",
 	)
 }
 
-func postgresTodo() (*asset, error) {
-	bytes, err := postgresTodoBytes()
+func postgres01_initialize_schemaDownSql() (*asset, error) {
+	bytes, err := postgres01_initialize_schemaDownSqlBytes()
 	if err != nil {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "postgres/.todo", size: 0, mode: os.FileMode(420), modTime: time.Unix(1745572759, 0)}
+	info := bindataFileInfo{name: "postgres/01_initialize_schema.down.sql", size: 75, mode: os.FileMode(420), modTime: time.Unix(1745573910, 0)}
+	a := &asset{bytes: bytes, info: info}
+	return a, nil
+}
+
+var _postgres01_initialize_schemaUpSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x84\x91\xd1\x4e\x83\x30\x18\x85\xef\xfb\x14\xe7\x12\x12\xde\xc0\xab\xda\xfd\x9a\xc6\x5a\xb4\xfc\x24\xee\x8a\x10\xa8\x59\x67\x56\x14\xd0\xe7\x37\xba\xb1\x0c\xe6\x1c\xd7\x1f\xff\x39\xe7\xab\x72\x24\x99\xc0\xf2\xd6\x10\xb6\x43\x17\xab\xa1\xd9\xf8\x5d\x2d\x12\x01\x00\xa1\xc5\xf4\x15\xe4\xb4\x34\x78\x72\xfa\x51\xba\x35\x1e\x68\x9d\x1d\x10\x1f\xc7\xf0\x1a\x7c\x0f\xa6\x17\x86\xcd\x19\xb6\x34\x06\xa5\xd5\xcf\x25\x89\xf4\x46\x88\x4b\x29\xd5\x97\xef\x87\xd0\xc5\xf3\xb4\xff\x12\x0f\x3f\x55\xbb\x7a\xdb\xf5\x80\xb6\x4c\xf7\xe4\x8e\xc1\x0b\x28\xc4\xeb\xd0\x7b\x3d\x36\x9b\x4b\x50\xd3\xc5\xd1\xc7\x71\x6a\xf5\x3b\x12\x58\x40\xa7\xa3\x42\x7b\x76\x09\x8e\xee\xc8\x91\x55\x54\x9c\xa2\x48\x42\x9b\x22\xb7\x58\x91\x21\x26\x28\x59\x28\xb9\xa2\xfd\x49\x95\xdb\x82\x9d\xd4\x96\xff\x52\x56\x7d\x7e\xbc\x1d\xf5\x4d\xdd\xf6\xca\x91\xcc\x0c\x65\x73\x17\xd9\x7c\x75\xb6\xa8\x9e\xfe\x3c\xd8\x77\x00\x00\x00\xff\xff\x56\xd0\x54\x3a\x16\x02\x00\x00")
+
+func postgres01_initialize_schemaUpSqlBytes() ([]byte, error) {
+	return bindataRead(
+		_postgres01_initialize_schemaUpSql,
+		"postgres/01_initialize_schema.up.sql",
+	)
+}
+
+func postgres01_initialize_schemaUpSql() (*asset, error) {
+	bytes, err := postgres01_initialize_schemaUpSqlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "postgres/01_initialize_schema.up.sql", size: 534, mode: os.FileMode(420), modTime: time.Unix(1745576250, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -191,9 +212,10 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"postgres/.todo":                        postgresTodo,
-	"sqlite3/01_initialize_schema.down.sql": sqlite301_initialize_schemaDownSql,
-	"sqlite3/01_initialize_schema.up.sql":   sqlite301_initialize_schemaUpSql,
+	"postgres/01_initialize_schema.down.sql": postgres01_initialize_schemaDownSql,
+	"postgres/01_initialize_schema.up.sql":   postgres01_initialize_schemaUpSql,
+	"sqlite3/01_initialize_schema.down.sql":  sqlite301_initialize_schemaDownSql,
+	"sqlite3/01_initialize_schema.up.sql":    sqlite301_initialize_schemaUpSql,
 }
 
 // AssetDir returns the file names below a certain
@@ -240,7 +262,8 @@ type bintree struct {
 
 var _bintree = &bintree{nil, map[string]*bintree{
 	"postgres": &bintree{nil, map[string]*bintree{
-		".todo": &bintree{postgresTodo, map[string]*bintree{}},
+		"01_initialize_schema.down.sql": &bintree{postgres01_initialize_schemaDownSql, map[string]*bintree{}},
+		"01_initialize_schema.up.sql":   &bintree{postgres01_initialize_schemaUpSql, map[string]*bintree{}},
 	}},
 	"sqlite3": &bintree{nil, map[string]*bintree{
 		"01_initialize_schema.down.sql": &bintree{sqlite301_initialize_schemaDownSql, map[string]*bintree{}},

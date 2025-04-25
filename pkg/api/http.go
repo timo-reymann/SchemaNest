@@ -1,8 +1,10 @@
 package api
 
-import "net/http"
+import (
+	"net/http"
+)
 
-func NewServeMux() (*http.ServeMux, error) {
+func NewServeMux(ctx *SchemaNestApiContext) (*http.ServeMux, error) {
 	swagger, err := GetSwagger()
 	if err != nil {
 		return nil, err
@@ -11,7 +13,7 @@ func NewServeMux() (*http.ServeMux, error) {
 
 	r := http.NewServeMux()
 
-	schemaNestApi := NewSchemaNestApi()
+	schemaNestApi := NewSchemaNestApi(ctx)
 	HandlerFromMux(schemaNestApi, r)
 	return r, nil
 }

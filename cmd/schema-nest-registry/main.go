@@ -5,6 +5,7 @@ import (
 	"github.com/timo-reymann/SchemaNest/pkg/api"
 	"github.com/timo-reymann/SchemaNest/pkg/buildinfo"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/database"
+	"github.com/timo-reymann/SchemaNest/pkg/persistence/json_schema"
 	"github.com/urfave/cli/v2"
 	"net"
 	"net/http"
@@ -28,7 +29,7 @@ func main() {
 					&cli.IntFlag{Name: "port", Aliases: []string{"p"}, DefaultText: "8080"},
 				},
 				Action: func(context *cli.Context) error {
-					db, err := database.Connect("sqlite3://schema_nest.sqlite?cache=shared&mode=memory")
+					db, err := database.Connect("sqlite3://schema_nest.sqlite")
 					if err != nil {
 						return err
 					}
@@ -42,7 +43,10 @@ func main() {
 						port = 8080
 					}
 
-					r, err := api.NewServeMux()
+					r, err := api.NewServeMux(&api.SchemaNestApiContext{
+						JsonSchemaRepository:        &json_schema.JsonSchemaRepositoryImpl{DB: db},
+						JsonSchemaVersionRepository: &json_schema.JsonSchemaVersionRepositoryImpl{DB: db},
+					})
 					if err != nil {
 						return err
 					}

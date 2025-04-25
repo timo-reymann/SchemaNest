@@ -36,22 +36,6 @@ paths:
                 $ref: "#/components/schemas/JsonSchemaList"
         '404':
           description: "JSON Schema with identifier not found"
-    post:
-      summary: Create a new json schema for a version
-      parameters:
-        - in: path
-          name: identifier
-          schema:
-            type: string
-          required: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-      responses:
-        '201':
-          description: Created JSON Schema version"
   /api/schema/json-schema/{identifier}/latest:
     get:
       summary: Get latest version of a JSON schema
@@ -116,19 +100,46 @@ paths:
                 type: object
         '404':
           description: "JSON Schema with identifier not found"
+    post:
+      summary: Create a new json schema for a version
+      parameters:
+        - in: path
+          name: identifier
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: version
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Created JSON Schema version"
+        '409':
+          description: JSON Schema version for identifier already exists
 components:
   schemas:
+    JsonSchemaInfo:
+      type: object
+      properties:
+        identifier:
+          type: string
     JsonSchemaList:
       type: array
       items:
-        type: object
-        properties:
-          identifier:
-            type: string
+        $ref: "#/components/schemas/JsonSchemaInfo"
+    JsonSchemaVersion:
+      type: object
+      properties:
+        version:
+          type: string
     JsonSchemaVersions:
       type: array
       items:
-        type: object
-        properties:
-          version:
-            type: string
+        $ref: "#/components/schemas/JsonSchemaVersion"
