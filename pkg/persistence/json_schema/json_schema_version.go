@@ -24,11 +24,6 @@ type JsonSchemaVersionRepositoryImpl struct {
 	DB *database.DBConnection
 }
 
-func (j *JsonSchemaVersionRepositoryImpl) List(ctx context.Context) ([]*JsonSchemaEntity, error) {
-	//TODO implement me
-	panic("implement me")
-}
-
 func (j *JsonSchemaVersionRepositoryImpl) Insert(ctx context.Context, entity *JsonSchemaVersionEntity) error {
 	err := j.DB.Insert(
 		"INSERT INTO json_schema_version (version_major, version_minor, version_patch, content, json_schema_id) VALUES (?, ?, ?, ?, ?)",
