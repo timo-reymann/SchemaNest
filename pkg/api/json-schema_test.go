@@ -1,0 +1,198 @@
+package api
+
+import (
+	"bytes"
+	"encoding/json"
+	"github.com/timo-reymann/SchemaNest/pkg/persistence/json_schema"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+)
+
+func TestListJSONSchemas(t *testing.T) {
+	tests := []struct {
+		name        string
+		mockSchemas []*json_schema.JsonSchemaEntity
+		expected    int
+	}{
+		{
+			name: "Success",
+			mockSchemas: []*json_schema.JsonSchemaEntity{
+				{Identifier: "schema1"},
+				{Identifier: "schema2"},
+			},
+			expected: http.StatusOK,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			mockContext := createTestContext()
+			mockRepo := mockContext.JsonSchemaRepository.(*MockJsonSchemaRepository)
+			mockRepo.Schemas = tt.mockSchemas
+
+			api := NewSchemaNestApi(&mockContext)
+			req := httptest.NewRequest(http.MethodGet, "/schemas", nil)
+			rec := httptest.NewRecorder()
+
+			api.ListJSONSchemas(rec, req)
+
+			if rec.Code != tt.expected {
+				t.Errorf("expected status %d, got %d", tt.expected, rec.Code)
+			}
+			if tt.expected == http.StatusOK {
+				var response []JsonSchemaInfo
+				err := json.NewDecoder(rec.Body).Decode(&response)
+				if err != nil {
+					t.Errorf("failed to decode response: %v", err)
+				}
+				if len(response) != len(tt.mockSchemas) {
+					t.Errorf("expected %d schemas, got %d", len(tt.mockSchemas), len(response))
+				}
+			}
+		})
+	}
+}
+
+func TestGetApiSchemaJsonSchemaIdentifier(t *testing.T) {
+	tests := []struct {
+		name         string
+		mockVersions []*json_schema.JsonSchemaVersionEntity
+		expected     int
+	}{
+		{
+			name: "Success",
+			mockVersions: []*json_schema.JsonSchemaVersionEntity{
+				{JsonSchemaId: 1, VersionMajor: 1, VersionMinor: 0, VersionPatch: 0},
+				{JsonSchemaId: 1, VersionMajor: 2, VersionMinor: 0, VersionPatch: 0},
+			},
+			expected: http.StatusOK,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			mockContext := createTestContext()
+			mockRepo := mockContext.JsonSchemaVersionRepository.(*MockJsonSchemaVersionRepository)
+			mockRepo.Versions = tt.mockVersions
+
+			api := NewSchemaNestApi(&mockContext)
+			req := httptest.NewRequest(http.MethodGet, "/schemas/schema1", nil)
+			rec := httptest.NewRecorder()
+
+			api.GetApiSchemaJsonSchemaIdentifier(rec, req, "schema1")
+
+			if rec.Code != tt.expected {
+				t.Errorf("expected status %d, got %d", tt.expected, rec.Code)
+			}
+			if tt.expected == http.StatusOK {
+				var response []JsonSchemaVersion
+				err := json.NewDecoder(rec.Body).Decode(&response)
+				if err != nil {
+					t.Errorf("failed to decode response: %v", err)
+				}
+				if len(response) != len(tt.mockVersions) {
+					t.Errorf("expected %d versions, got %d", len(tt.mockVersions), len(response))
+				}
+			}
+		})
+	}
+}
+
+func TestPostApiSchemaJsonSchemaIdentifierVersionVersion(t *testing.T) {
+	tests := []struct {
+		name     string
+		body     string
+		version  string
+		expected int
+	}{
+		{
+			name:     "Valid Schema",
+			body:     `{"type": "object"}`,
+			version:  "1.0.0",
+			expected: http.StatusCreated,
+		},
+		{
+			name:     "Invalid Version",
+			body:     `{"type": "object"}`,
+			version:  "1.a",
+			expected: http.StatusBadRequest,
+		},
+		{
+			name:     "Invalid JSON",
+			body:     `{"type": `,
+			version:  "1.0.0",
+			expected: http.StatusBadRequest,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			mockContext := createTestContext()
+			api := NewSchemaNestApi(&mockContext)
+
+			req := httptest.NewRequest(http.MethodPost, "/schemas/schema1/"+tt.version, bytes.NewBufferString(tt.body))
+			rec := httptest.NewRecorder()
+
+			api.PostApiSchemaJsonSchemaIdentifierVersionVersion(rec, req, "schema1", tt.version)
+
+			if rec.Code != tt.expected {
+				t.Errorf("expected status %d, got %d", tt.expected, rec.Code)
+			}
+		})
+	}
+}
+
+func TestGetApiSchemaJsonSchemaIdentifierVersionVersion(t *testing.T) {
+	tests := []struct {
+		name       string
+		version    string
+		mockEntity *json_schema.JsonSchemaVersionEntity
+		mockError  error
+		expected   int
+	}{
+		{
+			name:    "Success",
+			version: "1.0.0",
+			mockEntity: &json_schema.JsonSchemaVersionEntity{
+				JsonSchemaId: 1, VersionMajor: 1, VersionMinor: 0, VersionPatch: 0, Content: `{"type": "object"}`,
+			},
+			expected: http.StatusOK,
+		},
+		{
+			name:     "Not Found",
+			version:  "2.0.0",
+			expected: http.StatusNotFound,
+		},
+		{
+			name:     "Invalid Version",
+			version:  "1.a",
+			expected: http.StatusBadRequest,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			mockContext := createTestContext()
+			mockRepo := mockContext.JsonSchemaVersionRepository.(*MockJsonSchemaVersionRepository)
+			if tt.mockEntity != nil {
+				mockRepo.Versions = []*json_schema.JsonSchemaVersionEntity{tt.mockEntity}
+			}
+
+			api := NewSchemaNestApi(&mockContext)
+			req := httptest.NewRequest(http.MethodGet, "/schemas/schema1/"+tt.version, nil)
+			rec := httptest.NewRecorder()
+
+			api.GetApiSchemaJsonSchemaIdentifierVersionVersion(rec, req, "schema1", tt.version)
+
+			if rec.Code != tt.expected {
+				t.Errorf("expected status %d, got %d", tt.expected, rec.Code)
+			}
+			if tt.expected == http.StatusOK {
+				if rec.Body.String() != tt.mockEntity.Content {
+					t.Errorf("expected body %s, got %s", tt.mockEntity.Content, rec.Body.String())
+				}
+			}
+		})
+	}
+}

@@ -49,7 +49,7 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifier(w http.ResponseWriter, 
 
 func (s *SchemaNestApi) PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request, identifier string, version string) {
 	v, err := semver.NewVersion(version)
-	if err != nil || v.Metadata() != "" || v.Major() == 0 || v.Minor() == 0 || v.Patch() == 0 {
+	if err != nil || v.Metadata() != "" {
 		sendError(w, http.StatusBadRequest, "Invalid version format. Only 'major.minor.patch' is supported.")
 		return
 	}

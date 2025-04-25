@@ -1,5 +1,3 @@
-//go:build !darwin
-
 package database
 
 import (
@@ -83,9 +81,9 @@ func TestDBConnection_Insert(t *testing.T) {
 		},
 	}
 
+	t.Parallel()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-
 			dbc, err := Connect(tt.connStr)
 			if err != nil {
 				t.Fatalf("Failed to connect: %v", err)
