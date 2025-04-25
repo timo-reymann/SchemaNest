@@ -2,7 +2,7 @@ module github.com/timo-reymann/SchemaNest
 
 go 1.23.0
 
-toolchain go1.24.1
+toolchain go1.24.2
 
 require (
 	github.com/getkin/kin-openapi v0.127.0
