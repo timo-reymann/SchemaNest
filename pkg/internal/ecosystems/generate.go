@@ -1,0 +1,3 @@
+//go:generate go tool github.com/go-bindata/go-bindata/go-bindata -pkg migrations -prefix ../../../migrations/ -o ../migrations/migrations.gen.go ../../../migrations/...
+//go:generate go tool github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen --config openapi-codegen-config.yaml ../../../openapi.yml
+package ecosystems

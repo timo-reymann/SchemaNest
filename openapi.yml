@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
   title: SchemaNest
   description: API Definition for SchemaNest
@@ -6,7 +6,6 @@ info:
   contact:
     name: Timo Reymann
     url: https://timo-reymann.de
-  summary: Contains all API endpoints for schema nest
 paths:
   /api/schema/json-schema:
     get:

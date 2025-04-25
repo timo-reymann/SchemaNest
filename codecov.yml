@@ -5,3 +5,4 @@ coverage:
 ignore:
   - "cmd/**/*.go"
   - "pkg/buildinfo/*.go"
+  - "**/*.gen.go"
