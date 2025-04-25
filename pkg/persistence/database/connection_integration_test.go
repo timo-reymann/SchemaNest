@@ -182,7 +182,7 @@ func TestDBConnection_MigrateUp(t *testing.T) {
 		name    string
 		connStr string
 	}{
-		{"SQLite MigrateUp", "sqlite3::memory:"},
+		{"SQLite MigrateUp", "sqlite3://" + t.TempDir() + "/migrate.db"},
 		{"Postgres MigrateUp", pgConnstr},
 	}
 
