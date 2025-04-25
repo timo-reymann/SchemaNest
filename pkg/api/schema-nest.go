@@ -100,8 +100,25 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierLatest(w http.ResponseWr
 }
 
 func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request, identifier string, version string) {
-	//TODO implement me
-	panic("implement me")
+	semver, err := semver.NewVersion(version)
+	if err != nil || semver.Metadata() != "" {
+		SendError(w, http.StatusBadRequest, "Invalid version format. Only 'major.minor.patch' is supported.")
+		return
+	}
+
+	entity, err := s.context.JsonSchemaVersionRepository.GetForJsonSchemaAndVersion(r.Context(), identifier, semver.Major(), semver.Minor(), semver.Patch())
+	if err != nil {
+		SendInternalErr(w, "Failed to get JSON schema version for", identifier, err)
+		return
+	}
+
+	if entity == nil {
+		SendError(w, http.StatusNotFound, "Version not found")
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	_, _ = w.Write([]byte(entity.Content))
 }
 
 var _ ServerInterface = (*SchemaNestApi)(nil)
