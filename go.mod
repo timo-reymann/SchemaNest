@@ -9,7 +9,7 @@ require (
 	github.com/getkin/kin-openapi v0.131.0
 	github.com/golang-migrate/migrate/v4 v4.18.3
 	github.com/lib/pq v1.10.9
-	github.com/mattn/go-sqlite3 v1.14.22
+	github.com/mattn/go-sqlite3 v1.14.28
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/urfave/cli/v2 v2.27.6
 )
