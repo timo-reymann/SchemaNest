@@ -41,9 +41,10 @@ jobs:
     executor: go
     steps:
       - checkout
-      - run:
-          name: Build binaries
-          command: make build
+      - go/with-cache:
+        - run:
+            name: Build binaries
+            command: make build -j3
       - persist_to_workspace:
           root: ./
           paths:
