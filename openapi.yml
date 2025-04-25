@@ -1,0 +1,135 @@
+openapi: 3.1.0
+info:
+  title: SchemaNest
+  description: API Definition for SchemaNest
+  version: 0.0.1
+  contact:
+    name: Timo Reymann
+    url: https://timo-reymann.de
+  summary: Contains all API endpoints for schema nest
+paths:
+  /api/schema/json-schema:
+    get:
+      summary: List all available JSON schemas
+      operationId: listJSONSchemas
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonSchemaVersions"
+  /api/schema/json-schema/{identifier}:
+    get:
+      summary: Get versions of a json schema
+      parameters:
+        - in: path
+          name: identifier
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Version JSON Schema"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JsonSchemaList"
+        '404':
+          description: "JSON Schema with identifier not found"
+    post:
+      summary: Create a new json schema for a version
+      parameters:
+        - in: path
+          name: identifier
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Created JSON Schema version"
+  /api/schema/json-schema/{identifier}/latest:
+    get:
+      summary: Get latest version of a JSON schema
+      parameters:
+        - in: path
+          name: identifier
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: "Latest JSON Schema definition"
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: "JSON Schema with identifier not found"
+  /api/schema/json-schema/{identifier}/channel/{channel}:
+    get:
+      summary: Get latest version of a JSON schema for a channel
+      parameters:
+        - in: path
+          name: identifier
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: channel
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: "Latest JSON Schema definition"
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: "JSON Schema with identifier not found"
+  /api/schema/json-schema/{identifier}/version/{version}:
+    get:
+      summary: Get latest version of a JSON schema
+      parameters:
+        - in: path
+          name: identifier
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: version
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: "Latest JSON Schema definition"
+          content:
+            application/json:
+              schema:
+                type: object
+        '404':
+          description: "JSON Schema with identifier not found"
+components:
+  schemas:
+    JsonSchemaList:
+      type: array
+      items:
+        type: object
+        properties:
+          identifier:
+            type: string
+    JsonSchemaVersions:
+      type: array
+      items:
+        type: object
+        properties:
+          version:
+            type: string
