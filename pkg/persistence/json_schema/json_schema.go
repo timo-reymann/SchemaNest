@@ -20,7 +20,13 @@ type JsonSchemaRepositoryImpl struct {
 }
 
 func (j *JsonSchemaRepositoryImpl) Insert(ctx context.Context, entity *JsonSchemaEntity) error {
-	err := j.DB.Insert("INSERT INTO json_schema (identifier) VALUES (?)", entity.Identifier)
+	err := j.DB.Insert(
+		`
+			INSERT INTO json_schema (identifier) 
+			VALUES (?)
+			`,
+		entity.Identifier,
+	)
 	if err != nil {
 		return err
 	}
@@ -31,14 +37,21 @@ func (j *JsonSchemaRepositoryImpl) Insert(ctx context.Context, entity *JsonSchem
 func (j *JsonSchemaRepositoryImpl) List(ctx context.Context) ([]*JsonSchemaEntity, error) {
 	results := make([]*JsonSchemaEntity, 0)
 
-	err := j.DB.Query(context.Background(), func(scan func(dest ...any) error) (bool, error) {
-		res := &JsonSchemaEntity{}
-		err := scan(&res.Id, &res.Identifier)
-		if err == nil {
-			results = append(results, res)
-		}
-		return true, err
-	}, "SELECT id, identifier FROM json_schema")
+	err := j.DB.Query(
+		ctx,
+		func(scan func(dest ...any) error) (bool, error) {
+			res := &JsonSchemaEntity{}
+			err := scan(&res.Id, &res.Identifier)
+			if err == nil {
+				results = append(results, res)
+			}
+			return true, err
+		},
+		`
+		SELECT id, identifier 
+		FROM json_schema
+		ORDER BY identifier`,
+	)
 	if err != nil {
 		return nil, err
 	}

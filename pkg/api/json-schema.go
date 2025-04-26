@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/Masterminds/semver"
+	"github.com/timo-reymann/SchemaNest/pkg/channel"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/json_schema"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/mapping"
 	"io"
@@ -80,9 +81,27 @@ func (s *SchemaNestApi) PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.R
 	w.WriteHeader(http.StatusCreated)
 }
 
-func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierChannelChannel(w http.ResponseWriter, r *http.Request, identifier string, channel string) {
-	//TODO implement me
-	panic("implement me")
+func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierChannelChannel(w http.ResponseWriter, r *http.Request, identifier string, channelIdentifier string) {
+	parsedChannel, err := channel.Parse(channelIdentifier)
+	if err != nil {
+		sendError(w, http.StatusBadRequest, "Invalid channel format: "+err.Error())
+		return
+	}
+
+	var entity *json_schema.JsonSchemaVersionEntity
+	if parsedChannel.Minor == "" {
+		entity, err = s.context.JsonSchemaVersionRepository.GetForLatestMajorVersion(r.Context(), identifier, int64(parsedChannel.MajorVersion()))
+	} else {
+		entity, err = s.context.JsonSchemaVersionRepository.GetForLatestMinorVersion(r.Context(), identifier, int64(parsedChannel.MajorVersion()), int64(parsedChannel.MinorVersion()))
+	}
+
+	if entity == nil {
+		sendError(w, http.StatusNotFound, "Version not found")
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	_, _ = w.Write([]byte(entity.Content))
 }
 
 func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierLatest(w http.ResponseWriter, r *http.Request, identifier string) {

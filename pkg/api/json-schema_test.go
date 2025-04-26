@@ -196,3 +196,66 @@ func TestGetApiSchemaJsonSchemaIdentifierVersionVersion(t *testing.T) {
 		})
 	}
 }
+
+func TestGetApiSchemaJsonSchemaIdentifierChannelChannel(t *testing.T) {
+	tests := []struct {
+		name           string
+		channel        string
+		mockEntity     *json_schema.JsonSchemaVersionEntity
+		mockError      error
+		expectedStatus int
+		expectedBody   string
+	}{
+		{
+			name:    "Valid channel with major version",
+			channel: "1.x",
+			mockEntity: &json_schema.JsonSchemaVersionEntity{
+				JsonSchemaId: 1, VersionMajor: 1, VersionMinor: 0, VersionPatch: 0, Content: `{"type": "object"}`,
+			},
+			expectedStatus: http.StatusOK,
+			expectedBody:   `{"type": "object"}`,
+		},
+		{
+			name:    "Valid channel with major and minor version",
+			channel: "1.0.x",
+			mockEntity: &json_schema.JsonSchemaVersionEntity{
+				JsonSchemaId: 1, VersionMajor: 1, VersionMinor: 0, VersionPatch: 0, Content: `{"type": "object"}`,
+			},
+			expectedStatus: http.StatusOK,
+			expectedBody:   `{"type": "object"}`,
+		},
+		{
+			name:           "Invalid channel format",
+			channel:        "invalid",
+			expectedStatus: http.StatusBadRequest,
+		},
+		{
+			name:           "Invalid channel with single digit",
+			channel:        "2",
+			expectedStatus: http.StatusBadRequest,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			mockContext := createTestContext()
+			mockRepo := mockContext.JsonSchemaVersionRepository.(*MockJsonSchemaVersionRepository)
+			if tt.mockEntity != nil {
+				mockRepo.Versions = []*json_schema.JsonSchemaVersionEntity{tt.mockEntity}
+			}
+
+			api := NewSchemaNestApi(&mockContext)
+			req := httptest.NewRequest(http.MethodGet, "/schemas/schema1/channel/"+tt.channel, nil)
+			rec := httptest.NewRecorder()
+
+			api.GetApiSchemaJsonSchemaIdentifierChannelChannel(rec, req, "schema1", tt.channel)
+
+			if rec.Code != tt.expectedStatus {
+				t.Errorf("expected status %d, got %d", tt.expectedStatus, rec.Code)
+			}
+			if tt.expectedStatus == http.StatusOK && rec.Body.String() != tt.expectedBody {
+				t.Errorf("expected body %s, got %s", tt.expectedBody, rec.Body.String())
+			}
+		})
+	}
+}

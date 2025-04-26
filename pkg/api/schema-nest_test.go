@@ -23,6 +23,24 @@ type MockJsonSchemaVersionRepository struct {
 	Versions []*json_schema.JsonSchemaVersionEntity
 }
 
+func (m *MockJsonSchemaVersionRepository) GetForLatestMajorVersion(ctx context.Context, identifier string, versionMajor int64) (*json_schema.JsonSchemaVersionEntity, error) {
+	for _, version := range m.Versions {
+		if version.VersionMajor == versionMajor && version.JsonSchemaId == 1 {
+			return version, nil
+		}
+	}
+	return nil, nil
+}
+
+func (m *MockJsonSchemaVersionRepository) GetForLatestMinorVersion(ctx context.Context, identifier string, versionMajor int64, versionMinor int64) (*json_schema.JsonSchemaVersionEntity, error) {
+	for _, version := range m.Versions {
+		if version.VersionMajor == versionMajor && version.VersionMinor == versionMinor && version.JsonSchemaId == 1 {
+			return version, nil
+		}
+	}
+	return nil, nil
+}
+
 func (m *MockJsonSchemaVersionRepository) ListForJsonSchema(ctx context.Context, identifier string) ([]*json_schema.JsonSchemaVersionEntity, error) {
 	var results []*json_schema.JsonSchemaVersionEntity
 	for _, version := range m.Versions {
