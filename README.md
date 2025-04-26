@@ -71,8 +71,8 @@ To get started, please read the [Contribution Guidelines](./CONTRIBUTING.md).
 
 ### Test
 
-```
-make test
+```sh
+make test-coverage-report
 ```
 
 ### Build
