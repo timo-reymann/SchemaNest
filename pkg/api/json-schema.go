@@ -100,13 +100,22 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierChannelChannel(w http.Re
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	_, _ = w.Write([]byte(entity.Content))
+	_ = sendRawJSON(w, entity.Content)
 }
 
 func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierLatest(w http.ResponseWriter, r *http.Request, identifier string) {
-	//TODO implement me
-	panic("implement me")
+	entity, err := s.context.JsonSchemaVersionRepository.GetLatestVersion(r.Context(), identifier)
+	if err != nil {
+		sendInternalErr(w, "Failed to get latest JSON schema version for", identifier, err)
+		return
+	}
+
+	if entity == nil {
+		sendError(w, http.StatusNotFound, "Version not found")
+		return
+	}
+
+	_ = sendRawJSON(w, entity.Content)
 }
 
 func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request, identifier string, version string) {
@@ -127,6 +136,5 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierVersionVersion(w http.Re
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	_, _ = w.Write([]byte(entity.Content))
+	_ = sendRawJSON(w, entity.Content)
 }

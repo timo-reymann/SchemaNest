@@ -12,6 +12,13 @@ func sendJSON(w http.ResponseWriter, data any) error {
 	return encoding.WriteJSON(w, data)
 }
 
+func sendRawJSON(w http.ResponseWriter, data string) error {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	_, err := w.Write([]byte(data))
+	return err
+}
+
 func sendInternalErr(w http.ResponseWriter, msg string, extra ...any) {
 	slog.Info(msg, extra...)
 	w.WriteHeader(http.StatusInternalServerError)

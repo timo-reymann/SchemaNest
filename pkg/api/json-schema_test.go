@@ -259,3 +259,52 @@ func TestGetApiSchemaJsonSchemaIdentifierChannelChannel(t *testing.T) {
 		})
 	}
 }
+
+func TestGetApiSchemaJsonSchemaIdentifierLatest(t *testing.T) {
+	tests := []struct {
+		name       string
+		identifier string
+		mockEntity *json_schema.JsonSchemaVersionEntity
+		expected   int
+		body       string
+	}{
+		{
+			name:       "Valid Identifier",
+			identifier: "test-schema",
+			mockEntity: &json_schema.JsonSchemaVersionEntity{
+				JsonSchemaId: 1, VersionMajor: 1, VersionMinor: 0, VersionPatch: 0, Content: `{"type": "object"}`,
+			},
+			expected: http.StatusOK,
+			body:     `{"type": "object"}`,
+		},
+		{
+			name:       "Invalid Identifier",
+			identifier: "invalid-schema",
+			mockEntity: nil,
+			expected:   http.StatusNotFound,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			mockContext := createTestContext()
+			mockRepo := mockContext.JsonSchemaVersionRepository.(*MockJsonSchemaVersionRepository)
+			if tt.mockEntity != nil {
+				mockRepo.Versions = []*json_schema.JsonSchemaVersionEntity{tt.mockEntity}
+			}
+
+			api := NewSchemaNestApi(&mockContext)
+			req := httptest.NewRequest(http.MethodGet, "/schemas/"+tt.identifier+"/latest", nil)
+			rec := httptest.NewRecorder()
+
+			api.GetApiSchemaJsonSchemaIdentifierLatest(rec, req, tt.identifier)
+
+			if rec.Code != tt.expected {
+				t.Errorf("expected status %d, got %d", tt.expected, rec.Code)
+			}
+			if tt.expected == http.StatusOK && rec.Body.String() != tt.body {
+				t.Errorf("expected body %s, got %s", tt.body, rec.Body.String())
+			}
+		})
+	}
+}

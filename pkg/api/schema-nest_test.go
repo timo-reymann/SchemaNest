@@ -65,6 +65,15 @@ func (m *MockJsonSchemaVersionRepository) Insert(ctx context.Context, entity *js
 	return nil
 }
 
+func (m *MockJsonSchemaVersionRepository) GetLatestVersion(ctx context.Context, identifier string) (*json_schema.JsonSchemaVersionEntity, error) {
+	for _, version := range m.Versions {
+		if version.JsonSchemaId == 1 {
+			return version, nil
+		}
+	}
+	return nil, nil
+}
+
 func createTestContext() SchemaNestApiContext {
 	return SchemaNestApiContext{
 		JsonSchemaRepository:        &MockJsonSchemaRepository{},

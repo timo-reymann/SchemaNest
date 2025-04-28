@@ -20,6 +20,7 @@ type JsonSchemaVersionRepository interface {
 	GetForJsonSchemaAndVersion(ctx context.Context, identifier string, versionMajor int64, versionMinor int64, versionPatch int64) (*JsonSchemaVersionEntity, error)
 	GetForLatestMajorVersion(ctx context.Context, identifier string, versionMajor int64) (*JsonSchemaVersionEntity, error)
 	GetForLatestMinorVersion(ctx context.Context, identifier string, versionMajor int64, versionMinor int64) (*JsonSchemaVersionEntity, error)
+	GetLatestVersion(ctx context.Context, identifier string) (*JsonSchemaVersionEntity, error)
 }
 
 type JsonSchemaVersionRepositoryImpl struct {
@@ -134,7 +135,7 @@ func (j *JsonSchemaVersionRepositoryImpl) GetForLatestMinorVersion(ctx context.C
 		FROM json_schema_version
 		WHERE json_schema_id = (SELECT id
                         FROM json_schema
-                        WHERE identifier = '?')
+                        WHERE identifier = ?)
 		AND version_major = ?
 		AND version_minor = ?
 		ORDER BY version_major DESC,
@@ -142,6 +143,31 @@ func (j *JsonSchemaVersionRepositoryImpl) GetForLatestMinorVersion(ctx context.C
          		 version_patch DESC
 		LIMIT 1`,
 		identifier, versionMajor, versionMinor,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return entity, nil
+}
+
+func (j *JsonSchemaVersionRepositoryImpl) GetLatestVersion(ctx context.Context, identifier string) (*JsonSchemaVersionEntity, error) {
+	entity := &JsonSchemaVersionEntity{}
+
+	err := j.DB.Query(
+		ctx,
+		scanSingleRow(entity),
+		`
+		SELECT id, version_major, version_minor, version_patch, content, json_schema_id 
+		FROM json_schema_version
+		WHERE json_schema_id = (SELECT id
+                        FROM json_schema
+                        WHERE identifier = ?)
+		ORDER BY version_major DESC,
+        		 version_minor DESC,
+         		 version_patch DESC
+		LIMIT 1`,
+		identifier,
 	)
 	if err != nil {
 		return nil, err
