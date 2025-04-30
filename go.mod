@@ -6,7 +6,7 @@ toolchain go1.24.2
 
 require (
 	github.com/Masterminds/semver v1.5.0
-	github.com/getkin/kin-openapi v0.131.0
+	github.com/getkin/kin-openapi v0.132.0
 	github.com/golang-migrate/migrate/v4 v4.18.3
 	github.com/lib/pq v1.10.9
 	github.com/mattn/go-sqlite3 v1.14.28
