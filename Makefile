@@ -7,9 +7,9 @@ COMMIT_REF=$(shell git rev-parse --short HEAD)
 BUILD_ARGS=-ldflags "-X github.com/timo-reymann/SchemaNest/pkg/buildinfo.GitSha=$(COMMIT_REF) -X github.com/timo-reymann/SchemaNest/pkg/buildinfo.Version=$(VERSION) -X github.com/timo-reymann/SchemaNest/pkg/buildinfo.BuildTime=$(NOW)"
 BIN_PREFIX="dist/"
 BIN_PREFIX_SCHEMA_REGISTRY="$(BIN_PREFIX)schema-nest-registry-"
-BIN_PREFIX_SCHEMA_UPLOADER="$(BIN_PREFIX)schema-nest-uploader-"
+BIN_PREFIX_SCHEMA_UPLOADER="$(BIN_PREFIX)schema-nest-cli-"
 CMD_REGISTRY = "./cmd/schema-nest-registry"
-CMD_UPLOADER = "./cmd/schema-nest-uploader"
+CMD_UPLOADER = "./cmd/schema-nest-cli"
 
 clean: ## Cleanup artifacts
 	@rm -rf dist/
