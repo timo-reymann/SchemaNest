@@ -1,12 +1,13 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/timo-reymann/SchemaNest/pkg/api"
 	"github.com/timo-reymann/SchemaNest/pkg/buildinfo"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/database"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/json_schema"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 	"net"
 	"net/http"
 	"os"
@@ -16,11 +17,10 @@ import (
 func main() {
 	cli.VersionPrinter = buildinfo.PrintVersionInfo
 
-	app := &cli.App{
-		Name:     "schema-nest-registry",
-		Version:  buildinfo.Version,
-		Compiled: buildinfo.BuildTimeParsed,
-		Usage:    "Registry for storing and managing schemas.",
+	app := &cli.Command{
+		Name:    "schema-nest-registry",
+		Version: buildinfo.Version,
+		Usage:   "Registry for storing and managing schemas.",
 		Commands: []*cli.Command{
 			{
 				Name:        "serve-http",
@@ -28,7 +28,7 @@ func main() {
 				Flags: []cli.Flag{
 					&cli.IntFlag{Name: "port", Aliases: []string{"p"}, DefaultText: "8080"},
 				},
-				Action: func(context *cli.Context) error {
+				Action: func(ctx context.Context, command *cli.Command) error {
 					db, err := database.Connect("sqlite3://schema_nest.sqlite")
 					if err != nil {
 						return err
@@ -38,7 +38,7 @@ func main() {
 						return err
 					}
 
-					port := context.Int("port")
+					port := command.Int("port")
 					if port == 0 {
 						port = 8080
 					}
@@ -65,7 +65,7 @@ func main() {
 			},
 		},
 	}
-	err := app.Run(os.Args)
+	err := app.Run(context.Background(), os.Args)
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)

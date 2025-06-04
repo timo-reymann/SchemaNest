@@ -8,8 +8,11 @@ package api
 import (
 	"bytes"
 	"compress/gzip"
+	"context"
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 	"path"
@@ -19,9 +22,15 @@ import (
 	"github.com/oapi-codegen/runtime"
 )
 
+// Error defines model for Error.
+type Error struct {
+	// Error Error message
+	Error string `json:"error"`
+}
+
 // JsonSchemaInfo defines model for JsonSchemaInfo.
 type JsonSchemaInfo struct {
-	Identifier *string `json:"identifier,omitempty"`
+	Identifier string `json:"identifier"`
 }
 
 // JsonSchemaList defines model for JsonSchemaList.
@@ -29,7 +38,7 @@ type JsonSchemaList = []JsonSchemaInfo
 
 // JsonSchemaVersion defines model for JsonSchemaVersion.
 type JsonSchemaVersion struct {
-	Version *string `json:"version,omitempty"`
+	Version string `json:"version"`
 }
 
 // JsonSchemaVersions defines model for JsonSchemaVersions.
@@ -40,6 +49,829 @@ type PostApiSchemaJsonSchemaIdentifierVersionVersionJSONBody = map[string]interf
 
 // PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody defines body for PostApiSchemaJsonSchemaIdentifierVersionVersion for application/json ContentType.
 type PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody = PostApiSchemaJsonSchemaIdentifierVersionVersionJSONBody
+
+// RequestEditorFn  is the function signature for the RequestEditor callback function
+type RequestEditorFn func(ctx context.Context, req *http.Request) error
+
+// Doer performs HTTP requests.
+//
+// The standard http.Client implements this interface.
+type HttpRequestDoer interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+
+// Client which conforms to the OpenAPI3 specification for this service.
+type Client struct {
+	// The endpoint of the server conforming to this interface, with scheme,
+	// https://api.deepmap.com for example. This can contain a path relative
+	// to the server, such as https://api.deepmap.com/dev-test, and all the
+	// paths in the swagger spec will be appended to the server.
+	Server string
+
+	// Doer for performing requests, typically a *http.Client with any
+	// customized settings, such as certificate chains.
+	Client HttpRequestDoer
+
+	// A list of callbacks for modifying requests which are generated before sending over
+	// the network.
+	RequestEditors []RequestEditorFn
+}
+
+// ClientOption allows setting custom parameters during construction
+type ClientOption func(*Client) error
+
+// Creates a new Client, with reasonable defaults
+func NewClient(server string, opts ...ClientOption) (*Client, error) {
+	// create a client with sane default values
+	client := Client{
+		Server: server,
+	}
+	// mutate client and add all optional params
+	for _, o := range opts {
+		if err := o(&client); err != nil {
+			return nil, err
+		}
+	}
+	// ensure the server URL always has a trailing slash
+	if !strings.HasSuffix(client.Server, "/") {
+		client.Server += "/"
+	}
+	// create httpClient, if not already present
+	if client.Client == nil {
+		client.Client = &http.Client{}
+	}
+	return &client, nil
+}
+
+// WithHTTPClient allows overriding the default Doer, which is
+// automatically created using http.Client. This is useful for tests.
+func WithHTTPClient(doer HttpRequestDoer) ClientOption {
+	return func(c *Client) error {
+		c.Client = doer
+		return nil
+	}
+}
+
+// WithRequestEditorFn allows setting up a callback function, which will be
+// called right before sending the request. This can be used to mutate the request.
+func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
+	return func(c *Client) error {
+		c.RequestEditors = append(c.RequestEditors, fn)
+		return nil
+	}
+}
+
+// The interface specification for the client above.
+type ClientInterface interface {
+	// ListJSONSchemas request
+	ListJSONSchemas(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetApiSchemaJsonSchemaIdentifier request
+	GetApiSchemaJsonSchemaIdentifier(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetApiSchemaJsonSchemaIdentifierChannelChannel request
+	GetApiSchemaJsonSchemaIdentifierChannelChannel(ctx context.Context, identifier string, channel string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetApiSchemaJsonSchemaIdentifierLatest request
+	GetApiSchemaJsonSchemaIdentifierLatest(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetApiSchemaJsonSchemaIdentifierVersionVersion request
+	GetApiSchemaJsonSchemaIdentifierVersionVersion(ctx context.Context, identifier string, version string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PostApiSchemaJsonSchemaIdentifierVersionVersionWithBody request with any body
+	PostApiSchemaJsonSchemaIdentifierVersionVersionWithBody(ctx context.Context, identifier string, version string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	PostApiSchemaJsonSchemaIdentifierVersionVersion(ctx context.Context, identifier string, version string, body PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+}
+
+func (c *Client) ListJSONSchemas(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListJSONSchemasRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetApiSchemaJsonSchemaIdentifier(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetApiSchemaJsonSchemaIdentifierRequest(c.Server, identifier)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetApiSchemaJsonSchemaIdentifierChannelChannel(ctx context.Context, identifier string, channel string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetApiSchemaJsonSchemaIdentifierChannelChannelRequest(c.Server, identifier, channel)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetApiSchemaJsonSchemaIdentifierLatest(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetApiSchemaJsonSchemaIdentifierLatestRequest(c.Server, identifier)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetApiSchemaJsonSchemaIdentifierVersionVersion(ctx context.Context, identifier string, version string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetApiSchemaJsonSchemaIdentifierVersionVersionRequest(c.Server, identifier, version)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostApiSchemaJsonSchemaIdentifierVersionVersionWithBody(ctx context.Context, identifier string, version string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostApiSchemaJsonSchemaIdentifierVersionVersionRequestWithBody(c.Server, identifier, version, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PostApiSchemaJsonSchemaIdentifierVersionVersion(ctx context.Context, identifier string, version string, body PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPostApiSchemaJsonSchemaIdentifierVersionVersionRequest(c.Server, identifier, version, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// NewListJSONSchemasRequest generates requests for ListJSONSchemas
+func NewListJSONSchemasRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/schema/json-schema")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetApiSchemaJsonSchemaIdentifierRequest generates requests for GetApiSchemaJsonSchemaIdentifier
+func NewGetApiSchemaJsonSchemaIdentifierRequest(server string, identifier string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "identifier", runtime.ParamLocationPath, identifier)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/schema/json-schema/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetApiSchemaJsonSchemaIdentifierChannelChannelRequest generates requests for GetApiSchemaJsonSchemaIdentifierChannelChannel
+func NewGetApiSchemaJsonSchemaIdentifierChannelChannelRequest(server string, identifier string, channel string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "identifier", runtime.ParamLocationPath, identifier)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "channel", runtime.ParamLocationPath, channel)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/schema/json-schema/%s/channel/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetApiSchemaJsonSchemaIdentifierLatestRequest generates requests for GetApiSchemaJsonSchemaIdentifierLatest
+func NewGetApiSchemaJsonSchemaIdentifierLatestRequest(server string, identifier string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "identifier", runtime.ParamLocationPath, identifier)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/schema/json-schema/%s/latest", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetApiSchemaJsonSchemaIdentifierVersionVersionRequest generates requests for GetApiSchemaJsonSchemaIdentifierVersionVersion
+func NewGetApiSchemaJsonSchemaIdentifierVersionVersionRequest(server string, identifier string, version string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "identifier", runtime.ParamLocationPath, identifier)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "version", runtime.ParamLocationPath, version)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/schema/json-schema/%s/version/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPostApiSchemaJsonSchemaIdentifierVersionVersionRequest calls the generic PostApiSchemaJsonSchemaIdentifierVersionVersion builder with application/json body
+func NewPostApiSchemaJsonSchemaIdentifierVersionVersionRequest(server string, identifier string, version string, body PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewPostApiSchemaJsonSchemaIdentifierVersionVersionRequestWithBody(server, identifier, version, "application/json", bodyReader)
+}
+
+// NewPostApiSchemaJsonSchemaIdentifierVersionVersionRequestWithBody generates requests for PostApiSchemaJsonSchemaIdentifierVersionVersion with any type of body
+func NewPostApiSchemaJsonSchemaIdentifierVersionVersionRequestWithBody(server string, identifier string, version string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "identifier", runtime.ParamLocationPath, identifier)
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithLocation("simple", false, "version", runtime.ParamLocationPath, version)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/schema/json-schema/%s/version/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+func (c *Client) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
+	for _, r := range c.RequestEditors {
+		if err := r(ctx, req); err != nil {
+			return err
+		}
+	}
+	for _, r := range additionalEditors {
+		if err := r(ctx, req); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// ClientWithResponses builds on ClientInterface to offer response payloads
+type ClientWithResponses struct {
+	ClientInterface
+}
+
+// NewClientWithResponses creates a new ClientWithResponses, which wraps
+// Client with return type handling
+func NewClientWithResponses(server string, opts ...ClientOption) (*ClientWithResponses, error) {
+	client, err := NewClient(server, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &ClientWithResponses{client}, nil
+}
+
+// WithBaseURL overrides the baseURL.
+func WithBaseURL(baseURL string) ClientOption {
+	return func(c *Client) error {
+		newBaseURL, err := url.Parse(baseURL)
+		if err != nil {
+			return err
+		}
+		c.Server = newBaseURL.String()
+		return nil
+	}
+}
+
+// ClientWithResponsesInterface is the interface specification for the client with responses above.
+type ClientWithResponsesInterface interface {
+	// ListJSONSchemasWithResponse request
+	ListJSONSchemasWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListJSONSchemasResponse, error)
+
+	// GetApiSchemaJsonSchemaIdentifierWithResponse request
+	GetApiSchemaJsonSchemaIdentifierWithResponse(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*GetApiSchemaJsonSchemaIdentifierResponse, error)
+
+	// GetApiSchemaJsonSchemaIdentifierChannelChannelWithResponse request
+	GetApiSchemaJsonSchemaIdentifierChannelChannelWithResponse(ctx context.Context, identifier string, channel string, reqEditors ...RequestEditorFn) (*GetApiSchemaJsonSchemaIdentifierChannelChannelResponse, error)
+
+	// GetApiSchemaJsonSchemaIdentifierLatestWithResponse request
+	GetApiSchemaJsonSchemaIdentifierLatestWithResponse(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*GetApiSchemaJsonSchemaIdentifierLatestResponse, error)
+
+	// GetApiSchemaJsonSchemaIdentifierVersionVersionWithResponse request
+	GetApiSchemaJsonSchemaIdentifierVersionVersionWithResponse(ctx context.Context, identifier string, version string, reqEditors ...RequestEditorFn) (*GetApiSchemaJsonSchemaIdentifierVersionVersionResponse, error)
+
+	// PostApiSchemaJsonSchemaIdentifierVersionVersionWithBodyWithResponse request with any body
+	PostApiSchemaJsonSchemaIdentifierVersionVersionWithBodyWithResponse(ctx context.Context, identifier string, version string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiSchemaJsonSchemaIdentifierVersionVersionResponse, error)
+
+	PostApiSchemaJsonSchemaIdentifierVersionVersionWithResponse(ctx context.Context, identifier string, version string, body PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiSchemaJsonSchemaIdentifierVersionVersionResponse, error)
+}
+
+type ListJSONSchemasResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *JsonSchemaVersions
+}
+
+// Status returns HTTPResponse.Status
+func (r ListJSONSchemasResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListJSONSchemasResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetApiSchemaJsonSchemaIdentifierResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *JsonSchemaList
+}
+
+// Status returns HTTPResponse.Status
+func (r GetApiSchemaJsonSchemaIdentifierResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetApiSchemaJsonSchemaIdentifierResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetApiSchemaJsonSchemaIdentifierChannelChannelResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *map[string]interface{}
+}
+
+// Status returns HTTPResponse.Status
+func (r GetApiSchemaJsonSchemaIdentifierChannelChannelResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetApiSchemaJsonSchemaIdentifierChannelChannelResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetApiSchemaJsonSchemaIdentifierLatestResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *map[string]interface{}
+}
+
+// Status returns HTTPResponse.Status
+func (r GetApiSchemaJsonSchemaIdentifierLatestResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetApiSchemaJsonSchemaIdentifierLatestResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetApiSchemaJsonSchemaIdentifierVersionVersionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *map[string]interface{}
+}
+
+// Status returns HTTPResponse.Status
+func (r GetApiSchemaJsonSchemaIdentifierVersionVersionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetApiSchemaJsonSchemaIdentifierVersionVersionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PostApiSchemaJsonSchemaIdentifierVersionVersionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON409      *Error
+}
+
+// Status returns HTTPResponse.Status
+func (r PostApiSchemaJsonSchemaIdentifierVersionVersionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PostApiSchemaJsonSchemaIdentifierVersionVersionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ListJSONSchemasWithResponse request returning *ListJSONSchemasResponse
+func (c *ClientWithResponses) ListJSONSchemasWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListJSONSchemasResponse, error) {
+	rsp, err := c.ListJSONSchemas(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListJSONSchemasResponse(rsp)
+}
+
+// GetApiSchemaJsonSchemaIdentifierWithResponse request returning *GetApiSchemaJsonSchemaIdentifierResponse
+func (c *ClientWithResponses) GetApiSchemaJsonSchemaIdentifierWithResponse(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*GetApiSchemaJsonSchemaIdentifierResponse, error) {
+	rsp, err := c.GetApiSchemaJsonSchemaIdentifier(ctx, identifier, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetApiSchemaJsonSchemaIdentifierResponse(rsp)
+}
+
+// GetApiSchemaJsonSchemaIdentifierChannelChannelWithResponse request returning *GetApiSchemaJsonSchemaIdentifierChannelChannelResponse
+func (c *ClientWithResponses) GetApiSchemaJsonSchemaIdentifierChannelChannelWithResponse(ctx context.Context, identifier string, channel string, reqEditors ...RequestEditorFn) (*GetApiSchemaJsonSchemaIdentifierChannelChannelResponse, error) {
+	rsp, err := c.GetApiSchemaJsonSchemaIdentifierChannelChannel(ctx, identifier, channel, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetApiSchemaJsonSchemaIdentifierChannelChannelResponse(rsp)
+}
+
+// GetApiSchemaJsonSchemaIdentifierLatestWithResponse request returning *GetApiSchemaJsonSchemaIdentifierLatestResponse
+func (c *ClientWithResponses) GetApiSchemaJsonSchemaIdentifierLatestWithResponse(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*GetApiSchemaJsonSchemaIdentifierLatestResponse, error) {
+	rsp, err := c.GetApiSchemaJsonSchemaIdentifierLatest(ctx, identifier, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetApiSchemaJsonSchemaIdentifierLatestResponse(rsp)
+}
+
+// GetApiSchemaJsonSchemaIdentifierVersionVersionWithResponse request returning *GetApiSchemaJsonSchemaIdentifierVersionVersionResponse
+func (c *ClientWithResponses) GetApiSchemaJsonSchemaIdentifierVersionVersionWithResponse(ctx context.Context, identifier string, version string, reqEditors ...RequestEditorFn) (*GetApiSchemaJsonSchemaIdentifierVersionVersionResponse, error) {
+	rsp, err := c.GetApiSchemaJsonSchemaIdentifierVersionVersion(ctx, identifier, version, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetApiSchemaJsonSchemaIdentifierVersionVersionResponse(rsp)
+}
+
+// PostApiSchemaJsonSchemaIdentifierVersionVersionWithBodyWithResponse request with arbitrary body returning *PostApiSchemaJsonSchemaIdentifierVersionVersionResponse
+func (c *ClientWithResponses) PostApiSchemaJsonSchemaIdentifierVersionVersionWithBodyWithResponse(ctx context.Context, identifier string, version string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiSchemaJsonSchemaIdentifierVersionVersionResponse, error) {
+	rsp, err := c.PostApiSchemaJsonSchemaIdentifierVersionVersionWithBody(ctx, identifier, version, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostApiSchemaJsonSchemaIdentifierVersionVersionResponse(rsp)
+}
+
+func (c *ClientWithResponses) PostApiSchemaJsonSchemaIdentifierVersionVersionWithResponse(ctx context.Context, identifier string, version string, body PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiSchemaJsonSchemaIdentifierVersionVersionResponse, error) {
+	rsp, err := c.PostApiSchemaJsonSchemaIdentifierVersionVersion(ctx, identifier, version, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePostApiSchemaJsonSchemaIdentifierVersionVersionResponse(rsp)
+}
+
+// ParseListJSONSchemasResponse parses an HTTP response from a ListJSONSchemasWithResponse call
+func ParseListJSONSchemasResponse(rsp *http.Response) (*ListJSONSchemasResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListJSONSchemasResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest JsonSchemaVersions
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetApiSchemaJsonSchemaIdentifierResponse parses an HTTP response from a GetApiSchemaJsonSchemaIdentifierWithResponse call
+func ParseGetApiSchemaJsonSchemaIdentifierResponse(rsp *http.Response) (*GetApiSchemaJsonSchemaIdentifierResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetApiSchemaJsonSchemaIdentifierResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest JsonSchemaList
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetApiSchemaJsonSchemaIdentifierChannelChannelResponse parses an HTTP response from a GetApiSchemaJsonSchemaIdentifierChannelChannelWithResponse call
+func ParseGetApiSchemaJsonSchemaIdentifierChannelChannelResponse(rsp *http.Response) (*GetApiSchemaJsonSchemaIdentifierChannelChannelResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetApiSchemaJsonSchemaIdentifierChannelChannelResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest map[string]interface{}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetApiSchemaJsonSchemaIdentifierLatestResponse parses an HTTP response from a GetApiSchemaJsonSchemaIdentifierLatestWithResponse call
+func ParseGetApiSchemaJsonSchemaIdentifierLatestResponse(rsp *http.Response) (*GetApiSchemaJsonSchemaIdentifierLatestResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetApiSchemaJsonSchemaIdentifierLatestResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest map[string]interface{}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetApiSchemaJsonSchemaIdentifierVersionVersionResponse parses an HTTP response from a GetApiSchemaJsonSchemaIdentifierVersionVersionWithResponse call
+func ParseGetApiSchemaJsonSchemaIdentifierVersionVersionResponse(rsp *http.Response) (*GetApiSchemaJsonSchemaIdentifierVersionVersionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetApiSchemaJsonSchemaIdentifierVersionVersionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest map[string]interface{}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePostApiSchemaJsonSchemaIdentifierVersionVersionResponse parses an HTTP response from a PostApiSchemaJsonSchemaIdentifierVersionVersionWithResponse call
+func ParsePostApiSchemaJsonSchemaIdentifierVersionVersionResponse(rsp *http.Response) (*PostApiSchemaJsonSchemaIdentifierVersionVersionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PostApiSchemaJsonSchemaIdentifierVersionVersionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest Error
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	}
+
+	return response, nil
+}
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
@@ -371,18 +1203,19 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/+xVTW/UMBD9K9bAMd2k0Au5lSJVrapSsYgLcHCTSddVYrv2pCWK9r8jf2ST3W1Ru0AF",
-	"iFO9tvvmzXtvnB4K1WglUZKFvAdbLLDhfnlqlZz7nyeyUm5HG6XRkEB/LkqUJCqBxv2iTiPkYMkIeQXL",
-	"ZTLsqMtrLAiWyQTwTFjyEISNx3ppsIIcXqQjmzRSSTd4jMjcGN6tA39CY4WS22Rvx4MnMY2Adge2A5ct",
-	"wq6kiJIWShIvvBiSN+7SR9Eo9gG7hksJCbSmhhwWRNrmaUqiUXsmHM5KdNgl2sIITb47OLw4Ye+wElK4",
-	"DVYpwwKbc7QECZCg2lVZ21yJA9ksm+07VKVRci0gh9ezbJZBAprTwnefci1iu+m1VXIvrN3RFfpOnPDc",
-	"1T8pIQdn9un8/fk8RisBg1YraYMzr7JsEAKl/3eudS0KD+ALjLl8svg2qL2u0bwtCrS2amu2YupzYNum",
-	"4aaLnBmva8Zvuaj5ZY3MtcCG8XC3H9Ah7cfBWD4oyjHSoRaB6yTg40g5wQ1vkNBYyD/3IBx1ZwIkQ1TE",
-	"9LrBm1YYLCEn02IyUWwz8F+fxQE/4/eoH50JeoarX8BF7iA7cOjrtye32J2gBRt7ZlIRq1Qryw3zjpFY",
-	"jLRlqmKcuR6id4+2Li0WXEqs0z4udjfzKADEP7/T2uResGJV+PlCsvGmbufgjBNamsaAlauH65fnoQ7V",
-	"YixCKiYT7R9KzgahHp2RALtzMIIGf/Ks/102Pt64iJD2cbH7cMf3bPjaP/tw364K/0/FQ6lIQCt7j7cX",
-	"yv6j5t60aOmtKruf83W5FZT9bduODHLCcs3tSHz4sr/5sdmDc+4VnnjOa4O87Bh+E5bshvGhKuNM4t30",
-	"Ax+f8kE518T3AAAA//9LtWZm5QwAAA==",
+	"H4sIAAAAAAAC/+xXTU8bMRD9K9a0xyUbWi7dG6UVAiGKmqoXymHYnSVGXtvYXlAU5b9X/thk80EEKUVt",
+	"1VOs3fHMm/feeJ0plKrRSpJ0Foop2HJMDYblZ2OU8QusKu64kigujNJkHCcLRY3CUga692gK1O2pyJaG",
+	"a78NipiKNWQt3hBk4CaaoADrDJc3MJtlYOiu5YYqKC5Tkqt5mLq+pdLBLINTq+QoIDyRtfJ1lsvziqTj",
+	"NaeAYXuVXuz2UmfcupDcUROqvDVUQwFv8gV1eeItX0E4m2dGY3CynPg7GRv4eRbF94td2xvsArd3l0DY",
+	"HTrs8K816ZHwJFCppMMyECix8UHfeKPYV5o0KCVk0BoBBYyd07bIc8cbtWfiy0FFPveylQ4vTtgnqrkM",
+	"fLFaGRbRnJN13lrcCV9l6eGcMxgOhoN9n1Vpkqg5FPB+MBwMIQONbhy6z1Hz1G5+a5Xci2v/6oZCJ14P",
+	"9PVPKijAG+R09OV8lGbHy2C1kjYK9m447IggGbaj1oKXIUEosBi8Z5NvI9vLHI3asiRr61awOdJgD9s2",
+	"DZpJwsxQCIb3yAVeC2K+BdbNv49+hId8uhid2aOkHJM71Dxi7Q3FYug84QYbcmQsFJdT4B66FwGyziq8",
+	"H77wtjMtZT3GVufg6lUUCOfCBvaTMpHPGPoDvOUOhgfrR2Mvij1wN2aLnplUjtWqldWKeMfkWLK0Zapm",
+	"yHwPSbsnS5eXY5SSRD5Ni93FPIoJ0s/vlDbbmKycF349k6ycqes+OENH1vVtwKr5wfXifhCxWrJFdEVv",
+	"osNBiawj6skeiWl3Nkbk4E+e9b9LxqcLlzLk07TYfbjTedZ97V99uO/nhf+74jFXZKCV3aDthbL/qLh3",
+	"LVn3UVWTX9N1tmaU/XXZjgyho2pJ7QS8+7J/eLELRvzbtelWFwujMITVhD2gZa0WCitatUzEy5BJeuhf",
+	"DdJHoOPct/8zAAD//4x9CcYADgAA",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

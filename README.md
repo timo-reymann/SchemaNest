@@ -17,13 +17,13 @@ SchemaNest
 
 ## Features
 
-- [TBD] Supports uploading and versioning JSON schemas to a central repository.
+- Supports uploading and versioning JSON schemas to a central repository.
 - [TBD] Provides a web interface for browsing and searching schemas.
-- [TBD] CLI tool for uploading schemas from the command line.
+- CLI tool for uploading schemas from the command line.
 
 ## Requirements
 
-> tbd
+- Postgres for production usage (SQLite is only recommended for evaluation and smaller instances)
 
 ## Installation
 
@@ -31,7 +31,18 @@ SchemaNest
 
 ## Usage
 
-> tbd
+### CLI
+
+```shell
+schema-nest-cli --help
+```
+
+### Registry Server
+
+```shell
+# Spin up server on 0.0.0.0:8080
+schema-nest-registry serve-http --port "8080"
+```
 
 ## Motivation
 

@@ -122,11 +122,17 @@ paths:
         '201':
           description: Created JSON Schema version"
         '409':
-          description: JSON Schema version for identifier already exists
+          description: Schema already was uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     JsonSchemaInfo:
       type: object
+      required:
+        - identifier
       properties:
         identifier:
           type: string
@@ -136,6 +142,9 @@ components:
         $ref: "#/components/schemas/JsonSchemaInfo"
     JsonSchemaVersion:
       type: object
+      additionalProperties: false
+      required:
+        - version
       properties:
         version:
           type: string
@@ -143,3 +152,12 @@ components:
       type: array
       items:
         $ref: "#/components/schemas/JsonSchemaVersion"
+    Error:
+      type: object
+      additionalProperties: false
+      required:
+        - error
+      properties:
+        error:
+          type: string
+          description: Error message

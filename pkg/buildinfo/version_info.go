@@ -2,7 +2,7 @@ package buildinfo
 
 import (
 	"fmt"
-	"github.com/urfave/cli/v2"
+	"github.com/urfave/cli/v3"
 	"os"
 	"runtime"
 	"text/tabwriter"
@@ -13,8 +13,8 @@ func addLine(w *tabwriter.Writer, heading string, val string) {
 	_, _ = fmt.Fprintf(w, heading+"\t%s\n", val)
 }
 
-func PrintVersionInfo(cCtx *cli.Context) {
-	fmt.Println(cCtx.App.Name, cCtx.App.Version)
+func PrintVersionInfo(cmd *cli.Command) {
+	fmt.Println(cmd.Name, cmd.Version)
 	println()
 	println("Build information")
 	w := tabwriter.NewWriter(os.Stderr, 10, 1, 10, byte(' '), tabwriter.TabIndent)

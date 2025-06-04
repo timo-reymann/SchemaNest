@@ -3,4 +3,5 @@ generate:
   std-http-server: true
   embedded-spec: true
   models: true
+  client: true
 output: ../../api/schema-nest.gen.go
