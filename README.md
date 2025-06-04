@@ -58,7 +58,12 @@ machine.
 
 ### API
 
-The API definition is managed through OpenAPI 3.0, you can find an up-to-date spec in [openapi.yml](./openapi.yml)
+The API definition is managed through OpenAPI 3.0, you can find an up-to-date spec in [openapi.yml](./openapi.yml).
+
+For the [Redocly UI click here](https://timo-reymann.github.io/SchemaNest/apidocs.html). Please keep in mind that this
+is always the latest development version.
+
+Changes to the API are done when ever possible in a backward-compatible manner. So make sure your consuming code can handle extra fields.
 
 ## Contributing
 
