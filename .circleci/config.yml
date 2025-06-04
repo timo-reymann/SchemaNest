@@ -64,7 +64,7 @@ jobs:
       - run:
           name: Render api docs
           command: |
-            npx -y @redocly/cli@1 build-docs --output gh-pages/apidocs.html
+            npx -y @redocly/cli@1.34 build-docs openapi.yml --output gh-pages/apidocs.html
       - github-utils/publish_github_pages:
           folder: gh-pages/
           git_commit_author_email: "no-reply@timo-reymann.de"
