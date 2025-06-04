@@ -56,7 +56,9 @@ machine.
 
 ## Documentation
 
-> tbd
+### API
+
+The API definition is managed through OpenAPI 3.0, you can find an up-to-date spec in [openapi.yml](./openapi.yml)
 
 ## Contributing
 
