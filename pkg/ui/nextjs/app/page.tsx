@@ -1,5 +1,6 @@
 import { Link } from "@heroui/link";
 import { button as buttonStyles } from "@heroui/theme";
+import NextLink from "next/link";
 
 import { subtitle, title } from "@/components/primitives";
 import { siteConfig } from "@/config/site";
@@ -38,7 +39,7 @@ export default function Home() {
         >
           API-Documentation
         </Link>
-        <Link
+        <NextLink
           className={buttonStyles({
             color: "default",
             radius: "full",
@@ -47,7 +48,7 @@ export default function Home() {
           href="/schemas"
         >
           Schemas
-        </Link>
+        </NextLink>
       </div>
     </section>
   );
