@@ -225,6 +225,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@heroui/avatar@npm:^2.2.16":
+  version: 2.2.16
+  resolution: "@heroui/avatar@npm:2.2.16"
+  dependencies:
+    "@heroui/react-utils": "npm:2.1.10"
+    "@heroui/shared-utils": "npm:2.1.9"
+    "@heroui/use-image": "npm:2.1.9"
+    "@react-aria/focus": "npm:3.20.3"
+    "@react-aria/interactions": "npm:3.25.1"
+    "@react-aria/utils": "npm:3.29.0"
+  peerDependencies:
+    "@heroui/system": ">=2.4.7"
+    "@heroui/theme": ">=2.4.6"
+    react: ">=18 || >=19.0.0-rc.0"
+    react-dom: ">=18 || >=19.0.0-rc.0"
+  checksum: 10c0/cad224baaf53083adfb99750552795d75a79116cae2f61843622f0986993f8c0e29af71a320ea01622637fd2b4fa6004dabff81f78b5e4cb0b31878f27748568
+  languageName: node
+  linkType: hard
+
 "@heroui/button@npm:2.2.20":
   version: 2.2.20
   resolution: "@heroui/button@npm:2.2.20"
@@ -247,6 +266,29 @@ __metadata:
     react: ">=18 || >=19.0.0-rc.0"
     react-dom: ">=18 || >=19.0.0-rc.0"
   checksum: 10c0/0330d92f370e6f6a1dee2c8b56db0e688a9190f038e9e5dcaf45a205e5bd2a7a71580a8d99b422a6e3e47e853d81cde8d04bf33a26aef56e6f1d57b346a1d594
+  languageName: node
+  linkType: hard
+
+"@heroui/card@npm:^2.2.19":
+  version: 2.2.19
+  resolution: "@heroui/card@npm:2.2.19"
+  dependencies:
+    "@heroui/react-utils": "npm:2.1.10"
+    "@heroui/ripple": "npm:2.2.15"
+    "@heroui/shared-utils": "npm:2.1.9"
+    "@heroui/use-aria-button": "npm:2.2.14"
+    "@react-aria/button": "npm:3.13.1"
+    "@react-aria/focus": "npm:3.20.3"
+    "@react-aria/interactions": "npm:3.25.1"
+    "@react-aria/utils": "npm:3.29.0"
+    "@react-types/shared": "npm:3.29.1"
+  peerDependencies:
+    "@heroui/system": ">=2.4.7"
+    "@heroui/theme": ">=2.4.6"
+    framer-motion: ">=11.5.6 || >=12.0.0-alpha.1"
+    react: ">=18 || >=19.0.0-rc.0"
+    react-dom: ">=18 || >=19.0.0-rc.0"
+  checksum: 10c0/40610677dc66c9179663efc30bd16e2f40d0367ce4910c1f96b5b362345e5fc0476691981be2ed33758bd9a1c8083dff9ccd24055701188cc1527c338ce1f9d6
   languageName: node
   linkType: hard
 
@@ -441,6 +483,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@heroui/pagination@npm:^2.2.18":
+  version: 2.2.18
+  resolution: "@heroui/pagination@npm:2.2.18"
+  dependencies:
+    "@heroui/react-utils": "npm:2.1.10"
+    "@heroui/shared-icons": "npm:2.1.8"
+    "@heroui/shared-utils": "npm:2.1.9"
+    "@heroui/use-intersection-observer": "npm:2.2.12"
+    "@heroui/use-pagination": "npm:2.2.13"
+    "@react-aria/focus": "npm:3.20.3"
+    "@react-aria/i18n": "npm:3.12.9"
+    "@react-aria/interactions": "npm:3.25.1"
+    "@react-aria/utils": "npm:3.29.0"
+    scroll-into-view-if-needed: "npm:3.0.10"
+  peerDependencies:
+    "@heroui/system": ">=2.4.7"
+    "@heroui/theme": ">=2.4.6"
+    react: ">=18 || >=19.0.0-rc.0"
+    react-dom: ">=18 || >=19.0.0-rc.0"
+  checksum: 10c0/e53511427a7b1baff6f861e7f77916ffd9312f5708134d91ca77fffae4b9067d1fc0a4c16193c2a969f77511be50bf2536abee61d7c5a529d1952137f4eb7729
+  languageName: node
+  linkType: hard
+
 "@heroui/react-rsc-utils@npm:2.1.7":
   version: 2.1.7
   resolution: "@heroui/react-rsc-utils@npm:2.1.7"
@@ -517,7 +582,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroui/spinner@npm:2.2.17":
+"@heroui/spinner@npm:2.2.17, @heroui/spinner@npm:^2.2.17":
   version: 2.2.17
   resolution: "@heroui/spinner@npm:2.2.17"
   dependencies:
@@ -675,6 +740,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@heroui/use-image@npm:2.1.9":
+  version: 2.1.9
+  resolution: "@heroui/use-image@npm:2.1.9"
+  dependencies:
+    "@heroui/react-utils": "npm:2.1.10"
+    "@heroui/use-safe-layout-effect": "npm:2.1.7"
+  peerDependencies:
+    react: ">=18 || >=19.0.0-rc.0"
+  checksum: 10c0/538d83457503dadd6ba1ff664623288aa9880013382c9567be28389a8ecb49ad36628c27cdf8b1051804a542d94ced8cde668a79c66e332097562303128a349d
+  languageName: node
+  linkType: hard
+
+"@heroui/use-intersection-observer@npm:2.2.12":
+  version: 2.2.12
+  resolution: "@heroui/use-intersection-observer@npm:2.2.12"
+  dependencies:
+    "@react-aria/interactions": "npm:3.25.1"
+    "@react-aria/ssr": "npm:3.9.8"
+    "@react-aria/utils": "npm:3.29.0"
+    "@react-types/shared": "npm:3.29.1"
+  peerDependencies:
+    react: ">=18 || >=19.0.0-rc.0"
+  checksum: 10c0/eefc33880b5773e6a5350a415d74ec93aa3ba7a84f656a8aa768c1f0c1422e9624d8eed856c23282e715c5a69b68784f5f2d0de43f9861dd8d1f755b7941f7d1
+  languageName: node
+  linkType: hard
+
 "@heroui/use-is-mobile@npm:2.2.9":
   version: 2.2.9
   resolution: "@heroui/use-is-mobile@npm:2.2.9"
@@ -692,6 +783,18 @@ __metadata:
   peerDependencies:
     react: ">=18 || >=19.0.0-rc.0"
   checksum: 10c0/fcd6f28fb2e7a67d7c175af44b077e78555fa5a7e768acc559ca63fc626adecd7491e18febd71732c13d6c305a5470c20c5a1a31e233966d39440d3bd2bfb45c
+  languageName: node
+  linkType: hard
+
+"@heroui/use-pagination@npm:2.2.13":
+  version: 2.2.13
+  resolution: "@heroui/use-pagination@npm:2.2.13"
+  dependencies:
+    "@heroui/shared-utils": "npm:2.1.9"
+    "@react-aria/i18n": "npm:3.12.9"
+  peerDependencies:
+    react: ">=18 || >=19.0.0-rc.0"
+  checksum: 10c0/595bd7464ab8a8304fd3911617f5388c3b4ebf81f9a3d51a4708446692f09be6088639975f8f8bb50bbb201503a4d9beb28d91c1786d3f3e946ad4720214acb9
   languageName: node
   linkType: hard
 
@@ -3074,6 +3177,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"compute-scroll-into-view@npm:^3.0.2":
+  version: 3.1.1
+  resolution: "compute-scroll-into-view@npm:3.1.1"
+  checksum: 10c0/59761ed62304a9599b52ad75d0d6fbf0669ee2ab7dd472fdb0ad9da36628414c014dea7b5810046560180ad30ffec52a953d19297f66a1d4f3aa0999b9d2521d
+  languageName: node
+  linkType: hard
+
 "concat-map@npm:0.0.1":
   version: 0.0.1
   resolution: "concat-map@npm:0.0.1"
@@ -5187,14 +5297,18 @@ __metadata:
     "@eslint/compat": "npm:1.2.9"
     "@eslint/eslintrc": "npm:3.3.1"
     "@eslint/js": "npm:9.28.0"
+    "@heroui/avatar": "npm:^2.2.16"
     "@heroui/button": "npm:2.2.20"
+    "@heroui/card": "npm:^2.2.19"
     "@heroui/code": "npm:2.2.15"
     "@heroui/input": "npm:2.4.20"
     "@heroui/kbd": "npm:2.2.16"
     "@heroui/link": "npm:2.2.17"
     "@heroui/listbox": "npm:2.3.19"
     "@heroui/navbar": "npm:2.2.18"
+    "@heroui/pagination": "npm:^2.2.18"
     "@heroui/snippet": "npm:2.2.21"
+    "@heroui/spinner": "npm:^2.2.17"
     "@heroui/switch": "npm:2.2.18"
     "@heroui/system": "npm:2.4.16"
     "@heroui/theme": "npm:2.4.16"
@@ -5232,6 +5346,7 @@ __metadata:
     tailwind-variants: "npm:0.3.1"
     tailwindcss: "npm:^3.4.16"
     typescript: "npm:5.8.3"
+    zustand: "npm:^5.0.5"
   languageName: unknown
   linkType: soft
 
@@ -5972,6 +6087,15 @@ __metadata:
   version: 0.26.0
   resolution: "scheduler@npm:0.26.0"
   checksum: 10c0/5b8d5bfddaae3513410eda54f2268e98a376a429931921a81b5c3a2873aab7ca4d775a8caac5498f8cbc7d0daeab947cf923dbd8e215d61671f9f4e392d34356
+  languageName: node
+  linkType: hard
+
+"scroll-into-view-if-needed@npm:3.0.10":
+  version: 3.0.10
+  resolution: "scroll-into-view-if-needed@npm:3.0.10"
+  dependencies:
+    compute-scroll-into-view: "npm:^3.0.2"
+  checksum: 10c0/8bce433c0139cfd74d5b784113251f1c1783bcd4152c2f3a7e4ca6ff73d644eafd891747bdfb02456d7437835991b142ddd2cfa8c6ef78dd0d7fd6eb4c7c70b4
   languageName: node
   linkType: hard
 
@@ -7009,5 +7133,26 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 10c0/dceb44c28578b31641e13695d200d34ec4ab3966a5729814d5445b194933c096b7ced71494ce53a0e8820685d1d010df8b2422e5bf2cdea7e469d97ffbea306f
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^5.0.5":
+  version: 5.0.5
+  resolution: "zustand@npm:5.0.5"
+  peerDependencies:
+    "@types/react": ">=18.0.0"
+    immer: ">=9.0.6"
+    react: ">=18.0.0"
+    use-sync-external-store: ">=1.2.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    immer:
+      optional: true
+    react:
+      optional: true
+    use-sync-external-store:
+      optional: true
+  checksum: 10c0/76228022ad589c8ef29227f184d8852277509f88c80afd537de0506a6ded2e7ecc01d21bb79f426867560e4d59553c526e88d01abc46bd32b133d97ff337e19b
   languageName: node
   linkType: hard
