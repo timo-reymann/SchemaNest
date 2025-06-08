@@ -10,7 +10,7 @@ SchemaNest
 <p align="center">
 	<img width="300" src="./.github/images/NestHub.png">
     <br />
-    Where JSON schemas grow, thrive, and scale with your team.
+    Where schemas grow, thrive, and scale with your team.
 </p>
 
 > This project is under active development.
@@ -63,7 +63,8 @@ The API definition is managed through OpenAPI 3.0, you can find an up-to-date sp
 For the [Redocly UI click here](https://timo-reymann.github.io/SchemaNest/apidocs.html). Please keep in mind that this
 is always the latest development version.
 
-Changes to the API are done when ever possible in a backward-compatible manner. So make sure your consuming code can handle extra fields.
+Changes to the API are done when ever possible in a backward-compatible manner. So make sure your consuming code can
+handle extra fields.
 
 ## Contributing
 
@@ -81,11 +82,12 @@ To get started, please read the [Contribution Guidelines](./CONTRIBUTING.md).
 
 ### Requirements
 
-<!-- Delete the ones not required -->
-
 - [GNU make](https://www.gnu.org/software/make/)
+- [Go](https://go.dev/doc/install)
 - [Docker](https://docs.docker.com/get-docker/)
 - [pre-commit](https://pre-commit.com/)
+- [Node.js](https://nodejs.org/en/download)
+- [yarn](https://classic.yarnpkg.com/lang/en/docs/install/)
 
 ### Test
 
