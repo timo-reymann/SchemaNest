@@ -5229,7 +5229,7 @@ __metadata:
     prettier: "npm:3.5.3"
     react: "npm:19.1.0"
     react-dom: "npm:19.1.0"
-    tailwind-variants: "npm:0.3.0"
+    tailwind-variants: "npm:0.3.1"
     tailwindcss: "npm:^3.4.16"
     typescript: "npm:5.8.3"
   languageName: unknown
@@ -6475,6 +6475,17 @@ __metadata:
   peerDependencies:
     tailwindcss: "*"
   checksum: 10c0/115b0efb5ca5b76d4dfe6148e3f2f314f5af8490d0d2be8bdb6f062c0963ead87227ffd7340c6fb38cd95c0c751e2f65b04f3c0d833bf058d8cfe25210777bc7
+  languageName: node
+  linkType: hard
+
+"tailwind-variants@npm:0.3.1":
+  version: 0.3.1
+  resolution: "tailwind-variants@npm:0.3.1"
+  dependencies:
+    tailwind-merge: "npm:2.5.4"
+  peerDependencies:
+    tailwindcss: "*"
+  checksum: 10c0/2ad4a9282ea3d9b66443329ede844bd86b6737b98ede3f31d6b495e3d1f210677c57ba360af2dbffede00cce0026dd1105eeb1af936e825ebd14e715eb6cbc11
   languageName: node
   linkType: hard
 
