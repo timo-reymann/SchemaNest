@@ -51,6 +51,7 @@ jobs:
       - run:
           name: Run eslint
           command: |
+            cd pkg/ui/nextjs
             npm run lint
   build:
     executor: go
