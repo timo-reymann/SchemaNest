@@ -60,7 +60,7 @@ jobs:
       - checkout
       - node/install-packages:
           app-dir: pkg/ui/nextjs
-          pkg-manager: yarn
+          pkg-manager: yarn-berry
       - run:
           name: Build frontend
           command: |
