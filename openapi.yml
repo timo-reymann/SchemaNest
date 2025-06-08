@@ -133,9 +133,23 @@ components:
       type: object
       required:
         - identifier
+        - latestVersion
       properties:
         identifier:
           type: string
+        latestVersion:
+          type: object
+          required:
+            - major
+            - minor
+            - patch
+          properties:
+            major:
+              type: integer
+            minor:
+              type: integer
+            patch:
+              type: integer
     JsonSchemaList:
       type: array
       items:

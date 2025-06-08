@@ -20,9 +20,18 @@ func (s *SchemaNestApi) ListJSONSchemas(w http.ResponseWriter, r *http.Request) 
 	}
 
 	models := mapping.MapEntitiesToModel(
-		func(e *json_schema.JsonSchemaEntity) *JsonSchemaInfo {
+		func(e *json_schema.JsonSchemaEntityWithBasicInfo) *JsonSchemaInfo {
 			return &JsonSchemaInfo{
 				Identifier: e.Identifier,
+				LatestVersion: struct {
+					Major int `json:"major"`
+					Minor int `json:"minor"`
+					Patch int `json:"patch"`
+				}(struct {
+					Major int `json:"major,omitempty"`
+					Minor int `json:"minor,omitempty"`
+					Patch int `json:"patch,omitempty"`
+				}{Major: e.LatestVersion.Major, Minor: e.LatestVersion.Minor, Patch: e.LatestVersion.Patch}),
 			}
 		},
 		entities,

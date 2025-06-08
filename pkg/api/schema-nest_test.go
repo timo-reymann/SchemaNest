@@ -7,11 +7,11 @@ import (
 )
 
 type MockJsonSchemaRepository struct {
-	Schemas   []*json_schema.JsonSchemaEntity
+	Schemas   []*json_schema.JsonSchemaEntityWithBasicInfo
 	InsertErr error
 }
 
-func (m *MockJsonSchemaRepository) List(ctx context.Context) ([]*json_schema.JsonSchemaEntity, error) {
+func (m *MockJsonSchemaRepository) List(ctx context.Context) ([]*json_schema.JsonSchemaEntityWithBasicInfo, error) {
 	return m.Schemas, nil
 }
 

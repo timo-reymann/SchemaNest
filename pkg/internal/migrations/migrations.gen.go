@@ -95,7 +95,7 @@ func postgres01_initialize_schemaDownSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "postgres/01_initialize_schema.down.sql", size: 92, mode: os.FileMode(420), modTime: time.Unix(1745597948, 0)}
+	info := bindataFileInfo{name: "postgres/01_initialize_schema.down.sql", size: 92, mode: os.FileMode(420), modTime: time.Unix(1749374656, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -115,7 +115,7 @@ func postgres01_initialize_schemaUpSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "postgres/01_initialize_schema.up.sql", size: 534, mode: os.FileMode(420), modTime: time.Unix(1745576250, 0)}
+	info := bindataFileInfo{name: "postgres/01_initialize_schema.up.sql", size: 534, mode: os.FileMode(420), modTime: time.Unix(1749374656, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -135,7 +135,7 @@ func sqlite301_initialize_schemaDownSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "sqlite3/01_initialize_schema.down.sql", size: 76, mode: os.FileMode(420), modTime: time.Unix(1745597967, 0)}
+	info := bindataFileInfo{name: "sqlite3/01_initialize_schema.down.sql", size: 76, mode: os.FileMode(420), modTime: time.Unix(1749374656, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -155,7 +155,7 @@ func sqlite301_initialize_schemaUpSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "sqlite3/01_initialize_schema.up.sql", size: 805, mode: os.FileMode(420), modTime: time.Unix(1745575789, 0)}
+	info := bindataFileInfo{name: "sqlite3/01_initialize_schema.up.sql", size: 805, mode: os.FileMode(420), modTime: time.Unix(1749374656, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
