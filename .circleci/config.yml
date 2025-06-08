@@ -67,7 +67,7 @@ jobs:
             cd pkg/ui/nextjs
             yarn build
       - store_artifacts:
-          paths: pkg/ui/nextjs/build
+          path: pkg/ui/nextjs/build
   build-gh-pages:
     executor: node
     steps:
