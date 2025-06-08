@@ -61,9 +61,13 @@ jobs:
       - node/install-packages:
           app-dir: pkg/ui/nextjs
           pkg-manager: yarn
-      - node/run:
-          app-dir: pkg/ui/nextjs
-          artifacts-path: pkg/ui/nextjs/build
+      - run:
+          name: Build frontend
+          command: |
+            cd pkg/ui/nextjs
+            yarn build
+      - store_artifacts:
+          paths: pkg/ui/nextjs/build
   build-gh-pages:
     executor: node
     steps:
@@ -97,3 +101,4 @@ workflows:
           <<: *job_defaults
           requires:
             - test
+            - build-ui
