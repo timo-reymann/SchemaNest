@@ -4,7 +4,8 @@ const nextConfig = {
     output: 'export',
     experimental: {
         cpus: 4,
-        workerThreads: false
+        workerThreads: false,
+        appDir: false,
     }
 };
 
