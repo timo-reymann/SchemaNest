@@ -9,8 +9,7 @@ import { Link } from "@heroui/link";
 import { Input } from "@heroui/input";
 import NextLink from "next/link";
 import clsx from "clsx";
-import { button as buttonStyles } from "@heroui/theme";
-import { link as linkStyles } from "@heroui/theme";
+import { button as buttonStyles, link as linkStyles } from "@heroui/theme";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
@@ -47,7 +46,7 @@ export const Navbar = () => {
             <p className="font-bold text-inherit">SchemaNest</p>
           </NextLink>
         </NavbarBrand>
-        <ul className="hidden lg:flex gap-4 justify-start ml-2">
+        <ul className="lg:flex gap-4 justify-start ml-2">
           <NavbarItem key="/schemas">
             <NextLink
               className={clsx(
@@ -57,7 +56,7 @@ export const Navbar = () => {
               color="foreground"
               href="/schemas"
             >
-              Schemas
+              Overview
             </NextLink>
           </NavbarItem>
         </ul>
