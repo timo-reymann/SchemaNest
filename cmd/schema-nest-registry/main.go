@@ -7,6 +7,7 @@ import (
 	"github.com/timo-reymann/SchemaNest/pkg/buildinfo"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/database"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/json_schema"
+	"github.com/timo-reymann/SchemaNest/pkg/ui"
 	"github.com/urfave/cli/v3"
 	"net"
 	"net/http"
@@ -50,9 +51,7 @@ func main() {
 					if err != nil {
 						return err
 					}
-					r.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
-						_, _ = writer.Write([]byte(`Welcome to SchemaNest! Here you will soon see a fancy dancy UI!`))
-					})
+					r.HandleFunc("/", ui.Handler())
 
 					addr := net.JoinHostPort("0.0.0.0", strconv.Itoa(port))
 					fmt.Println("Listening on", addr)
