@@ -4,7 +4,7 @@ SHELL := /bin/bash
 VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)
 NOW=$(shell date +"%Y-%m-%d_%H:%M:%S")
 COMMIT_REF=$(shell git rev-parse --short HEAD)
-BUILD_ARGS=-ldflags "-X github.com/timo-reymann/SchemaNest/pkg/buildinfo.GitSha=$(COMMIT_REF) -X github.com/timo-reymann/SchemaNest/pkg/buildinfo.Version=$(VERSION) -X github.com/timo-reymann/SchemaNest/pkg/buildinfo.BuildTime=$(NOW)"
+BUILD_ARGS=-ldflags "-X github.com/timo-reymann/SchemaNest/pkg/buildinfo.GitSha=$(COMMIT_REF) -X github.com/timo-reymann/SchemaNest/pkg/buildinfo.Version=$(VERSION) -X github.com/timo-reymann/SchemaNest/pkg/buildinfo.BuildTime=$(NOW)" -tags prod
 BIN_PREFIX="dist/"
 BIN_PREFIX_SCHEMA_REGISTRY="$(BIN_PREFIX)schema-nest-registry-"
 BIN_PREFIX_SCHEMA_CLI="$(BIN_PREFIX)schema-nest-cli-"
@@ -28,6 +28,9 @@ save-coverage-report: coverage ## Save coverage report to coverage.html
 
 create-dist: ## Create dist folder if not already existent
 	@mkdir -p dist/
+
+build-ui: ## Build UI
+	@cd pkg/ui/nextjs && yarn build
 
 build-linux: create-dist ## Build binaries for linux
 	@GOOS=linux GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)linux-amd64 $(BUILD_ARGS) $(CMD_REGISTRY)
