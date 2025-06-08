@@ -45,6 +45,8 @@ jobs:
     executor: go
     steps:
       - checkout
+      - attach_workspace:
+          at: ./
       - go/with-cache:
           steps:
             - run:
@@ -66,8 +68,10 @@ jobs:
           command: |
             cd pkg/ui/nextjs
             yarn build
-      - store_artifacts:
-          path: pkg/ui/nextjs/build
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - pkg/ui/nextjs/build
   build-gh-pages:
     executor: node
     steps:
