@@ -41,6 +41,17 @@ jobs:
           path: junit.xml
       - store_artifacts:
           path: coverage.txt
+  test-ui:
+    executor: node
+    steps:
+      - checkout
+      - node/install-packages:
+          app-dir: pkg/ui/nextjs
+          pkg-manager: yarn-berry
+      - run:
+          name: Run eslint
+          command: |
+            npm run lint
   build:
     executor: go
     steps:
@@ -99,10 +110,13 @@ workflows:
               only: main
       - test:
           <<: *job_defaults
+      - test-ui:
+          <<: *job_defaults
       - build-ui:
           <<: *job_defaults
       - build:
           <<: *job_defaults
           requires:
             - test
+            - test-ui
             - build-ui
