@@ -5,6 +5,14 @@ import (
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/database"
 )
 
+func scanSingleRowForSchema(entity *JsonSchemaEntity) func(scan func(dest ...any) error) (bool, error) {
+	mapper := func(scan func(dest ...any) error) (bool, error) {
+		err := scan(&entity.Id, &entity.Identifier)
+		return false, err
+	}
+	return mapper
+}
+
 type JsonSchemaEntity struct {
 	Id         *int64
 	Identifier string
@@ -25,10 +33,25 @@ type JsonSchemaEntityWithBasicInfo struct {
 type JsonSchemaRepository interface {
 	Insert(ctx context.Context, entity *JsonSchemaEntity) error
 	List(ctx context.Context) ([]*JsonSchemaEntityWithBasicInfo, error)
+	Get(ctx context.Context, identifier string) (*JsonSchemaEntity, error)
 }
 
 type JsonSchemaRepositoryImpl struct {
 	DB *database.DBConnection
+}
+
+func (j *JsonSchemaRepositoryImpl) Get(ctx context.Context, identifier string) (*JsonSchemaEntity, error) {
+	entity := &JsonSchemaEntity{}
+	err := j.DB.Query(ctx, scanSingleRowForSchema(entity), `
+	SELECT id, identifier
+	FROM json_schema
+	WHERE identifier = ?
+	`, identifier)
+	if err != nil {
+		return nil, err
+	}
+
+	return entity, err
 }
 
 func (j *JsonSchemaRepositoryImpl) Insert(ctx context.Context, entity *JsonSchemaEntity) error {

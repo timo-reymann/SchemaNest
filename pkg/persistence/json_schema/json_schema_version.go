@@ -67,7 +67,7 @@ func (j *JsonSchemaVersionRepositoryImpl) ListForJsonSchema(ctx context.Context,
 		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
 		FROM json_schema_version 
 		WHERE json_schema_id = (SELECT id FROM json_schema WHERE identifier = ?) 
-		ORDER BY version_major, version_minor, version_patch
+		ORDER BY version_major DESC, version_minor DESC, version_patch DESC
 		`,
 		identifier)
 	if err != nil {

@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"errors"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/json_schema"
 	"testing"
 )
@@ -9,6 +10,19 @@ import (
 type MockJsonSchemaRepository struct {
 	Schemas   []*json_schema.JsonSchemaEntityWithBasicInfo
 	InsertErr error
+}
+
+func (m *MockJsonSchemaRepository) Get(ctx context.Context, identifier string) (*json_schema.JsonSchemaEntity, error) {
+	for _, schema := range m.Schemas {
+		if schema.Identifier == identifier {
+			return &json_schema.JsonSchemaEntity{
+				Id:         schema.Id,
+				Identifier: schema.Identifier,
+			}, nil
+		}
+	}
+
+	return nil, errors.New("no entity with identifier")
 }
 
 func (m *MockJsonSchemaRepository) List(ctx context.Context) ([]*json_schema.JsonSchemaEntityWithBasicInfo, error) {
