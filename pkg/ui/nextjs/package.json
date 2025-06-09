@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@heroui/avatar": "^2.2.16",
-    "@heroui/button": "2.2.20",
+    "@heroui/button": "2.2.21",
     "@heroui/card": "^2.2.19",
     "@heroui/chip": "^2.2.16",
     "@heroui/code": "2.2.15",
