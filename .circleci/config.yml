@@ -84,7 +84,7 @@ jobs:
             cd pkg/ui/nextjs
             yarn build
       - save_cache:
-          keys: v1-next-cache
+          key: v1-next-cache
           paths:
             - pkg/ui/nextjs/.next/cache
       - persist_to_workspace:
