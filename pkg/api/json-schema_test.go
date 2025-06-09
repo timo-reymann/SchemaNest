@@ -137,6 +137,13 @@ func TestPostApiSchemaJsonSchemaIdentifierVersionVersion(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			mockContext := createTestContext()
+			mockRepo := mockContext.JsonSchemaRepository.(*MockJsonSchemaRepository)
+			var id int64 = 1
+			mockRepo.Schemas = []*json_schema.JsonSchemaEntityWithBasicInfo{
+				{
+					JsonSchemaEntity: json_schema.JsonSchemaEntity{Identifier: "schema1", Id: &id},
+				},
+			}
 			api := NewSchemaNestApi(&mockContext)
 
 			req := httptest.NewRequest(http.MethodPost, "/schemas/schema1/"+tt.version, bytes.NewBufferString(tt.body))
