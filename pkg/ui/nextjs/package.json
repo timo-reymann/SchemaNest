@@ -24,6 +24,8 @@
     "@heroui/switch": "2.2.18",
     "@heroui/system": "2.4.16",
     "@heroui/theme": "2.4.16",
+    "@heroui/use-theme": "^2.1.8",
+    "@monaco-editor/react": "^4.7.0",
     "@react-aria/ssr": "3.9.9",
     "@react-aria/visually-hidden": "3.8.24",
     "@tailwindcss/postcss": "^4.1.8",
