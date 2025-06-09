@@ -1,0 +1,167 @@
+{
+   "$defs": {
+      "WheelPlatformIdentifier": {
+         "properties": {
+            "platform": {
+               "description": "Name of the platform",
+               "title": "Platform",
+               "type": "string"
+            },
+            "python_tag": {
+               "default": "py3",
+               "description": "Python tag (e.g pyX)",
+               "title": "Python Tag",
+               "type": "string"
+            },
+            "abi_tag": {
+               "default": "none",
+               "description": "Indicates which Python ABI is required by any included extension modules.",
+               "title": "Abi Tag",
+               "type": "string"
+            }
+         },
+         "required": [
+            "platform"
+         ],
+         "title": "WheelPlatformIdentifier",
+         "type": "object"
+      }
+   },
+   "properties": {
+      "package": {
+         "description": "Name of the generated package",
+         "title": "Package",
+         "type": "string"
+      },
+      "executable": {
+         "description": "Path of the executable, relative to the package folder. It must match one of the file names from the wheel sources in order to work",
+         "title": "Executable",
+         "type": "string"
+      },
+      "name": {
+         "description": "Name of the wheel package",
+         "title": "Name",
+         "type": "string"
+      },
+      "version": {
+         "description": "Version of the package",
+         "title": "Version",
+         "type": "string"
+      },
+      "source": {
+         "description": "Source to fetch files from",
+         "properties": {},
+         "required": [],
+         "title": "Source",
+         "type": "object"
+      },
+      "platforms": {
+         "description": "Platforms supported by the wheel",
+         "items": {
+            "$ref": "#/$defs/WheelPlatformIdentifier"
+         },
+         "title": "Platforms",
+         "type": "array"
+      },
+      "summary": {
+         "anyOf": [
+            {
+               "type": "string"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "description": "Summary for package metadata",
+         "title": "Summary"
+      },
+      "description": {
+         "anyOf": [
+            {
+               "type": "string"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "description": "Description for package metadata",
+         "title": "Description"
+      },
+      "license": {
+         "anyOf": [
+            {
+               "type": "string"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "description": "Name of the license",
+         "title": "License"
+      },
+      "classifier": {
+         "anyOf": [
+            {
+               "items": {
+                  "type": "string"
+               },
+               "type": "array"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "description": "Classifiers to show in frontends",
+         "title": "Classifier"
+      },
+      "project_urls": {
+         "anyOf": [
+            {
+               "additionalProperties": {
+                  "type": "string"
+               },
+               "type": "object"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "description": "Incude project URLs like bugtrackers etc.",
+         "title": "Project Urls"
+      },
+      "requires_python": {
+         "anyOf": [
+            {
+               "type": "string"
+            },
+            {
+               "type": "null"
+            }
+         ],
+         "default": null,
+         "description": "Python version constraint for the wheel",
+         "title": "Requires Python"
+      },
+      "add_to_path": {
+         "default": true,
+         "description": "Should the executable be added to the path (using python wrapper)",
+         "title": "Add To Path",
+         "type": "boolean"
+      }
+   },
+   "required": [
+      "package",
+      "executable",
+      "name",
+      "version",
+      "source",
+      "platforms"
+   ],
+   "title": "Wheel",
+   "type": "object"
+}
