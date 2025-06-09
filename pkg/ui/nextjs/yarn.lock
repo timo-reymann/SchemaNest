@@ -226,21 +226,21 @@ __metadata:
   linkType: hard
 
 "@heroui/avatar@npm:^2.2.16":
-  version: 2.2.16
-  resolution: "@heroui/avatar@npm:2.2.16"
+  version: 2.2.17
+  resolution: "@heroui/avatar@npm:2.2.17"
   dependencies:
-    "@heroui/react-utils": "npm:2.1.10"
+    "@heroui/react-utils": "npm:2.1.11"
     "@heroui/shared-utils": "npm:2.1.9"
-    "@heroui/use-image": "npm:2.1.9"
-    "@react-aria/focus": "npm:3.20.3"
-    "@react-aria/interactions": "npm:3.25.1"
-    "@react-aria/utils": "npm:3.29.0"
+    "@heroui/use-image": "npm:2.1.10"
+    "@react-aria/focus": "npm:3.20.4"
+    "@react-aria/interactions": "npm:3.25.2"
+    "@react-aria/utils": "npm:3.29.1"
   peerDependencies:
     "@heroui/system": ">=2.4.7"
     "@heroui/theme": ">=2.4.6"
     react: ">=18 || >=19.0.0-rc.0"
     react-dom: ">=18 || >=19.0.0-rc.0"
-  checksum: 10c0/cad224baaf53083adfb99750552795d75a79116cae2f61843622f0986993f8c0e29af71a320ea01622637fd2b4fa6004dabff81f78b5e4cb0b31878f27748568
+  checksum: 10c0/0020ae8cda03b26543338858cbcf992b2a18e906312471bee2f9eb1c960b64d60b61fa255c574b04da96cc82191dffa2d51dae541109bc75ab27b0181324bc1b
   languageName: node
   linkType: hard
 
@@ -592,6 +592,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@heroui/react-rsc-utils@npm:2.1.8":
+  version: 2.1.8
+  resolution: "@heroui/react-rsc-utils@npm:2.1.8"
+  peerDependencies:
+    react: ">=18 || >=19.0.0-rc.0"
+  checksum: 10c0/37af1e236b0adb8cce15277aa5cdee5dc564b59439b5c3eb561c4e8142005f265527d814a8dc249ed49d85faf0db80d68c62bef436e22aa8e973efb6e47d1171
+  languageName: node
+  linkType: hard
+
 "@heroui/react-utils@npm:2.1.10":
   version: 2.1.10
   resolution: "@heroui/react-utils@npm:2.1.10"
@@ -601,6 +610,18 @@ __metadata:
   peerDependencies:
     react: ">=18 || >=19.0.0-rc.0"
   checksum: 10c0/d2fda2d81fff7a2e6dce86902a3700cbb292676bd57fa3972567d6c62c14d2d30b28df7a2a30fe684f1bd1520199bf2fdbf1012faba4b7bc584725f683fd5a9e
+  languageName: node
+  linkType: hard
+
+"@heroui/react-utils@npm:2.1.11":
+  version: 2.1.11
+  resolution: "@heroui/react-utils@npm:2.1.11"
+  dependencies:
+    "@heroui/react-rsc-utils": "npm:2.1.8"
+    "@heroui/shared-utils": "npm:2.1.9"
+  peerDependencies:
+    react: ">=18 || >=19.0.0-rc.0"
+  checksum: 10c0/b64b54bfdac50e99bc71c4a45b6eda68fa9af18102058a498d846985ba43cc3956fd8ca89865b3d30bc82ee4ce075b38def9c430ee83adf1580081377fcd12f0
   languageName: node
   linkType: hard
 
@@ -985,15 +1006,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroui/use-image@npm:2.1.9":
-  version: 2.1.9
-  resolution: "@heroui/use-image@npm:2.1.9"
+"@heroui/use-image@npm:2.1.10":
+  version: 2.1.10
+  resolution: "@heroui/use-image@npm:2.1.10"
   dependencies:
-    "@heroui/react-utils": "npm:2.1.10"
+    "@heroui/react-utils": "npm:2.1.11"
     "@heroui/use-safe-layout-effect": "npm:2.1.7"
   peerDependencies:
     react: ">=18 || >=19.0.0-rc.0"
-  checksum: 10c0/538d83457503dadd6ba1ff664623288aa9880013382c9567be28389a8ecb49ad36628c27cdf8b1051804a542d94ced8cde668a79c66e332097562303128a349d
+  checksum: 10c0/a2a031120e4d1dfe6300275d0d3afb432f80eff124cf8606c9373d4039a87790e4421d1b83624939a50ba4f82d2aade8d5100dd3e4639a5d4ff3a403e0c8b91d
   languageName: node
   linkType: hard
 
@@ -1674,7 +1695,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-aria/focus@npm:^3.20.3, @react-aria/focus@npm:^3.20.4":
+"@react-aria/focus@npm:3.20.4, @react-aria/focus@npm:^3.20.3, @react-aria/focus@npm:^3.20.4":
   version: 3.20.4
   resolution: "@react-aria/focus@npm:3.20.4"
   dependencies:
@@ -1800,7 +1821,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-aria/interactions@npm:^3.25.1, @react-aria/interactions@npm:^3.25.2":
+"@react-aria/interactions@npm:3.25.2, @react-aria/interactions@npm:^3.25.1, @react-aria/interactions@npm:^3.25.2":
   version: 3.25.2
   resolution: "@react-aria/interactions@npm:3.25.2"
   dependencies:
@@ -2164,7 +2185,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-aria/utils@npm:^3.29.0, @react-aria/utils@npm:^3.29.1":
+"@react-aria/utils@npm:3.29.1, @react-aria/utils@npm:^3.29.0, @react-aria/utils@npm:^3.29.1":
   version: 3.29.1
   resolution: "@react-aria/utils@npm:3.29.1"
   dependencies:
