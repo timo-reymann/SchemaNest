@@ -1,0 +1,12 @@
+POST http://localhost:8080/api/schema/json-schema/adb/version/2.0.0
+Content-Type: application/json
+
+{
+  "description": " would like to see a way to get the validation errors inside of monaco so I can prevent the user from saving code that is invalid without putting a custom syntax validation on Save.",
+  "type": "object",
+  "properties": {
+    "test":{
+      "type": "string"
+    }
+  }
+}
