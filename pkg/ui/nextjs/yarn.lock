@@ -1071,11 +1071,11 @@ __metadata:
   linkType: hard
 
 "@heroui/use-theme@npm:^2.1.8":
-  version: 2.1.8
-  resolution: "@heroui/use-theme@npm:2.1.8"
+  version: 2.1.9
+  resolution: "@heroui/use-theme@npm:2.1.9"
   peerDependencies:
     react: ">=18 || >=19.0.0-rc.0"
-  checksum: 10c0/104455ba61b29c9e084a3d729388f7b55d99b54f900204cbb72a6f63474ea348d98e13b2a67693c113ab786c9dfa0127e8a79f3b92b365763e469ad968881d35
+  checksum: 10c0/f85c8f3779c3934347984b16238517a54c10fb7f2c82e1489e919960027131a2e69939507fc32dd204352ebc946e0e65e178fe4138c3a7e00e6a74a871dd43b0
   languageName: node
   linkType: hard
 
