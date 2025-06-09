@@ -75,11 +75,18 @@ jobs:
       - node/install-packages:
           app-dir: pkg/ui/nextjs
           pkg-manager: yarn-berry
+      - restore_cache:
+          keys:
+            - v1-next-cache
       - run:
           name: Build frontend
           command: |
             cd pkg/ui/nextjs
             yarn build
+      - save_cache:
+          keys: v1-next-cache
+          paths:
+            - pkg/ui/nextjs/.next/cache
       - persist_to_workspace:
           root: ./
           paths:
