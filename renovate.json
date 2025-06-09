@@ -8,7 +8,7 @@
       "groupName": "Hero UI",
       "groupSlug": "hero-ui",
       "matchPackageNames": [
-        "@heroui/.*"
+        "@heroui.*"
       ]
     }
   ]
