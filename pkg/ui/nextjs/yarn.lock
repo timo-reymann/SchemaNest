@@ -592,6 +592,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@heroui/react-rsc-utils@npm:2.1.8":
+  version: 2.1.8
+  resolution: "@heroui/react-rsc-utils@npm:2.1.8"
+  peerDependencies:
+    react: ">=18 || >=19.0.0-rc.0"
+  checksum: 10c0/37af1e236b0adb8cce15277aa5cdee5dc564b59439b5c3eb561c4e8142005f265527d814a8dc249ed49d85faf0db80d68c62bef436e22aa8e973efb6e47d1171
+  languageName: node
+  linkType: hard
+
 "@heroui/react-utils@npm:2.1.10":
   version: 2.1.10
   resolution: "@heroui/react-utils@npm:2.1.10"
@@ -601,6 +610,18 @@ __metadata:
   peerDependencies:
     react: ">=18 || >=19.0.0-rc.0"
   checksum: 10c0/d2fda2d81fff7a2e6dce86902a3700cbb292676bd57fa3972567d6c62c14d2d30b28df7a2a30fe684f1bd1520199bf2fdbf1012faba4b7bc584725f683fd5a9e
+  languageName: node
+  linkType: hard
+
+"@heroui/react-utils@npm:2.1.11":
+  version: 2.1.11
+  resolution: "@heroui/react-utils@npm:2.1.11"
+  dependencies:
+    "@heroui/react-rsc-utils": "npm:2.1.8"
+    "@heroui/shared-utils": "npm:2.1.9"
+  peerDependencies:
+    react: ">=18 || >=19.0.0-rc.0"
+  checksum: 10c0/b64b54bfdac50e99bc71c4a45b6eda68fa9af18102058a498d846985ba43cc3956fd8ca89865b3d30bc82ee4ce075b38def9c430ee83adf1580081377fcd12f0
   languageName: node
   linkType: hard
 
@@ -740,26 +761,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroui/switch@npm:2.2.18":
-  version: 2.2.18
-  resolution: "@heroui/switch@npm:2.2.18"
+"@heroui/switch@npm:2.2.19":
+  version: 2.2.19
+  resolution: "@heroui/switch@npm:2.2.19"
   dependencies:
-    "@heroui/react-utils": "npm:2.1.10"
+    "@heroui/react-utils": "npm:2.1.11"
     "@heroui/shared-utils": "npm:2.1.9"
     "@heroui/use-safe-layout-effect": "npm:2.1.7"
-    "@react-aria/focus": "npm:3.20.3"
-    "@react-aria/interactions": "npm:3.25.1"
-    "@react-aria/switch": "npm:3.7.3"
-    "@react-aria/utils": "npm:3.29.0"
-    "@react-aria/visually-hidden": "npm:3.8.23"
-    "@react-stately/toggle": "npm:3.8.4"
-    "@react-types/shared": "npm:3.29.1"
+    "@react-aria/focus": "npm:3.20.4"
+    "@react-aria/interactions": "npm:3.25.2"
+    "@react-aria/switch": "npm:3.7.4"
+    "@react-aria/utils": "npm:3.29.1"
+    "@react-aria/visually-hidden": "npm:3.8.24"
+    "@react-stately/toggle": "npm:3.8.5"
   peerDependencies:
     "@heroui/system": ">=2.4.7"
     "@heroui/theme": ">=2.4.3"
     react: ">=18 || >=19.0.0-rc.0"
     react-dom: ">=18 || >=19.0.0-rc.0"
-  checksum: 10c0/2983e094db99c279e278a0fd8df12b8f02b26e9751ae9a03904385aa8b123663dae096898a13e082b64c52fdc06a3f57317649eb9a8d3d23ddfbfb124bd94162
+  checksum: 10c0/6d23ec0bc9b178fafe56fc8158f0d047656dea93bd1179cee39377352d1952ddb54702976c27edaea6518f73a73b51bf069a85ce223cb523f0ecec05be093712
   languageName: node
   linkType: hard
 
@@ -1674,7 +1694,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-aria/focus@npm:^3.20.3, @react-aria/focus@npm:^3.20.4":
+"@react-aria/focus@npm:3.20.4, @react-aria/focus@npm:^3.20.3, @react-aria/focus@npm:^3.20.4":
   version: 3.20.4
   resolution: "@react-aria/focus@npm:3.20.4"
   dependencies:
@@ -1800,7 +1820,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-aria/interactions@npm:^3.25.1, @react-aria/interactions@npm:^3.25.2":
+"@react-aria/interactions@npm:3.25.2, @react-aria/interactions@npm:^3.25.1, @react-aria/interactions@npm:^3.25.2":
   version: 3.25.2
   resolution: "@react-aria/interactions@npm:3.25.2"
   dependencies:
@@ -2016,19 +2036,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-aria/switch@npm:3.7.3":
-  version: 3.7.3
-  resolution: "@react-aria/switch@npm:3.7.3"
+"@react-aria/switch@npm:3.7.4":
+  version: 3.7.4
+  resolution: "@react-aria/switch@npm:3.7.4"
   dependencies:
-    "@react-aria/toggle": "npm:^3.11.3"
-    "@react-stately/toggle": "npm:^3.8.4"
-    "@react-types/shared": "npm:^3.29.1"
-    "@react-types/switch": "npm:^3.5.11"
+    "@react-aria/toggle": "npm:^3.11.4"
+    "@react-stately/toggle": "npm:^3.8.5"
+    "@react-types/shared": "npm:^3.30.0"
+    "@react-types/switch": "npm:^3.5.12"
     "@swc/helpers": "npm:^0.5.0"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
     react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
-  checksum: 10c0/5327d43126711d81105b6a98ebc3cd4a4c9aad4e8a24e6444f9781ec8b1087cad78bedee9ba70f630052ad4c136b9e9f91de4570ff43a6af13c8d1a38d7c69a0
+  checksum: 10c0/a36fb2179ac41d441a721c6e141d66e1f06c123542e8de9f019a0016d5128ce66db61e5e34e8ee1252273ab88749d01cbd4c5c2c311c3f2d0c04b86a085a5b7a
   languageName: node
   linkType: hard
 
@@ -2097,7 +2117,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-aria/toggle@npm:^3.11.3":
+"@react-aria/toggle@npm:^3.11.3, @react-aria/toggle@npm:^3.11.4":
   version: 3.11.4
   resolution: "@react-aria/toggle@npm:3.11.4"
   dependencies:
@@ -2164,7 +2184,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-aria/utils@npm:^3.29.0, @react-aria/utils@npm:^3.29.1":
+"@react-aria/utils@npm:3.29.1, @react-aria/utils@npm:^3.29.0, @react-aria/utils@npm:^3.29.1":
   version: 3.29.1
   resolution: "@react-aria/utils@npm:3.29.1"
   dependencies:
@@ -2491,7 +2511,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-stately/toggle@npm:^3.8.4, @react-stately/toggle@npm:^3.8.5":
+"@react-stately/toggle@npm:3.8.5, @react-stately/toggle@npm:^3.8.4, @react-stately/toggle@npm:^3.8.5":
   version: 3.8.5
   resolution: "@react-stately/toggle@npm:3.8.5"
   dependencies:
@@ -2805,7 +2825,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-types/switch@npm:^3.5.11":
+"@react-types/switch@npm:^3.5.12":
   version: 3.5.12
   resolution: "@react-types/switch@npm:3.5.12"
   dependencies:
@@ -6100,7 +6120,7 @@ __metadata:
     "@heroui/select": "npm:^2.4.20"
     "@heroui/snippet": "npm:2.2.21"
     "@heroui/spinner": "npm:^2.2.17"
-    "@heroui/switch": "npm:2.2.18"
+    "@heroui/switch": "npm:2.2.19"
     "@heroui/system": "npm:2.4.16"
     "@heroui/table": "npm:^2.2.19"
     "@heroui/tabs": "npm:^2.2.17"
