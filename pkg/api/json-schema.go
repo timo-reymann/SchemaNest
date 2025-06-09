@@ -57,6 +57,7 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifier(w http.ResponseWriter, 
 		sendInternalErr(w, "Failed to get latest JSON schema version for", identifier, err)
 		return
 	}
+
 	details := JsonSchemaDetails{
 		Versions:    versions,
 		Description: latest.Description,
@@ -90,6 +91,19 @@ func (s *SchemaNestApi) PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.R
 		description = &valStr
 	}
 
+	schema, err := s.context.JsonSchemaRepository.Get(r.Context(), identifier)
+	if err != nil {
+		err = s.context.JsonSchemaRepository.Insert(r.Context(), &json_schema.JsonSchemaEntity{
+			Identifier: identifier,
+		})
+		schema, err = s.context.JsonSchemaRepository.Get(r.Context(), identifier)
+	}
+
+	if err != nil || schema == nil {
+		SendError(w, http.StatusInternalServerError, "failed to get or create json schema entry")
+		return
+	}
+
 	err = s.context.JsonSchemaVersionRepository.Insert(r.Context(), &json_schema.JsonSchemaVersionEntity{
 		Id:           nil,
 		Description:  description,
@@ -97,7 +111,7 @@ func (s *SchemaNestApi) PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.R
 		VersionMinor: v.Minor(),
 		VersionPatch: v.Patch(),
 		Content:      string(raw),
-		JsonSchemaId: 1,
+		JsonSchemaId: *schema.Id,
 	})
 	if err != nil {
 		SendError(w, http.StatusConflict, "schema already exists")
