@@ -14,6 +14,7 @@ export const Logo: React.FC<IconSvgProps> = ({
     version="1.0"
     viewBox="0 0 584.000000 584.000000"
     width={size || width}
+    {...props}
     xmlns="http://www.w3.org/2000/svg"
   >
     <g

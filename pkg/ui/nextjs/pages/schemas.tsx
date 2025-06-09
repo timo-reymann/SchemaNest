@@ -4,7 +4,6 @@ import { Code } from "@heroui/code";
 import { Pagination } from "@heroui/pagination";
 import React, { useEffect, useState } from "react";
 import NextLink from "next/link";
-import { Spinner } from "@heroui/spinner";
 import { useRouter } from "next/navigation";
 import { Input } from "@heroui/input";
 

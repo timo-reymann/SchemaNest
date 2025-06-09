@@ -3,7 +3,7 @@ import { Viewport } from "next";
 import clsx from "clsx";
 import { AppProps } from "next/app";
 
-import { Providers } from "./providers";
+import { Providers } from "../styles/providers";
 
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";

@@ -1,66 +1,76 @@
 "use client";
-import {createHead} from "@/util/layoutHelpers";
-import {useParams} from "next/navigation";
-import {subtitle, title} from "@/components/primitives";
-import {useBoundStore} from "@/store/main";
-import React, {useEffect, useState} from "react";
+import { useParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { Editor } from "@monaco-editor/react";
+import { useTheme } from "next-themes";
+import { Code } from "@heroui/code";
+
 import LoadingSpinner from "@/components/LoadingSpinner";
-import {Editor} from "@monaco-editor/react";
-import {useTheme} from "next-themes";
-import {Code} from "@heroui/code";
+import { useBoundStore } from "@/store/main";
+import { subtitle, title } from "@/components/primitives";
+import { createHead } from "@/util/layoutHelpers";
 
 export default function JsonSchemaVersionPage() {
-    const params = useParams<{ identifier: string, version: string }>()
+  const params = useParams<{ identifier: string; version: string }>();
 
-    const [schema, setSchema] = useState({})
-    const [exists, setExists] = useState(false)
-    const fetchSchemaByVersion = useBoundStore(s => s.fetchSchemaByVersion)
-    const loading = useBoundStore(s => s.schemaLoading)
-    const {theme} = useTheme()
+  const [schema, setSchema] = useState({});
+  const [exists, setExists] = useState(false);
+  const fetchSchemaByVersion = useBoundStore((s) => s.fetchSchemaByVersion);
+  const loading = useBoundStore((s) => s.schemaLoading);
+  const { theme } = useTheme();
 
-    useEffect(() => {
-        if (params == null) {
-            return
-        }
-        (async () => {
-            try {
-                let schema = await fetchSchemaByVersion(params.identifier, params.version)
-                setSchema(schema)
-                setExists(true)
-            } catch {
-                setExists(false)
-            }
-        })()
-    }, [fetchSchemaByVersion, params]);
-
+  useEffect(() => {
     if (params == null) {
-        return <></>
+      return;
     }
+    (async () => {
+      try {
+        let schema = await fetchSchemaByVersion(
+          params.identifier,
+          params.version,
+        );
 
-    if (loading) {
-        return <LoadingSpinner label="Loading schema ..."/>
-    }
+        setSchema(schema);
+        setExists(true);
+      } catch {
+        setExists(false);
+      }
+    })();
+  }, [fetchSchemaByVersion, params]);
 
-    if (!exists) {
-        return <div className="flex h-full w-full">
-            <p className=" mx-auto text-center">
-                JSON-Schema <Code>{params.identifier}</Code> in version <Code>{params.version}</Code> not found.
-            </p>
-        </div>
-    }
+  if (params == null) {
+    return <></>;
+  }
 
+  if (loading) {
+    return <LoadingSpinner label="Loading schema ..." />;
+  }
+
+  if (!exists) {
     return (
-        <>
-            {createHead(`${params.identifier} - JSON Schema`)}
-            <h1 className={title()}>{params.identifier}</h1>
-            <h2 className={subtitle()}>{params.version}</h2>
-            <Editor height="50vh"
-                    options={{
-                        readOnly: true
-                    }}
-                    theme={theme === "dark" ? "vs-dark" : "vs-light"}
-                    defaultLanguage="javascript"
-                    value={JSON.stringify(schema, null, "  ")}/>
-        </>
+      <div className="flex h-full w-full">
+        <p className=" mx-auto text-center">
+          JSON-Schema <Code>{params.identifier}</Code> in version{" "}
+          <Code>{params.version}</Code> not found.
+        </p>
+      </div>
     );
+  }
+
+  return (
+    <>
+      {createHead(`${params.identifier} - JSON Schema`)}
+      <h1 className={title()}>{params.identifier}</h1>
+      <h2 className={subtitle()}>{params.version}</h2>
+      <Editor
+        defaultLanguage="javascript"
+        height="50vh"
+        options={{
+          readOnly: true,
+        }}
+        theme={theme === "dark" ? "vs-dark" : "vs-light"}
+        value={JSON.stringify(schema, null, "  ")}
+      />
+    </>
+  );
 }
