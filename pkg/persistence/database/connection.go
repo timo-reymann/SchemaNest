@@ -55,8 +55,10 @@ func (dbc *DBConnection) Query(ctx context.Context, rowMapper func(scan func(des
 		return errors.Join(errors.New("failed to run query"), err)
 	}
 	defer q.Close()
+	hasResults := false
 
 	for q.Next() {
+		hasResults = true
 		cont, err := rowMapper(q.Scan)
 		if err != nil {
 			return errors.Join(errors.New("failed to read results"), err)
@@ -65,6 +67,10 @@ func (dbc *DBConnection) Query(ctx context.Context, rowMapper func(scan func(des
 		if !cont {
 			break
 		}
+	}
+
+	if !hasResults {
+		return errors.New("no records found")
 	}
 
 	return nil

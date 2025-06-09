@@ -31,6 +31,10 @@ func Handler() func(writer http.ResponseWriter, request *http.Request) {
 	fileServer := http.FileServer(httpFs)
 
 	return func(w http.ResponseWriter, r *http.Request) {
+		if handleAPIRoute(w, r) {
+			return
+		}
+
 		cleanPath := strings.TrimPrefix(strings.TrimSuffix(r.URL.Path, "/"), "/")
 		if !hasFile(nextJsFiles, cleanPath) {
 			r.URL.Path = "/"

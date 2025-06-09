@@ -34,6 +34,10 @@ func Handler() func(writer http.ResponseWriter, request *http.Request) {
 	proxy := httputil.NewSingleHostReverseProxy(target)
 
 	return func(w http.ResponseWriter, r *http.Request) {
+		if handleAPIRoute(w, r) {
+			return
+		}
+
 		// Try reach frontend once if not already running since start
 		if !frontendReachableOnce {
 			slog.Info("Checking if frontend is reachable now")

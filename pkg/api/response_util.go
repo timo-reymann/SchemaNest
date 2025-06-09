@@ -24,7 +24,7 @@ func sendInternalErr(w http.ResponseWriter, msg string, extra ...any) {
 	w.WriteHeader(http.StatusInternalServerError)
 }
 
-func sendError(w http.ResponseWriter, status int, error string) {
+func SendError(w http.ResponseWriter, status int, error string) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	_ = encoding.WriteJSON(w, map[string]string{"error": error})

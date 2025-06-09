@@ -12,14 +12,22 @@ import (
 func TestListJSONSchemas(t *testing.T) {
 	tests := []struct {
 		name        string
-		mockSchemas []*json_schema.JsonSchemaEntity
+		mockSchemas []*json_schema.JsonSchemaEntityWithBasicInfo
 		expected    int
 	}{
 		{
 			name: "Success",
-			mockSchemas: []*json_schema.JsonSchemaEntity{
-				{Identifier: "schema1"},
-				{Identifier: "schema2"},
+			mockSchemas: []*json_schema.JsonSchemaEntityWithBasicInfo{
+				{
+					JsonSchemaEntity: json_schema.JsonSchemaEntity{
+						Identifier: "schema1",
+					},
+				},
+				{
+					JsonSchemaEntity: json_schema.JsonSchemaEntity{
+						Identifier: "schema2",
+					},
+				},
 			},
 			expected: http.StatusOK,
 		},
@@ -86,13 +94,13 @@ func TestGetApiSchemaJsonSchemaIdentifier(t *testing.T) {
 				t.Errorf("expected status %d, got %d", tt.expected, rec.Code)
 			}
 			if tt.expected == http.StatusOK {
-				var response []JsonSchemaVersion
+				response := JsonSchemaDetails{}
 				err := json.NewDecoder(rec.Body).Decode(&response)
 				if err != nil {
 					t.Errorf("failed to decode response: %v", err)
 				}
-				if len(response) != len(tt.mockVersions) {
-					t.Errorf("expected %d versions, got %d", len(tt.mockVersions), len(response))
+				if len(response.Versions) != len(tt.mockVersions) {
+					t.Errorf("expected %d versions, got %d", len(tt.mockVersions), len(response.Versions))
 				}
 			}
 		})

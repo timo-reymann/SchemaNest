@@ -17,7 +17,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/JsonSchemaVersions"
+                $ref: "#/components/schemas/JsonSchemaDetails"
   /api/schema/json-schema/{identifier}:
     get:
       summary: Get versions of a json schema
@@ -133,27 +133,33 @@ components:
       type: object
       required:
         - identifier
+        - description
         - latestVersion
       properties:
         identifier:
           type: string
+          description: Identifier for the schema
+        description:
+          type: string
+          description: Description for the schema as set by the latest version
         latestVersion:
-          type: object
-          required:
-            - major
-            - minor
-            - patch
-          properties:
-            major:
-              type: integer
-            minor:
-              type: integer
-            patch:
-              type: integer
+          $ref: "#/components/schemas/VersionParts"
+
     JsonSchemaList:
       type: array
       items:
         $ref: "#/components/schemas/JsonSchemaInfo"
+    JsonSchemaDetails:
+      type: object
+      additionalProperties: false
+      required:
+        - versions
+      properties:
+        versions:
+            $ref: '#/components/schemas/JsonSchemaVersions'
+        description:
+          type: string
+          description: Description for the
     JsonSchemaVersion:
       type: object
       additionalProperties: false
@@ -175,3 +181,21 @@ components:
         error:
           type: string
           description: Error message
+    VersionParts:
+      type: object
+      description: Version seperated into its parts
+      additionalProperties: false
+      required:
+        - major
+        - minor
+        - patch
+      properties:
+        major:
+          type: integer
+          description: Semantic major version
+        minor:
+          type: integer
+          description: Semantic minor version
+        patch:
+          type: integer
+          description: Semantic patch version

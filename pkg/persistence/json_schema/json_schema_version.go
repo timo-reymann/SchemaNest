@@ -7,6 +7,7 @@ import (
 
 type JsonSchemaVersionEntity struct {
 	Id           *int64
+	Description  *string
 	VersionMajor int64
 	VersionMinor int64
 	VersionPatch int64
@@ -29,7 +30,7 @@ type JsonSchemaVersionRepositoryImpl struct {
 
 func scanSingleRow(entity *JsonSchemaVersionEntity) func(scan func(dest ...any) error) (bool, error) {
 	mapper := func(scan func(dest ...any) error) (bool, error) {
-		err := scan(&entity.Id, &entity.VersionMajor, &entity.VersionMinor, &entity.VersionPatch, &entity.Content, &entity.JsonSchemaId)
+		err := scan(&entity.Id, &entity.VersionMajor, &entity.VersionMinor, &entity.VersionPatch, &entity.Content, &entity.Description, &entity.JsonSchemaId)
 		return false, err
 	}
 	return mapper
@@ -38,10 +39,10 @@ func scanSingleRow(entity *JsonSchemaVersionEntity) func(scan func(dest ...any) 
 func (j *JsonSchemaVersionRepositoryImpl) Insert(ctx context.Context, entity *JsonSchemaVersionEntity) error {
 	err := j.DB.Insert(
 		`
-		INSERT INTO json_schema_version (version_major, version_minor, version_patch, content, json_schema_id) 
-		VALUES (?, ?, ?, ?, ?)
+		INSERT INTO json_schema_version (version_major, version_minor, version_patch, content, description, json_schema_id) 
+		VALUES (?, ?, ?, ?, ?, ?)
         `,
-		entity.VersionMajor, entity.VersionMinor, entity.VersionPatch, entity.Content, entity.JsonSchemaId,
+		entity.VersionMajor, entity.VersionMinor, entity.VersionPatch, entity.Content, entity.Description, entity.JsonSchemaId,
 	)
 	if err != nil {
 		return err
@@ -56,14 +57,14 @@ func (j *JsonSchemaVersionRepositoryImpl) ListForJsonSchema(ctx context.Context,
 		ctx,
 		func(scan func(dest ...any) error) (bool, error) {
 			res := &JsonSchemaVersionEntity{}
-			err := scan(&res.Id, &res.VersionMajor, &res.VersionMinor, &res.VersionPatch, &res.Content, &res.JsonSchemaId)
+			err := scan(&res.Id, &res.VersionMajor, &res.VersionMinor, &res.VersionPatch, &res.Content, &res.Description, &res.JsonSchemaId)
 			if err == nil {
 				results = append(results, res)
 			}
 			return true, err
 		},
 		`
-		SELECT id, version_major, version_minor, version_patch, content, json_schema_id 
+		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
 		FROM json_schema_version 
 		WHERE json_schema_id = (SELECT id FROM json_schema WHERE identifier = ?) 
 		ORDER BY version_major, version_minor, version_patch
@@ -82,7 +83,7 @@ func (j *JsonSchemaVersionRepositoryImpl) GetForJsonSchemaAndVersion(ctx context
 		ctx,
 		scanSingleRow(entity),
 		`
-		SELECT id, version_major, version_minor, version_patch, content, json_schema_id 
+		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
 		FROM json_schema_version 
 		WHERE json_schema_id = (SELECT id FROM json_schema WHERE identifier = ?) 
 		AND version_major = ? 
@@ -105,7 +106,7 @@ func (j *JsonSchemaVersionRepositoryImpl) GetForLatestMajorVersion(ctx context.C
 		ctx,
 		scanSingleRow(entity),
 		`
-		SELECT id, version_major, version_minor, version_patch, content, json_schema_id 
+		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
 		FROM json_schema_version
 		WHERE json_schema_id = (SELECT id
                         FROM json_schema
@@ -131,7 +132,7 @@ func (j *JsonSchemaVersionRepositoryImpl) GetForLatestMinorVersion(ctx context.C
 		ctx,
 		scanSingleRow(entity),
 		`
-		SELECT id, version_major, version_minor, version_patch, content, json_schema_id 
+		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
 		FROM json_schema_version
 		WHERE json_schema_id = (SELECT id
                         FROM json_schema
@@ -158,7 +159,7 @@ func (j *JsonSchemaVersionRepositoryImpl) GetLatestVersion(ctx context.Context, 
 		ctx,
 		scanSingleRow(entity),
 		`
-		SELECT id, version_major, version_minor, version_patch, content, json_schema_id 
+		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
 		FROM json_schema_version
 		WHERE json_schema_id = (SELECT id
                         FROM json_schema

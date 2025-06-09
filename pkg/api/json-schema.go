@@ -22,16 +22,13 @@ func (s *SchemaNestApi) ListJSONSchemas(w http.ResponseWriter, r *http.Request) 
 	models := mapping.MapEntitiesToModel(
 		func(e *json_schema.JsonSchemaEntityWithBasicInfo) *JsonSchemaInfo {
 			return &JsonSchemaInfo{
-				Identifier: e.Identifier,
-				LatestVersion: struct {
-					Major int `json:"major"`
-					Minor int `json:"minor"`
-					Patch int `json:"patch"`
-				}(struct {
-					Major int `json:"major,omitempty"`
-					Minor int `json:"minor,omitempty"`
-					Patch int `json:"patch,omitempty"`
-				}{Major: e.LatestVersion.Major, Minor: e.LatestVersion.Minor, Patch: e.LatestVersion.Patch}),
+				Identifier:  e.Identifier,
+				Description: e.Description,
+				LatestVersion: VersionParts{
+					Major: e.LatestVersion.Major,
+					Minor: e.LatestVersion.Minor,
+					Patch: e.LatestVersion.Patch,
+				},
 			}
 		},
 		entities,
@@ -45,7 +42,7 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifier(w http.ResponseWriter, 
 		sendInternalErr(w, "Failed to list JSON schema versions for", identifier, err)
 		return
 	}
-	models := mapping.MapEntitiesToModel(
+	_, versions := mapping.MapEntitiesToModelWithValues(
 		func(e *json_schema.JsonSchemaVersionEntity) *JsonSchemaVersion {
 			version := fmt.Sprintf("%d.%d.%d", e.VersionMajor, e.VersionMinor, e.VersionPatch)
 			return &JsonSchemaVersion{
@@ -54,30 +51,48 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifier(w http.ResponseWriter, 
 		},
 		entities,
 	)
-	_ = sendJSON(w, models)
+
+	latest, err := s.context.JsonSchemaVersionRepository.GetLatestVersion(r.Context(), identifier)
+	if err != nil {
+		sendInternalErr(w, "Failed to get latest JSON schema version for", identifier, err)
+		return
+	}
+	details := JsonSchemaDetails{
+		Versions:    versions,
+		Description: latest.Description,
+	}
+	_ = sendJSON(w, details)
 }
 
 func (s *SchemaNestApi) PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request, identifier string, version string) {
 	v, err := semver.NewVersion(version)
 	if err != nil || v.Metadata() != "" {
-		sendError(w, http.StatusBadRequest, "invalid version format. Only 'major.minor.patch' is supported.")
+		SendError(w, http.StatusBadRequest, "invalid version format. Only 'major.minor.patch' is supported.")
 		return
 	}
 
 	raw, err := io.ReadAll(r.Body)
 	if err != nil {
-		sendError(w, http.StatusBadRequest, "failed to read request body")
+		SendError(w, http.StatusBadRequest, "failed to read request body")
 		return
 	}
 
-	err = json.NewDecoder(bytes.NewBuffer(raw)).Decode(&map[string]any{})
+	decoded := map[string]any{}
+	err = json.NewDecoder(bytes.NewBuffer(raw)).Decode(&decoded)
 	if err != nil {
-		sendError(w, http.StatusBadRequest, "invalid JSON schema")
+		SendError(w, http.StatusBadRequest, "invalid JSON schema")
 		return
+	}
+
+	var description *string
+	if val, ok := decoded["description"]; ok {
+		valStr := val.(string)
+		description = &valStr
 	}
 
 	err = s.context.JsonSchemaVersionRepository.Insert(r.Context(), &json_schema.JsonSchemaVersionEntity{
 		Id:           nil,
+		Description:  description,
 		VersionMajor: v.Major(),
 		VersionMinor: v.Minor(),
 		VersionPatch: v.Patch(),
@@ -85,7 +100,7 @@ func (s *SchemaNestApi) PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.R
 		JsonSchemaId: 1,
 	})
 	if err != nil {
-		sendError(w, http.StatusConflict, "schema already exists")
+		SendError(w, http.StatusConflict, "schema already exists")
 		return
 	}
 	w.WriteHeader(http.StatusCreated)
@@ -94,7 +109,7 @@ func (s *SchemaNestApi) PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.R
 func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierChannelChannel(w http.ResponseWriter, r *http.Request, identifier string, channelIdentifier string) {
 	parsedChannel, err := channel.Parse(channelIdentifier)
 	if err != nil {
-		sendError(w, http.StatusBadRequest, "invalid channel format: "+err.Error())
+		SendError(w, http.StatusBadRequest, "invalid channel format: "+err.Error())
 		return
 	}
 
@@ -106,7 +121,7 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierChannelChannel(w http.Re
 	}
 
 	if entity == nil {
-		sendError(w, http.StatusNotFound, "version not found")
+		SendError(w, http.StatusNotFound, "version not found")
 		return
 	}
 
@@ -121,7 +136,7 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierLatest(w http.ResponseWr
 	}
 
 	if entity == nil {
-		sendError(w, http.StatusNotFound, "version not found")
+		SendError(w, http.StatusNotFound, "version not found")
 		return
 	}
 
@@ -131,7 +146,7 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierLatest(w http.ResponseWr
 func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request, identifier string, version string) {
 	semver, err := semver.NewVersion(version)
 	if err != nil || semver.Metadata() != "" {
-		sendError(w, http.StatusBadRequest, "invalid version format. Only 'major.minor.patch' is supported.")
+		SendError(w, http.StatusBadRequest, "invalid version format. Only 'major.minor.patch' is supported.")
 		return
 	}
 
@@ -142,7 +157,7 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierVersionVersion(w http.Re
 	}
 
 	if entity == nil {
-		sendError(w, http.StatusNotFound, "version not found")
+		SendError(w, http.StatusNotFound, "version not found")
 		return
 	}
 

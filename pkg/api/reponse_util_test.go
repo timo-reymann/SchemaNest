@@ -68,15 +68,15 @@ func TestSendError(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			rec := httptest.NewRecorder()
-			sendError(rec, tt.status, tt.errorMsg)
+			SendError(rec, tt.status, tt.errorMsg)
 			if rec.Code != tt.status {
-				t.Errorf("sendError() status = %d, want %d", rec.Code, tt.status)
+				t.Errorf("SendError() status = %d, want %d", rec.Code, tt.status)
 			}
 			if rec.Body.String() != tt.expected {
-				t.Errorf("sendError() = %q, want %q", rec.Body.String(), tt.expected)
+				t.Errorf("SendError() = %q, want %q", rec.Body.String(), tt.expected)
 			}
 			if rec.Header().Get("Content-Type") != "application/json" {
-				t.Errorf("sendError() Content-Type = %q, want %q", rec.Header().Get("Content-Type"), "application/json")
+				t.Errorf("SendError() Content-Type = %q, want %q", rec.Header().Get("Content-Type"), "application/json")
 			}
 		})
 	}

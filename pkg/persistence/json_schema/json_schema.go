@@ -19,6 +19,7 @@ type JsonSchemaEntityLatestVersion struct {
 type JsonSchemaEntityWithBasicInfo struct {
 	JsonSchemaEntity
 	LatestVersion JsonSchemaEntityLatestVersion
+	Description   string
 }
 
 type JsonSchemaRepository interface {
@@ -54,14 +55,14 @@ func (j *JsonSchemaRepositoryImpl) List(ctx context.Context) ([]*JsonSchemaEntit
 			res := &JsonSchemaEntityWithBasicInfo{
 				LatestVersion: JsonSchemaEntityLatestVersion{},
 			}
-			err := scan(&res.Id, &res.Identifier, &res.LatestVersion.Major, &res.LatestVersion.Minor, &res.LatestVersion.Patch)
+			err := scan(&res.Id, &res.Identifier, &res.Description, &res.LatestVersion.Major, &res.LatestVersion.Minor, &res.LatestVersion.Patch)
 			if err == nil {
 				results = append(results, res)
 			}
 			return true, err
 		},
 		`
-		SELECT s.id, s.identifier, v.version_major as latest_version_major, v.version_minor as latest_version_minor, v.version_patch as latest_version_minor
+		SELECT s.id, s.identifier, v.description, v.version_major as latest_version_major, v.version_minor as latest_version_minor, v.version_patch as latest_version_minor
 		FROM json_schema s
 				 INNER JOIN json_schema_version v ON s.id = v.json_schema_id
 		WHERE v.id = (SELECT lv.id

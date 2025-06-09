@@ -17,6 +17,7 @@ create table json_schema_version
     version_minor  integer not null,
     version_patch  integer not null,
     content        TEXT    not null,
+    description    TEXT,
     json_schema_id integer not null
         constraint json_schema_version__json_schema_fk
             references json_schema

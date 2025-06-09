@@ -28,14 +28,23 @@ type Error struct {
 	Error string `json:"error"`
 }
 
+// JsonSchemaDetails defines model for JsonSchemaDetails.
+type JsonSchemaDetails struct {
+	// Description Description for the
+	Description *string            `json:"description,omitempty"`
+	Versions    JsonSchemaVersions `json:"versions"`
+}
+
 // JsonSchemaInfo defines model for JsonSchemaInfo.
 type JsonSchemaInfo struct {
-	Identifier    string `json:"identifier"`
-	LatestVersion struct {
-		Major int `json:"major"`
-		Minor int `json:"minor"`
-		Patch int `json:"patch"`
-	} `json:"latestVersion"`
+	// Description Description for the schema as set by the latest version
+	Description string `json:"description"`
+
+	// Identifier Identifier for the schema
+	Identifier string `json:"identifier"`
+
+	// LatestVersion Version seperated into its parts
+	LatestVersion VersionParts `json:"latestVersion"`
 }
 
 // JsonSchemaList defines model for JsonSchemaList.
@@ -48,6 +57,18 @@ type JsonSchemaVersion struct {
 
 // JsonSchemaVersions defines model for JsonSchemaVersions.
 type JsonSchemaVersions = []JsonSchemaVersion
+
+// VersionParts Version seperated into its parts
+type VersionParts struct {
+	// Major Semantic major version
+	Major int `json:"major"`
+
+	// Minor Semantic minor version
+	Minor int `json:"minor"`
+
+	// Patch Semantic patch version
+	Patch int `json:"patch"`
+}
 
 // PostApiSchemaJsonSchemaIdentifierVersionVersionJSONBody defines parameters for PostApiSchemaJsonSchemaIdentifierVersionVersion.
 type PostApiSchemaJsonSchemaIdentifierVersionVersionJSONBody = map[string]interface{}
@@ -531,7 +552,7 @@ type ClientWithResponsesInterface interface {
 type ListJSONSchemasResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *JsonSchemaVersions
+	JSON200      *JsonSchemaDetails
 }
 
 // Status returns HTTPResponse.Status
@@ -737,7 +758,7 @@ func ParseListJSONSchemasResponse(rsp *http.Response) (*ListJSONSchemasResponse,
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest JsonSchemaVersions
+		var dest JsonSchemaDetails
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -1208,20 +1229,21 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/+xX3U/bOhT/V6xz72Noyr28LG+MTQiEGFqnvTAeDslJa5TYxnaKqqr/++SPtGnaotIx",
-	"tE17wqp9Pn4fxw5zyGWtpCBhDWRzMPmEavTLj1pL7RZYFNxyKbC60VKRtpwMZCVWhhJQnZ/mQG1MQSbX",
-	"XLkwyEIqVpMxOCZIwM4UQQbGai7GsFgkoOmx4ZoKyG5jkrvlMXn/QLmFRQKXRoqR7/BClNLVWS/PCxKW",
-	"l5x8D70qCVRoydivpI1vqx9d44PsBnJhaUzaRdZc7NpSaPPJtq0eqpC9TdXGbaLshXUg9QE8z9AVN9Zz",
-	"Yqn28P7VVEIG/6QrxdMod9ojdrHMjFrjbD1xh78XOGO6inpe/ele6GIT5gCEbf8bIF0nPPoql8Ji7gkU",
-	"WLtDX3gt2Wea1SgEJNDoCjKYWKtMlqaW1/JIh81BQS73+gSc3lywD1Ry4flipdQsdHNNxrqJ4LZyVdZ+",
-	"XHIGw8FwcOyySkUCFYcM/h8MB8Pgo4lHn6LiEW76YKQ4Cmu3NSaPxOmBrv5FARk4g1yOPl2P4sg7GYyS",
-	"wgTB/hsOWyJI+HBUquK5T+ALrO6LF5NvAtvrHI2aPCdjyqZiy069PUxT16hnsWeGVcVwirzC+4qYg8Da",
-	"a8ud3sFDOl+N0mInKedkTxUPvXaGojuECjXWZEkbyG7nwF3rTgRIWquszezK21Y3lHQY68/B3Zso4O+F",
-	"LexHZQKf4eg3cJY7GZ5s3uidU+yJ2wlbYWZCWlbKRhQ98c7Jsmhpw2TJkDkMUbu9pUvzCQpBVTqPi8PF",
-	"PAsJ4p+fKW2yNVm+LPx2Jum/Nhs+uPJvTNcGrFheXK/uh/CitbYIruhMtL8okbVE7e2RkPZgYwQOfuVZ",
-	"/71k3F+4mCGdx8Xhwx3vs/a1f/Phni4L/3XFLlckoKTZou2NNH+ouI8NGfteFrMf03WxYZTjTdnONKGl",
-	"Yk3t2Hj7sr97tQ+M8N/itq+6UBgrTVjM2BMa1qhKYkF9y4R+GTJBT91Pg/gItJw7+N8DAAD//6QEpAK3",
-	"DgAA",
+	"H4sIAAAAAAAC/+xYTW/cNhD9KwTbo7LatLlUtzQuAgdBatSFL2kOY2nkpSGRDDlaYyHsfy/4oc+VN7tO",
+	"arRFTpYl8vHNe49D2i3PVa2VREmWZy23+QZr8I+/GaOMe4CiECSUhOrKKI2GBFqelVBZTLgevWo5dnMK",
+	"tLkR2k3jWYBiNVoLd8gTTjuNPOOWjJB3fL9PuMHPjTBY8OxjBPnUD1O395gT3yf8nVXy2jO8QAJR2TPp",
+	"TVjNSV4Mv7FSGUabBaoJ36KxQkmP96PBkmf8h3QQMY0KpgPXm27GvNAe6nitl7JUbrWvq4UFYgwss0js",
+	"dudfVkBoiUUmS/WKAiWJUuCCr5f9t9kqS0BhqSjGl9SLw67A0KFuI0rJhNF8keO6vheWHA9BWJ9hp7dj",
+	"3yODMbCbAo9qPCOc22HW8f2xPam6m1FOz6yw479Q5MSXL9U3DUucyixqNEBYMCFJMUGWaQ83F6SG+6Vm",
+	"co01SBI5898Poysk4R0ax7YW8jiC+34UQQPlmyMI/vsRhJl1oaSOWAd/aKSbJ+K2z5UkyH1SJdRu1J+i",
+	"VuwP3NUg3ZqNqXjGN0TaZmlKolYvTPi4KtAVMeX++uqSXWAppOjbQ7D9A1pyJQiq3CqTl304+Xq1Xr10",
+	"qEqjBC14xn9erVfrUM3GO5eCFjFX6b1V8kXsClnL79BXonwGhJKXBc+424nvrn//cB1PHyea1UraEISf",
+	"1utOCJR+OmhdidwD+AWGo+v0lHdHiBd7Zm+T52ht2VSsJ+q9tE1dg9lFygyqisEWRAW3FTJXAesOUDf6",
+	"ERnSdmhg+0c1eYv0WotAddR8xq1Pg4EaCY3l2ceWC0fdecCTLimTTjkEkUyDyUiweb/59CwG+P67oH7X",
+	"KLyeYehf3CXu1frV4VYcjWIPgjZsqJlJRaxUjSxm5r3F/sizTJUMmKuhO7tOtS7NNyAlVmkbH55u5psA",
+	"EH/8k9Ymi2B5v/DzhWSh5U2dfR/uJmODi75vffM8TG9CIRWjHe37JLBOqJMzEmCfHIygwb95r/+3bDzd",
+	"uIiQtvHh6Zs79rOb/pLwzJt7uJ18T8VjqUi4VnbB2ytl/6fmfm7Q0q+q2H2dr/uDoLw8tO2NQX/hH9sX",
+	"iXcn+y/f7IIR/m+xdKuLfwBXBqHYsQewrNGVggLnkQl8GTCJD+OrQTwEOs1d+X8HAAD//92Iu7xBEQAA",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file
