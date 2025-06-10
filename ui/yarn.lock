@@ -1725,6 +1725,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-aria/interactions@npm:^3.25.3":
+  version: 3.25.3
+  resolution: "@react-aria/interactions@npm:3.25.3"
+  dependencies:
+    "@react-aria/ssr": "npm:^3.9.9"
+    "@react-aria/utils": "npm:^3.29.1"
+    "@react-stately/flags": "npm:^3.1.2"
+    "@react-types/shared": "npm:^3.30.0"
+    "@swc/helpers": "npm:^0.5.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+  checksum: 10c0/3193fc304523d90e8ed7a699e9ce2963c6af78634f338ecbc3d80e05b30acde0a0d6abe4a9cf24a55732bfe3961da9c13588a8ef4aca5244f132ccaa5057ed1c
+  languageName: node
+  linkType: hard
+
 "@react-aria/label@npm:3.7.19, @react-aria/label@npm:^3.7.19":
   version: 3.7.19
   resolution: "@react-aria/label@npm:3.7.19"
@@ -2004,6 +2020,21 @@ __metadata:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
     react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
   checksum: 10c0/e4ee9a8bdac655843ee8686902ca9f42f4d6d390be2734cd04d7a02f65136eec9da33001dfc869790be7d95258cfc0ef8093c8c92a9822474a1dc96dced5e885
+  languageName: node
+  linkType: hard
+
+"@react-aria/visually-hidden@npm:3.8.25":
+  version: 3.8.25
+  resolution: "@react-aria/visually-hidden@npm:3.8.25"
+  dependencies:
+    "@react-aria/interactions": "npm:^3.25.3"
+    "@react-aria/utils": "npm:^3.29.1"
+    "@react-types/shared": "npm:^3.30.0"
+    "@swc/helpers": "npm:^0.5.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+  checksum: 10c0/d31605357a7b2f979d11554ae06627413e3184684bcbc485b754214af5af6c883683d7ea852cde9dcf2ca4ce090e25ebd37f8e7c136c2607f5ac94bbacaecdc9
   languageName: node
   linkType: hard
 
@@ -5881,7 +5912,7 @@ __metadata:
     "@monaco-editor/react": "npm:^4.7.0"
     "@next/eslint-plugin-next": "npm:15.3.3"
     "@react-aria/ssr": "npm:3.9.9"
-    "@react-aria/visually-hidden": "npm:3.8.24"
+    "@react-aria/visually-hidden": "npm:3.8.25"
     "@react-types/shared": "npm:3.30.0"
     "@tailwindcss/postcss": "npm:^4.1.8"
     "@types/node": "npm:22.15.30"
