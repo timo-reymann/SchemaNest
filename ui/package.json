@@ -37,10 +37,13 @@
     "clsx": "2.1.1",
     "framer-motion": "12.16.0",
     "intl-messageformat": "10.7.16",
+    "mobx": "^6.13.7",
     "next": "15.3.3",
     "next-themes": "0.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "redoc": "^2.5.0",
+    "styled-components": "^6.1.18",
     "zustand": "^5.0.5"
   },
   "devDependencies": {

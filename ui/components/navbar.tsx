@@ -13,6 +13,17 @@ import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { GithubIcon, Logo } from "@/components/icons";
 
+const navItems = [
+  {
+    label: "Overview",
+    href: "/schemas",
+  },
+  {
+    label: "API Documentation",
+    href: "/api-docs",
+  },
+];
+
 export const Navbar = () => {
   return (
     <HeroUINavbar maxWidth="2xl" position="static">
@@ -24,18 +35,20 @@ export const Navbar = () => {
           </NextLink>
         </NavbarBrand>
         <ul className="lg:flex gap-4 justify-start ml-2">
-          <NavbarItem key="/schemas">
-            <NextLink
-              className={clsx(
-                linkStyles({ color: "foreground" }),
-                "data-[active=true]:text-primary data-[active=true]:font-medium",
-              )}
-              color="foreground"
-              href="/schemas"
-            >
-              Overview
-            </NextLink>
-          </NavbarItem>
+          {navItems.map((nav) => (
+            <NavbarItem key={nav.href}>
+              <NextLink
+                className={clsx(
+                  linkStyles({ color: "foreground" }),
+                  "data-[active=true]:text-primary data-[active=true]:font-bold",
+                )}
+                color="foreground"
+                href={nav.href}
+              >
+                {nav.label}
+              </NextLink>
+            </NavbarItem>
+          ))}
         </ul>
       </NavbarContent>
 

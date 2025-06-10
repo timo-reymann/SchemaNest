@@ -36,7 +36,7 @@ export default function Home() {
               radius: "full",
               variant: "shadow",
             })}
-            href={siteConfig.links.apiDocs}
+            href="/api-docs"
           >
             API-Documentation
           </Link>
