@@ -30,7 +30,7 @@ create-dist: ## Create dist folder if not already existent
 	@mkdir -p dist/
 
 build-ui: ## Build UI
-	@cd pkg/ui/nextjs && yarn build
+	@cd ui && yarn build
 
 build-linux: create-dist ## Build binaries for linux
 	@GOOS=linux GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)linux-amd64 $(BUILD_ARGS) $(CMD_REGISTRY)

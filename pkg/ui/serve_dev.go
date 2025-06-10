@@ -26,7 +26,7 @@ func isFrontendRunning() bool {
 
 var frontendReachableOnce = false
 
-func Handler() func(writer http.ResponseWriter, request *http.Request) {
+func CreateHandler() func(writer http.ResponseWriter, request *http.Request) {
 	slog.Warn("Enabling frontend handler for development")
 
 	frontendReachableOnce = isFrontendRunning()

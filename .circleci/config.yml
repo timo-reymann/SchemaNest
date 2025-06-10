@@ -46,12 +46,12 @@ jobs:
     steps:
       - checkout
       - node/install-packages:
-          app-dir: pkg/ui/nextjs
+          app-dir: ui
           pkg-manager: yarn-berry
       - run:
           name: Run eslint
           command: |
-            cd pkg/ui/nextjs
+            cd ui
             npm run lint
   build:
     executor: go
@@ -73,7 +73,7 @@ jobs:
     steps:
       - checkout
       - node/install-packages:
-          app-dir: pkg/ui/nextjs
+          app-dir: ui
           pkg-manager: yarn-berry
       - restore_cache:
           keys:
@@ -81,16 +81,16 @@ jobs:
       - run:
           name: Build frontend
           command: |
-            cd pkg/ui/nextjs
+            cd ui
             yarn build
       - save_cache:
           key: v1-next-cache
           paths:
-            - pkg/ui/nextjs/.next/cache
+            - ui/.next/cache
       - persist_to_workspace:
           root: ./
           paths:
-            - pkg/ui/nextjs/build
+            - ui/build
   build-gh-pages:
     executor: node
     steps:

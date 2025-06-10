@@ -3,15 +3,12 @@
 package ui
 
 import (
+	schemanest_files "github.com/timo-reymann/SchemaNest"
 	"github.com/timo-reymann/SchemaNest/pkg/buildinfo"
 	"net/http"
 	"strings"
 )
-import "embed"
 import "io/fs"
-
-//go:embed all:nextjs/build
-var nextDist embed.FS
 
 func hasFile(fs fs.FS, path string) bool {
 	f, err := fs.Open(path)
@@ -23,7 +20,7 @@ func hasFile(fs fs.FS, path string) bool {
 }
 
 func Handler() func(writer http.ResponseWriter, request *http.Request) {
-	nextJsFiles, err := fs.Sub(nextDist, "nextjs/build")
+	nextJsFiles, err := fs.Sub(schemanest_files.UIFiles, "build")
 	if err != nil {
 		panic(err)
 	}
