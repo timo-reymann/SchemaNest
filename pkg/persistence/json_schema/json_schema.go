@@ -2,6 +2,7 @@ package json_schema
 
 import (
 	"context"
+	"database/sql"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/database"
 )
 
@@ -78,7 +79,11 @@ func (j *JsonSchemaRepositoryImpl) List(ctx context.Context) ([]*JsonSchemaEntit
 			res := &JsonSchemaEntityWithBasicInfo{
 				LatestVersion: JsonSchemaEntityLatestVersion{},
 			}
-			err := scan(&res.Id, &res.Identifier, &res.Description, &res.LatestVersion.Major, &res.LatestVersion.Minor, &res.LatestVersion.Patch)
+			var description sql.NullString
+			err := scan(&res.Id, &res.Identifier, &description, &res.LatestVersion.Major, &res.LatestVersion.Minor, &res.LatestVersion.Patch)
+			if description.Valid {
+				res.Description = description.String
+			}
 			if err == nil {
 				results = append(results, res)
 			}

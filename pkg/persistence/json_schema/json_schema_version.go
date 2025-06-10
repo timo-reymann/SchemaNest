@@ -2,6 +2,7 @@ package json_schema
 
 import (
 	"context"
+	"database/sql"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/database"
 )
 
@@ -28,9 +29,13 @@ type JsonSchemaVersionRepositoryImpl struct {
 	DB *database.DBConnection
 }
 
-func scanSingleRow(entity *JsonSchemaVersionEntity) func(scan func(dest ...any) error) (bool, error) {
+func scanSingleRowForVersion(entity *JsonSchemaVersionEntity) func(scan func(dest ...any) error) (bool, error) {
 	mapper := func(scan func(dest ...any) error) (bool, error) {
-		err := scan(&entity.Id, &entity.VersionMajor, &entity.VersionMinor, &entity.VersionPatch, &entity.Content, &entity.Description, &entity.JsonSchemaId)
+		var description sql.NullString
+		err := scan(&entity.Id, &entity.VersionMajor, &entity.VersionMinor, &entity.VersionPatch, &entity.Content, &description, &entity.JsonSchemaId)
+		if description.Valid {
+			entity.Description = &description.String
+		}
 		return false, err
 	}
 	return mapper
@@ -57,7 +62,8 @@ func (j *JsonSchemaVersionRepositoryImpl) ListForJsonSchema(ctx context.Context,
 		ctx,
 		func(scan func(dest ...any) error) (bool, error) {
 			res := &JsonSchemaVersionEntity{}
-			err := scan(&res.Id, &res.VersionMajor, &res.VersionMinor, &res.VersionPatch, &res.Content, &res.Description, &res.JsonSchemaId)
+
+			_, err := scanSingleRowForVersion(res)(scan)
 			if err == nil {
 				results = append(results, res)
 			}
@@ -81,7 +87,7 @@ func (j *JsonSchemaVersionRepositoryImpl) GetForJsonSchemaAndVersion(ctx context
 	entity := &JsonSchemaVersionEntity{}
 	err := j.DB.Query(
 		ctx,
-		scanSingleRow(entity),
+		scanSingleRowForVersion(entity),
 		`
 		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
 		FROM json_schema_version 
@@ -104,7 +110,7 @@ func (j *JsonSchemaVersionRepositoryImpl) GetForLatestMajorVersion(ctx context.C
 
 	err := j.DB.Query(
 		ctx,
-		scanSingleRow(entity),
+		scanSingleRowForVersion(entity),
 		`
 		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
 		FROM json_schema_version
@@ -130,7 +136,7 @@ func (j *JsonSchemaVersionRepositoryImpl) GetForLatestMinorVersion(ctx context.C
 
 	err := j.DB.Query(
 		ctx,
-		scanSingleRow(entity),
+		scanSingleRowForVersion(entity),
 		`
 		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
 		FROM json_schema_version
@@ -157,7 +163,7 @@ func (j *JsonSchemaVersionRepositoryImpl) GetLatestVersion(ctx context.Context, 
 
 	err := j.DB.Query(
 		ctx,
-		scanSingleRow(entity),
+		scanSingleRowForVersion(entity),
 		`
 		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
 		FROM json_schema_version
