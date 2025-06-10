@@ -3,7 +3,6 @@ import { button as buttonStyles } from "@heroui/theme";
 import NextLink from "next/link";
 
 import { subtitle, title } from "@/components/primitives";
-import { siteConfig } from "@/config/site";
 import { Logo } from "@/components/icons";
 import { createHead } from "@/util/layoutHelpers";
 
