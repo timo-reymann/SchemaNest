@@ -127,6 +127,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - ApiKeyAuth: []
+        - {}
 components:
   schemas:
     JsonSchemaInfo:
@@ -199,3 +202,8 @@ components:
         patch:
           type: integer
           description: Semantic patch version
+  securitySchemes:
+    ApiKey:
+      type: http
+      scheme: bearer
+      bearerFormat: API-Key
