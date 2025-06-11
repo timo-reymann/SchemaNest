@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/timo-reymann/SchemaNest/pkg/api"
 	"github.com/timo-reymann/SchemaNest/pkg/buildinfo"
+	"github.com/timo-reymann/SchemaNest/pkg/config"
 	"github.com/timo-reymann/SchemaNest/pkg/openapi"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/database"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/json_schema"
@@ -28,9 +29,49 @@ func main() {
 				Name:        "serve-http",
 				Description: "Start the registry HTTP server",
 				Flags: []cli.Flag{
-					&cli.IntFlag{Name: "port", Aliases: []string{"p"}, DefaultText: "8080"},
+					&cli.IntFlag{
+						Name:        "port",
+						Aliases:     []string{"p"},
+						DefaultText: "8080",
+					},
+					&cli.StringFlag{
+						Name:    "config-file",
+						Aliases: []string{"C"},
+						Validator: func(path string) error {
+							if path == "" {
+								return nil
+							}
+
+							stat, err := os.Stat(path)
+							if err != nil {
+								return fmt.Errorf("file %s does not exist", path)
+							}
+
+							if stat.IsDir() {
+								return fmt.Errorf("%s it not a valid file", path)
+							}
+
+							return nil
+						},
+					},
 				},
 				Action: func(ctx context.Context, command *cli.Command) error {
+					configFile := command.String("config-file")
+					var cfg *config.Config
+					if configFile != "" {
+						cfgContent, err := os.ReadFile(configFile)
+						if err != nil {
+							return fmt.Errorf("failed to read config file: %s", err)
+						}
+
+						cfg, err = config.ParseFromToml(string(cfgContent))
+						if err != nil {
+							return fmt.Errorf("failed to parse toml: %s", err)
+						}
+					} else {
+						cfg = config.Default()
+					}
+
 					db, err := database.Connect("sqlite3://schema_nest.sqlite")
 					if err != nil {
 						return err
@@ -48,6 +89,7 @@ func main() {
 					r, err := api.NewServeMux(&api.SchemaNestApiContext{
 						JsonSchemaRepository:        &json_schema.JsonSchemaRepositoryImpl{DB: db},
 						JsonSchemaVersionRepository: &json_schema.JsonSchemaVersionRepositoryImpl{DB: db},
+						Config:                      cfg,
 					})
 					if err != nil {
 						return err
