@@ -189,3 +189,108 @@ func TestConfig_mapKeys(t *testing.T) {
 		})
 	}
 }
+
+func TestConfig_LookupApiKey(t *testing.T) {
+	tests := []struct {
+		name       string
+		config     *Config
+		lookupKey  string
+		wantApiKey *ApiKey
+		wantFound  bool
+	}{
+		{
+			name: "existing key",
+			config: &Config{
+				EnableUploadAuthentication: true,
+				APIKeys: []ApiKey{
+					{
+						Identifier: "test-key",
+						Key:        "abc123",
+						Patterns:   []string{"*.json"},
+					},
+				},
+			},
+			lookupKey: "abc123",
+			wantApiKey: &ApiKey{
+				Identifier: "test-key",
+				Key:        "abc123",
+				Patterns:   []string{"*.json"},
+			},
+			wantFound: true,
+		},
+		{
+			name: "non-existent key",
+			config: &Config{
+				EnableUploadAuthentication: true,
+				APIKeys: []ApiKey{
+					{
+						Identifier: "test-key",
+						Key:        "abc123",
+						Patterns:   []string{"*.json"},
+					},
+				},
+			},
+			lookupKey:  "xyz789",
+			wantApiKey: nil,
+			wantFound:  false,
+		},
+		{
+			name: "empty config",
+			config: &Config{
+				EnableUploadAuthentication: false,
+				APIKeys:                    []ApiKey{},
+			},
+			lookupKey:  "any-key",
+			wantApiKey: nil,
+			wantFound:  false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// Initialize the key mapping before looking up
+			tt.config.mapKeys()
+
+			gotApiKey, gotFound := tt.config.LookupApiKey(tt.lookupKey)
+
+			if gotFound != tt.wantFound {
+				t.Errorf("LookupApiKey() found = %v, want %v", gotFound, tt.wantFound)
+			}
+
+			if !tt.wantFound {
+				if gotApiKey != nil {
+					t.Errorf("LookupApiKey() returned non-nil ApiKey when not found")
+				}
+				return
+			}
+
+			if gotApiKey == nil {
+				t.Errorf("LookupApiKey() returned nil ApiKey when found")
+				return
+			}
+
+			if gotApiKey.Identifier != tt.wantApiKey.Identifier {
+				t.Errorf("LookupApiKey() Identifier = %v, want %v",
+					gotApiKey.Identifier, tt.wantApiKey.Identifier)
+			}
+
+			if gotApiKey.Key != tt.wantApiKey.Key {
+				t.Errorf("LookupApiKey() Key = %v, want %v",
+					gotApiKey.Key, tt.wantApiKey.Key)
+			}
+
+			if len(gotApiKey.Patterns) != len(tt.wantApiKey.Patterns) {
+				t.Errorf("LookupApiKey() Patterns length = %v, want %v",
+					len(gotApiKey.Patterns), len(tt.wantApiKey.Patterns))
+				return
+			}
+
+			for i, pattern := range tt.wantApiKey.Patterns {
+				if gotApiKey.Patterns[i] != pattern {
+					t.Errorf("LookupApiKey() Patterns[%d] = %v, want %v",
+						i, gotApiKey.Patterns[i], pattern)
+				}
+			}
+		})
+	}
+}

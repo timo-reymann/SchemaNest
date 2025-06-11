@@ -41,3 +41,8 @@ func (c *Config) Validate() error {
 
 	return nil
 }
+
+func (c *Config) LookupApiKey(key string) (*ApiKey, bool) {
+	apiKey, ok := c.keyMapping[key]
+	return apiKey, ok
+}
