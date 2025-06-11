@@ -19,7 +19,7 @@ func hasFile(fs fs.FS, path string) bool {
 	return false
 }
 
-func Handler() func(writer http.ResponseWriter, request *http.Request) {
+func CreateHandler() func(writer http.ResponseWriter, request *http.Request) {
 	nextJsFiles, err := fs.Sub(schemanest_files.UIFiles, "build")
 	if err != nil {
 		panic(err)
