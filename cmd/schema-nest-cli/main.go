@@ -25,6 +25,11 @@ func main() {
 				Usage:    "Base URL including protocol for SchemaNest instance",
 				Required: true,
 			},
+			&cli.StringFlag{
+				Name:    "api-key",
+				Usage:   "API-Key for authentication",
+				Sources: cli.NewValueSourceChain(cli.EnvVar("SCHEMA_NEST_CLI_API_KEY")),
+			},
 		},
 		Commands: []*cli.Command{
 			{
@@ -83,7 +88,7 @@ func main() {
 					identifier := command.String("identifier")
 					path := command.String("path")
 
-					c, err := client.NewClient(command.String("base-url"))
+					c, err := client.NewClient(command.String("base-url"), command.String("api-key"))
 					if err != nil {
 						return fmt.Errorf("failed to create API client: %s", err)
 					}

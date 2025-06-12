@@ -93,7 +93,7 @@ export const createJsonSchemaSlice: StateCreator<JsonSchemasSlice> = (
     });
     try {
       const res = await getJSON<Object & Error>(
-        `/api/schema/json-schema/${identifier}/version/${version}`,
+        `/api/schema/json-schema/${encodeURIComponent(identifier)}/version/${version}`,
       );
 
       if (res.error) {
@@ -113,7 +113,7 @@ export const createJsonSchemaSlice: StateCreator<JsonSchemasSlice> = (
     });
     try {
       return await getJSON<JsonSchemaDetails>(
-        `/api/schema/json-schema/${identifier}`,
+        `/api/schema/json-schema/${encodeURIComponent(identifier)}`,
       );
     } finally {
       set({

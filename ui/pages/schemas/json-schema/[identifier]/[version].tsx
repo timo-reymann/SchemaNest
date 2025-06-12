@@ -9,7 +9,7 @@ import {
   CheckIcon,
   ClockCircleLinearIcon,
   EyeIcon,
-  LinkIcon,
+  LinkIcon
 } from "@heroui/shared-icons";
 import { Chip } from "@heroui/chip";
 import {
@@ -18,7 +18,7 @@ import {
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow,
+  TableRow
 } from "@heroui/table";
 import { Snippet } from "@heroui/snippet";
 import { Select, SelectItem } from "@heroui/select";
@@ -33,10 +33,10 @@ import { DiffIcon } from "@/components/icons";
 
 const JsonSchemaViewer = React.memo(
   function JsonSchemaViewer({
-    theme,
-    content,
-    schema,
-  }: {
+                              theme,
+                              content,
+                              schema
+                            }: {
     theme: string;
     content: Object;
     schema?: Object;
@@ -50,31 +50,31 @@ const JsonSchemaViewer = React.memo(
               {
                 uri: "in-memory",
                 fileMatch: ["*"],
-                schema,
-              },
-            ],
+                schema
+              }
+            ]
           });
         }}
         defaultLanguage="json"
         height="50vh"
         options={{
           readOnly: schema === undefined,
-          contextmenu: false,
+          contextmenu: false
         }}
         theme={theme === "dark" ? "vs-dark" : "vs-light"}
         value={JSON.stringify(content, null, "  ")}
       />
     );
   },
-  (prev, next) => prev.content === next.content && prev.theme == next.theme,
+  (prev, next) => prev.content === next.content && prev.theme == next.theme
 );
 
 const JsonSchemaDiffViewer = React.memo(
   function JsonSchemaDiffViewer({
-    theme,
-    currentSchema,
-    otherSchema,
-  }: {
+                                  theme,
+                                  currentSchema,
+                                  otherSchema
+                                }: {
     theme: string;
     currentSchema: Object;
     otherSchema: Object;
@@ -91,7 +91,7 @@ const JsonSchemaDiffViewer = React.memo(
         modified={modified}
         options={{
           readOnly: true,
-          contextmenu: false,
+          contextmenu: false
         }}
         original={original}
         theme={theme === "dark" ? "vs-dark" : "vs-light"}
@@ -101,14 +101,14 @@ const JsonSchemaDiffViewer = React.memo(
   (prev, next) =>
     prev.theme === next.theme &&
     prev.currentSchema === next.currentSchema &&
-    prev.otherSchema === next.otherSchema,
+    prev.otherSchema === next.otherSchema
 );
 
 export function JsonSchemaLinks({
-  identifier,
-  version,
-  schema,
-}: {
+                                  identifier,
+                                  version,
+                                  schema
+                                }: {
   identifier: string;
   version: string;
   schema: Partial<JsonSchemaDetails>;
@@ -122,30 +122,30 @@ export function JsonSchemaLinks({
     {
       label: "Get JSON schema for the currently selected version",
       method: "GET",
-      url: buildApiLink(`/schema/json-schema/${identifier}/version/${version}`),
+      url: buildApiLink(`/schema/json-schema/${identifier}/version/${version}`)
     },
     {
       label: "Get latest JSON schema version",
       method: "GET",
-      url: buildApiLink(`/schema/json-schema/${identifier}/latest`),
+      url: buildApiLink(`/schema/json-schema/${identifier}/latest`)
     },
     {
       label: "Get schema for latest minor for current version",
       method: "GET",
-      url: buildApiLink(`/schema/json-schema/${identifier}/channel/${major}.x`),
+      url: buildApiLink(`/schema/json-schema/${identifier}/channel/${major}.x`)
     },
     {
       label: "Get schema for latest patch for current version",
       method: "GET",
       url: buildApiLink(
-        `/schema/json-schema/${identifier}/channel/${major}.${minor}.x`,
-      ),
+        `/schema/json-schema/${identifier}/channel/${major}.${minor}.x`
+      )
     },
     {
       label: "Create new schema definition for a given version",
       method: "POST",
-      url: buildApiLink(`/schema/json-schema/${identifier}/version/{version}`),
-    },
+      url: buildApiLink(`/schema/json-schema/${identifier}/version/{version}`)
+    }
   ];
 
   return (
@@ -176,15 +176,15 @@ export function JsonSchemaLinks({
 }
 
 export function JsonSchemaComparer({
-  currentSchema,
-  identifier,
-  schemaInfo,
-  theme,
-  otherSchema,
-  otherVersion,
-  onVersionChanged,
-  currentVersion,
-}: {
+                                     currentSchema,
+                                     identifier,
+                                     schemaInfo,
+                                     theme,
+                                     otherSchema,
+                                     otherVersion,
+                                     onVersionChanged,
+                                     currentVersion
+                                   }: {
   currentSchema: Object;
   currentVersion: string;
   otherSchema: Object | null;
@@ -241,7 +241,7 @@ export default function JsonSchemaVersionPage() {
 
   const fetchSchemaByVersion = useBoundStore((s) => s.fetchSchemaByVersion);
   const fetchSchemaDetailsByVersion = useBoundStore(
-    (s) => s.fetchSchemaDetailsByVersion,
+    (s) => s.fetchSchemaDetailsByVersion
   );
   const loading = useBoundStore((s) => s.schemaLoading);
   const [tab, setTab] = useState("view");
@@ -290,7 +290,7 @@ export default function JsonSchemaVersionPage() {
     const newQuery = { ...router.query, tab };
     const url = {
       pathname: router.pathname,
-      query: newQuery,
+      query: newQuery
     };
 
     router.push(url, undefined, { shallow: true });
@@ -303,7 +303,7 @@ export default function JsonSchemaVersionPage() {
     (async () => {
       const otherSchema = await fetchSchemaByVersion(
         identifier,
-        comparedVersion!,
+        comparedVersion!
       );
 
       setComparedSchema(otherSchema);
@@ -330,7 +330,7 @@ export default function JsonSchemaVersionPage() {
       title: "View",
       id: "view",
       content: <JsonSchemaViewer content={schema} theme={theme!} />,
-      icon: <EyeIcon fontSize={16} />,
+      icon: <EyeIcon fontSize={16} />
     },
     {
       title: "Endpoints",
@@ -348,24 +348,25 @@ export default function JsonSchemaVersionPage() {
       title: "Compare",
       id: "compare",
       icon: <DiffIcon size={18} />,
-      content: (
-        <JsonSchemaComparer
-          currentSchema={schema}
-          currentVersion={version}
-          identifier={identifier}
-          otherSchema={comparedSchema}
-          otherVersion={comparedVersion}
-          schemaInfo={details}
-          theme={theme!}
-          onVersionChanged={setComparedVersion}
-        />
-      ),
+      content: (<>
+        {details.versions?.length! > 1 ?
+          <JsonSchemaComparer
+            currentSchema={schema}
+            currentVersion={version}
+            identifier={identifier}
+            otherSchema={comparedSchema}
+            otherVersion={comparedVersion}
+            schemaInfo={details}
+            theme={theme!}
+            onVersionChanged={setComparedVersion}
+          /> : <p className="text-warning text-center">No other version to compare against.</p>}
+      </>)
     },
     {
       title: "Validate document",
       id: "validate-document",
       icon: <CheckIcon fontSize={16} />,
-      content: <JsonSchemaViewer content={{}} schema={schema} theme={theme!} />,
+      content: <JsonSchemaViewer content={{}} schema={schema} theme={theme!} />
     },
     {
       title: "History",
@@ -382,8 +383,8 @@ export default function JsonSchemaVersionPage() {
                   query: {
                     identifier: identifier,
                     version: v.version,
-                    tab: "view",
-                  },
+                    tab: "view"
+                  }
                 }}
               >
                 {v.version}
@@ -391,8 +392,8 @@ export default function JsonSchemaVersionPage() {
             </li>
           ))}
         </ul>
-      ),
-    },
+      )
+    }
   ];
 
   return (
@@ -410,7 +411,7 @@ export default function JsonSchemaVersionPage() {
           tabList:
             "gap-6 w-full relative rounded-none p-0 border-b border-divider mx-auto mb-2",
           cursor: "w-full ",
-          tab: "max-w-fit px-0 h-12",
+          tab: "max-w-fit px-0 h-12"
         }}
         color="primary"
         items={tabs}

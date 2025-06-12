@@ -11,9 +11,10 @@ import (
 type Client struct {
 	context   context.Context
 	apiClient *api.ClientWithResponses
+	apiKey    string
 }
 
-func NewClient(baseUrl string) (*Client, error) {
+func NewClient(baseUrl string, apiKey string) (*Client, error) {
 	c, err := api.NewClientWithResponses(baseUrl)
 	if err != nil {
 		return nil, err
@@ -21,6 +22,7 @@ func NewClient(baseUrl string) (*Client, error) {
 
 	return &Client{
 		apiClient: c,
+		apiKey:    apiKey,
 		context:   context.Background(),
 	}, nil
 }
@@ -37,6 +39,12 @@ func (c *Client) UploadJsonSchema(identifier, version, localPath string) error {
 		version,
 		"application/json",
 		file,
+		func(ctx context.Context, req *http.Request) error {
+			if c.apiKey != "" {
+				req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.apiKey))
+			}
+			return nil
+		},
 	)
 
 	if err != nil {

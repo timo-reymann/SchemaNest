@@ -10,6 +10,7 @@ import (
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/mapping"
 	"io"
 	"net/http"
+	"strings"
 )
 
 func (s *SchemaNestApi) ListJSONSchemas(w http.ResponseWriter, r *http.Request) {
@@ -66,6 +67,31 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifier(w http.ResponseWriter, 
 }
 
 func (s *SchemaNestApi) PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request, identifier string, version string) {
+	if s.context.Config.EnableUploadAuthentication {
+		authHeader := r.Header.Get("Authorization")
+		if authHeader == "" {
+			SendError(w, http.StatusUnauthorized, "authorization header not set")
+			return
+		}
+
+		headerParts := strings.Split(authHeader, " ")
+		if len(headerParts) != 2 || headerParts[0] != "Bearer" {
+			SendError(w, http.StatusBadRequest, "invalid authorization header")
+			return
+		}
+
+		apiKey, found := s.context.Config.LookupApiKey(headerParts[1])
+		if !found {
+			SendError(w, http.StatusForbidden, "invalid api key")
+			return
+		}
+
+		if !apiKey.IsUsableForSchemaIdentifier(identifier) {
+			SendError(w, http.StatusForbidden, fmt.Sprintf("the api key you provided can not be used to upload JSON schemas with the identifier '%s'", identifier))
+			return
+		}
+	}
+
 	v, err := semver.NewVersion(version)
 	if err != nil || v.Metadata() != "" {
 		SendError(w, http.StatusBadRequest, "invalid version format. Only 'major.minor.patch' is supported.")

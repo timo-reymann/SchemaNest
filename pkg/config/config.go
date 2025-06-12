@@ -7,16 +7,16 @@ import (
 const DefaultDBConnectionString = "sqlite3://schema_nest.sqlite"
 
 type Config struct {
-	EnableUploadAuthentication bool     `toml:"enable_upload_authentication"`
-	APIKeys                    []ApiKey `toml:"api_keys"`
-	DBConnectionString         string   `toml:"database_dsn"`
+	EnableUploadAuthentication bool      `toml:"enable_upload_authentication"`
+	APIKeys                    []*ApiKey `toml:"api_keys"`
+	DBConnectionString         string    `toml:"database_dsn"`
 	keyMapping                 map[string]*ApiKey
 }
 
 func (c *Config) mapKeys() {
 	c.keyMapping = make(map[string]*ApiKey, len(c.APIKeys))
 	for _, ak := range c.APIKeys {
-		c.keyMapping[ak.Key] = &ak
+		c.keyMapping[ak.Key] = ak
 	}
 }
 

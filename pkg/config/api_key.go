@@ -37,3 +37,12 @@ func (a *ApiKey) Validate() error {
 
 	return nil
 }
+
+func (a *ApiKey) IsUsableForSchemaIdentifier(identifier string) bool {
+	for _, pattern := range a.parsedPatterns {
+		if pattern.Match(identifier) {
+			return true
+		}
+	}
+	return false
+}
