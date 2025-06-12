@@ -1,6 +1,9 @@
 package config
 
 import (
+	"errors"
+	"os"
+	"path/filepath"
 	"testing"
 )
 
@@ -106,6 +109,90 @@ invalid-toml-here`,
 						t.Errorf("ParseFromToml() APIKeys[%d].Patterns[%d] = %v, want %v",
 							i, j, gotKey.Patterns[j], pattern)
 					}
+				}
+			}
+		})
+	}
+}
+
+func TestParseFromFile(t *testing.T) {
+	testParser := func(data string) (*Config, error) {
+		if data == "invalid" {
+			return nil, errors.New("parse error")
+		}
+		return &Config{DBConnectionString: data}, nil
+	}
+
+	tmpDir, err := os.MkdirTemp("", "config-test-*")
+	if err != nil {
+		t.Fatalf("failed to create temp dir: %v", err)
+	}
+	defer os.RemoveAll(tmpDir)
+
+	tests := []struct {
+		name        string
+		configFile  string
+		fileContent string
+		wantErr     bool
+		setup       func(string) error
+	}{
+		{
+			name:       "empty config file path returns default config",
+			configFile: "",
+			wantErr:    false,
+		},
+		{
+			name:       "non-existent file returns error",
+			configFile: filepath.Join(tmpDir, "nonexistent.toml"),
+			wantErr:    true,
+		},
+		{
+			name:        "invalid content returns error",
+			configFile:  filepath.Join(tmpDir, "invalid.toml"),
+			fileContent: "invalid",
+			wantErr:     true,
+			setup: func(path string) error {
+				return os.WriteFile(path, []byte("invalid"), 0644)
+			},
+		},
+		{
+			name:        "valid content returns config",
+			configFile:  filepath.Join(tmpDir, "valid.toml"),
+			fileContent: "valid content",
+			wantErr:     false,
+			setup: func(path string) error {
+				return os.WriteFile(path, []byte("valid content"), 0644)
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// Setup if needed
+			if tt.setup != nil {
+				if err := tt.setup(tt.configFile); err != nil {
+					t.Fatalf("setup failed: %v", err)
+				}
+			}
+
+			cfg, err := ParseFromFile(tt.configFile, testParser)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("ParseFromFile() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+
+			if !tt.wantErr {
+				if cfg == nil {
+					t.Error("ParseFromFile() returned nil config when no error was expected")
+				}
+
+				if tt.configFile == "" && cfg == nil {
+					t.Error("ParseFromFile() with empty path did not return default config")
+				}
+
+				if tt.configFile != "" && cfg.DBConnectionString != tt.fileContent {
+					t.Errorf("ParseFromFile() got config with DBConnectionString = %v, want %v",
+						cfg.DBConnectionString, tt.fileContent)
 				}
 			}
 		})

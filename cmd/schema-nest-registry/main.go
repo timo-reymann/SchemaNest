@@ -56,23 +56,9 @@ func main() {
 					},
 				},
 				Action: func(ctx context.Context, command *cli.Command) error {
-					configFile := command.String("config-file")
-					var cfg *config.Config
-					if configFile != "" {
-						cfgContent, err := os.ReadFile(configFile)
-						if err != nil {
-							return fmt.Errorf("failed to read config file: %s", err)
-						}
+					cfg, err := config.ParseFromFile(command.String("config-file"), config.ParseFromToml)
 
-						cfg, err = config.ParseFromToml(string(cfgContent))
-						if err != nil {
-							return fmt.Errorf("failed to parse toml: %s", err)
-						}
-					} else {
-						cfg = config.Default()
-					}
-
-					db, err := database.Connect("sqlite3://schema_nest.sqlite")
+					db, err := database.Connect(cfg.DBConnectionString)
 					if err != nil {
 						return err
 					}
