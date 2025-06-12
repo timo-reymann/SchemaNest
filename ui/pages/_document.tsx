@@ -6,7 +6,9 @@ import { fontSans } from "@/config/fonts";
 export default function Document() {
   return (
     <Html>
-      <Head />
+      <Head>
+          <link rel="icon" href="/favicon.ico" />
+      </Head>
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background font-sans antialiased",
