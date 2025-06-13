@@ -19,6 +19,6 @@ LABEL org.opencontainers.image.authors="Timo Reymann <mail@timo-reymann.de>"
 LABEL org.opencontainers.image.url="https://github.com/timo-reymann/SchemaNest"
 LABEL org.opencontainers.image.documentation="https://github.com/timo-reymann/SchemaNest"
 LABEL org.opencontainers.image.source="https://github.com/timo-reymann/SchemaNest.git"
-USER 1000
 RUN adduser -D -u 1000 schemanest
+USER 1000
 COPY --from=bin /bin/schemanest-registry /bin/schemanest-registry
