@@ -8,7 +8,7 @@ SchemaNest
 [![codecov](https://codecov.io/gh/timo-reymann/SchemaNest/graph/badge.svg?token=I9ZrKsbTsR)](https://codecov.io/gh/timo-reymann/SchemaNest)
 
 <p align="center">
-	<img width="300" src="./.github/images/NestHub.png">
+	<img width="300" src="https://raw.githubusercontent.com/timo-reymann/SchemaNest/main/.github/images/NestHub.png">
     <br />
     Where schemas grow, thrive, and scale with your team.
 </p>
