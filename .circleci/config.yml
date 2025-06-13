@@ -62,8 +62,11 @@ jobs:
       - run:
           name: Install zig
           command: |
-            sudo apt-get update
-            sudo apt-get install -y zig
+            mkdir -p .zig && cd .zig
+            ZIG_VERSION=zig-x86_64-linux-0.15.0-dev.777+6810ffa42
+            curl https://ziglang.org/builds/${ZIG_VERSION}.tar.xz --output zig.tar.xz
+            tar -xf zig.tar.xz
+            export PATH="$PATH:$PWD/${ZIG_VERSION}"
       - go/with-cache:
           steps:
             - run:
