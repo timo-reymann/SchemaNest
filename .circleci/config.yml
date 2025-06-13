@@ -60,13 +60,17 @@ jobs:
       - attach_workspace:
           at: ./
       - run:
-          name: Install zig
+          name: Install build dependencies
           command: |
             mkdir -p .zig && cd .zig
             ZIG_VERSION=zig-x86_64-linux-0.15.0-dev.777+6810ffa42
             curl https://ziglang.org/builds/${ZIG_VERSION}.tar.xz --output zig.tar.xz
             tar -xf zig.tar.xz
-            export PATH="$PATH:$PWD/${ZIG_VERSION}"
+            rm zig.tar.xz
+            sudo ln -s $PWD/zig-x86_64-linux-0.15.0-dev.777+6810ffa42/zig /usr/local/bin/zig
+
+            sudo apt-get update
+            sudo apt-get install -y clang
       - go/with-cache:
           steps:
             - run:
