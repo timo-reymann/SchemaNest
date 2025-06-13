@@ -23,7 +23,7 @@ func TestConfig_Validate(t *testing.T) {
 			name: "valid config with auth enabled",
 			config: Config{
 				EnableUploadAuthentication: true,
-				APIKeys: []ApiKey{
+				APIKeys: []*ApiKey{
 					{
 						Identifier: "test-key",
 						Key:        "secret123",
@@ -37,7 +37,7 @@ func TestConfig_Validate(t *testing.T) {
 			name: "auth enabled but no api keys",
 			config: Config{
 				EnableUploadAuthentication: true,
-				APIKeys:                    []ApiKey{},
+				APIKeys:                    []*ApiKey{},
 			},
 			wantErr: true,
 			errMsg:  "at least one API key must be configured when upload authentication is enabled",
@@ -46,7 +46,7 @@ func TestConfig_Validate(t *testing.T) {
 			name: "auth enabled with invalid api key",
 			config: Config{
 				EnableUploadAuthentication: true,
-				APIKeys: []ApiKey{
+				APIKeys: []*ApiKey{
 					{
 						Identifier: "",
 						Key:        "secret123",
@@ -61,7 +61,7 @@ func TestConfig_Validate(t *testing.T) {
 			name: "auth enabled with invalid api key",
 			config: Config{
 				EnableUploadAuthentication: true,
-				APIKeys: []ApiKey{
+				APIKeys: []*ApiKey{
 					{
 						Identifier: "",
 						Key:        "secret123",
@@ -76,7 +76,7 @@ func TestConfig_Validate(t *testing.T) {
 			name: "auth enabled with invalid api key and identifier",
 			config: Config{
 				EnableUploadAuthentication: true,
-				APIKeys: []ApiKey{
+				APIKeys: []*ApiKey{
 					{
 						Identifier: "foo",
 						Key:        "",
@@ -112,7 +112,7 @@ func TestConfig_mapKeys(t *testing.T) {
 		{
 			name: "empty api keys",
 			config: Config{
-				APIKeys:    []ApiKey{},
+				APIKeys:    []*ApiKey{},
 				keyMapping: make(map[string]*ApiKey),
 			},
 			want: map[string]*ApiKey{},
@@ -120,7 +120,7 @@ func TestConfig_mapKeys(t *testing.T) {
 		{
 			name: "single api key",
 			config: Config{
-				APIKeys: []ApiKey{
+				APIKeys: []*ApiKey{
 					{
 						Identifier: "test-key",
 						Key:        "secret123",
@@ -140,7 +140,7 @@ func TestConfig_mapKeys(t *testing.T) {
 		{
 			name: "multiple api keys",
 			config: Config{
-				APIKeys: []ApiKey{
+				APIKeys: []*ApiKey{
 					{
 						Identifier: "test-key-1",
 						Key:        "secret123",
@@ -202,7 +202,7 @@ func TestConfig_LookupApiKey(t *testing.T) {
 			name: "existing key",
 			config: &Config{
 				EnableUploadAuthentication: true,
-				APIKeys: []ApiKey{
+				APIKeys: []*ApiKey{
 					{
 						Identifier: "test-key",
 						Key:        "abc123",
@@ -222,7 +222,7 @@ func TestConfig_LookupApiKey(t *testing.T) {
 			name: "non-existent key",
 			config: &Config{
 				EnableUploadAuthentication: true,
-				APIKeys: []ApiKey{
+				APIKeys: []*ApiKey{
 					{
 						Identifier: "test-key",
 						Key:        "abc123",
@@ -238,7 +238,7 @@ func TestConfig_LookupApiKey(t *testing.T) {
 			name: "empty config",
 			config: &Config{
 				EnableUploadAuthentication: false,
-				APIKeys:                    []ApiKey{},
+				APIKeys:                    []*ApiKey{},
 			},
 			lookupKey:  "any-key",
 			wantApiKey: nil,

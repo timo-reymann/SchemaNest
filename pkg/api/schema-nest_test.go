@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"errors"
+	"github.com/timo-reymann/SchemaNest/pkg/config"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/json_schema"
 	"testing"
 )
@@ -92,6 +93,7 @@ func createTestContext() SchemaNestApiContext {
 	return SchemaNestApiContext{
 		JsonSchemaRepository:        &MockJsonSchemaRepository{},
 		JsonSchemaVersionRepository: &MockJsonSchemaVersionRepository{},
+		Config:                      config.Default(),
 	}
 }
 

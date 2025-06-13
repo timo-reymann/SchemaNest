@@ -30,7 +30,7 @@ key = "xyz789"
 patterns = ["@deepl/*"]`,
 			want: &Config{
 				EnableUploadAuthentication: true,
-				APIKeys: []ApiKey{
+				APIKeys: []*ApiKey{
 					{
 						Identifier: "frontend",
 						Key:        "abc123",
@@ -52,7 +52,7 @@ enable_upload_authentication = false
 api_keys = []`,
 			want: &Config{
 				EnableUploadAuthentication: false,
-				APIKeys:                    []ApiKey{},
+				APIKeys:                    []*ApiKey{},
 			},
 			wantErr: false,
 		},

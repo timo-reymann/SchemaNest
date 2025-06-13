@@ -67,7 +67,7 @@ func TestClient_UploadJsonSchema(t *testing.T) {
 			defer server.Close()
 
 			// Create client
-			client, err := NewClient(server.URL)
+			client, err := NewClient(server.URL, "")
 			if err != nil {
 				t.Fatalf("Failed to create client: %v", err)
 			}
