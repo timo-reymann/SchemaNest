@@ -125,6 +125,7 @@ jobs:
           command: |
             echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
             docker buildx create --use
+            export BUILDKIT_PROGRESS=plain
             make build-image -j2
       - docker/update-description:
           image: timoreymann/schemanest-cli
