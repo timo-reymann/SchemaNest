@@ -47,10 +47,10 @@ build-windows: create-dist ## Build binaries for windows
 
 build-darwin: create-dist  ## Build binaries for macOS
 	@CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)darwin-amd64 $(BUILD_ARGS) $(CMD_REGISTRY)
-	@CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)darwin-arm64 $(BUILD_ARGS) $(CMD_REGISTRY)
+	@CGO_ENABLED=1 GOOS=darwin go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)darwin-arm64 $(BUILD_ARGS) $(CMD_REGISTRY)
 
-	CGO_ENABLED=1 CC="zig cc -target x86_64-macos" CXX="zig c++ -target x86_64-macos"  GOOS=darwin GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_CLI)darwin-amd64 $(BUILD_ARGS) $(CMD_CLI)
-	CGO_ENABLED=1 CC="zig cc -target aarch64-macos" CXX="zig c++ -target aarch64-macos"  GOOS=darwin GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_CLI)darwin-arm64 $(BUILD_ARGS) $(CMD_CLI)
+	CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_CLI)darwin-amd64 $(BUILD_ARGS) $(CMD_CLI)
+	CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_CLI)darwin-arm64 $(BUILD_ARGS) $(CMD_CLI)
 
 create-checksums: ## Create checksums for binaries
 	@find ./dist -type f -exec sh -c 'sha256sum {} | cut -d " " -f 1 > {}.sha256' {} \;
