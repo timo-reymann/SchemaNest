@@ -5,9 +5,9 @@ RUN if [[ "$(arch)" == "x86_64" ]]; then \
     else \
         architecture="arm"; \
     fi; \
-    cp /dist/schema-nest-registry-linux-${architecture} /bin/schemanest-registry && \
-    chmod +x /bin/schemanest-registry && \
-    chown 1000:1000 /bin/schemanest-registry
+    cp /dist/schema-nest-registry-linux-${architecture} /bin/schema-nest-registry && \
+    chmod +x /bin/schema-nest-registry && \
+    chown 1000:1000 /bin/schema-nest-registry
 
 FROM chainguard/wolfi-base
 LABEL org.opencontainers.image.title="schemanest-registry"
@@ -19,6 +19,6 @@ LABEL org.opencontainers.image.authors="Timo Reymann <mail@timo-reymann.de>"
 LABEL org.opencontainers.image.url="https://github.com/timo-reymann/SchemaNest"
 LABEL org.opencontainers.image.documentation="https://github.com/timo-reymann/SchemaNest"
 LABEL org.opencontainers.image.source="https://github.com/timo-reymann/SchemaNest.git"
-RUN adduser -D -u 1000 schemanest
+RUN adduser -D -u 1000 schema-nest
 USER 1000
-COPY --from=bin /bin/schemanest-registry /bin/schemanest-registry
+COPY --from=bin /bin/schema-nest-registry /bin/schema-nest-registry

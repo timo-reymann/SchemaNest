@@ -89,7 +89,7 @@ build-image-cli: ## Build the CLI container image
 		-t timoreymann/schemanest-cli:${VERSION} \
 		-t timoreymann/schemanest-cli:latest \
 		-f docker/cli.Dockerfile \
-		--platform linux/amd64,linux/arm/v7,linux/arm64 \
+		--platform linux/amd64,linux/arm64 \
 		--push
 
 build-image-registry: ## Build the registry container image
@@ -97,7 +97,7 @@ build-image-registry: ## Build the registry container image
 		-t timoreymann/schemanest-registry:${VERSION} \
 		-t timoreymann/schemanest-registry:latest \
 		-f docker/registry.Dockerfile \
-		--platform linux/amd64,linux/arm/v7,linux/arm64 \
+		--platform linux/amd64,linux/arm64 \
 		--push
 
 build-image: build-image-cli build-image-registry ## Build all images
