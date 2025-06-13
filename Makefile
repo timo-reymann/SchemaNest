@@ -33,50 +33,24 @@ build-ui: ## Build UI
 	@cd ui && yarn build
 
 build-linux: create-dist ## Build binaries for linux
-	@GOOS=linux GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)linux-amd64 $(BUILD_ARGS) $(CMD_REGISTRY)
-	@GOOS=linux GOARCH=386 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)linux-i386 $(BUILD_ARGS) $(CMD_REGISTRY)
-	@GOOS=linux GOARCH=arm go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)linux-arm $(BUILD_ARGS) $(CMD_REGISTRY)
-	@GOOS=linux GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)linux-arm64 $(BUILD_ARGS) $(CMD_REGISTRY)
+	@CGO_ENABLED=1 CC="zig cc -target x86_64-linux-musl" CXX="zig c++ -target x86_64-linux-musl"  GOOS=linux GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)linux-amd64 $(BUILD_ARGS) $(CMD_REGISTRY)
+	@CGO_ENABLED=1 CC="zig cc -target x86-linux-musl" CXX="zig c++ -target x86-linux-musl"  GOOS=linux GOARCH=386 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)linux-i386 $(BUILD_ARGS) $(CMD_REGISTRY)
+	@CGO_ENABLED=1 CC="zig cc -target arm-linux-musleabihf" CXX="zig c++ -target arm-linux-musleabihf"  GOOS=linux GOARCH=arm go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)linux-arm $(BUILD_ARGS) $(CMD_REGISTRY)
 
-	@GOOS=linux GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-amd64 $(BUILD_ARGS) $(CMD_CLI)
-	@GOOS=linux GOARCH=arm go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-arm $(BUILD_ARGS) $(CMD_CLI)
-    @GOOS=linux GOARCH=386 go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-i386 $(BUILD_ARGS) $(CMD_CLI)
-    @GOOS=linux GOARCH=arm go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-arm $(BUILD_ARGS) $(CMD_CLI)
-    @GOOS=linux GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-arm64 $(BUILD_ARGS) $(CMD_CLI)
+	@CGO_ENABLED=1 CC="zig cc -target x86_64-linux-musl" CXX="zig c++ -target x86_64-linux-musl"  GOOS=linux GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-amd64 $(BUILD_ARGS) $(CMD_CLI)
+	@CGO_ENABLED=1 CC="zig cc -target arm-linux-musleabihf" CXX="zig c++ -target arm-linux-musleabihf"  GOOS=linux GOARCH=arm go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-arm $(BUILD_ARGS) $(CMD_CLI)
+    @CGO_ENABLED=1 CC="zig cc -target x86-linux-musl" CXX="zig c++ -target x86-linux-musl"  GOOS=linux GOARCH=386 go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-i386 $(BUILD_ARGS) $(CMD_CLI)
 
 build-windows: create-dist ## Build binaries for windows
-	@GOOS=windows GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)windows-amd64.exe $(BUILD_ARGS) $(CMD_REGISTRY)
-	@GOOS=windows GOARCH=386 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)windows-i386.exe $(BUILD_ARGS) $(CMD_REGISTRY)
-	@GOOS=windows GOARCH=arm go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)windows-arm.exe $(BUILD_ARGS) $(CMD_REGISTRY)
-
-	@GOOS=windows GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_CLI)windows-amd64.exe $(BUILD_ARGS) $(CMD_CLI)
-	@GOOS=windows GOARCH=386 go build -o $(BIN_PREFIX_SCHEMA_CLI)windows-i386.exe $(BUILD_ARGS) $(CMD_CLI)
-	@GOOS=windows GOARCH=arm go build -o $(BIN_PREFIX_SCHEMA_CLI)windows-arm.exe $(BUILD_ARGS) $(CMD_CLI)
+	@CGO_ENABLED=1 CC="zig cc -target x86_64-windows-gnu" CXX="zig c++ -target x86_64-windows-gnu"  GOOS=windows GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)windows-amd64.exe $(BUILD_ARGS) $(CMD_REGISTRY)
+	@CGO_ENABLED=1 CC="zig cc -target x86_64-windows-gnu" CXX="zig c++ -target x86_64-windows-gnu"  GOOS=windows GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_CLI)windows-amd64.exe $(BUILD_ARGS) $(CMD_CLI)
 
 build-darwin: create-dist  ## Build binaries for macOS
-	@GOOS=darwin GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)darwin-amd64 $(BUILD_ARGS) $(CMD_REGISTRY)
-	@GOOS=darwin GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)darwin-arm64 $(BUILD_ARGS) $(CMD_REGISTRY)
+	@CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)darwin-amd64 $(BUILD_ARGS) $(CMD_REGISTRY)
+	@CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)darwin-arm64 $(BUILD_ARGS) $(CMD_REGISTRY)
 
-	@GOOS=darwin GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_CLI)darwin-amd64 $(BUILD_ARGS) $(CMD_CLI)
-	@GOOS=darwin GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_CLI)darwin-arm64 $(BUILD_ARGS) $(CMD_CLI)
-
-build-freebsd: create-dist ## Build binaries for FreeBSD
-	@GOOS=freebsd GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)freebsd-amd64 $(BUILD_ARGS) $(CMD_REGISTRY)
-    @GOOS=freebsd GOARCH=386 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)freebsd-i386 $(BUILD_ARGS) $(CMD_REGISTRY)
-    @GOOS=freebsd GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)freebsd-arm64 $(BUILD_ARGS) $(CMD_REGISTRY)
-    @GOOS=freebsd GOARCH=arm go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)freebsd-arm $(BUILD_ARGS) $(CMD_REGISTRY)
-
-	@GOOS=freebsd GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_CLI)freebsd-amd64 $(BUILD_ARGS) $(CMD_CLI)
-    @GOOS=freebsd GOARCH=386 go build -o $(BIN_PREFIX_SCHEMA_CLI)freebsd-i386 $(BUILD_ARGS) $(CMD_CLI)
-    @GOOS=freebsd GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_CLI)freebsd-arm64 $(BUILD_ARGS) $(CMD_CLI)
-    @GOOS=freebsd GOARCH=arm go build -o $(BIN_PREFIX_SCHEMA_CLI)freebsd-arm $(BUILD_ARGS) $(CMD_CLI)
-
-build-openbsd: create-dist ## Build binaries for OpenBSD
-	@GOOS=openbsd GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)openbsd-amd64 $(BUILD_ARGS) $(CMD_REGISTRY)
-    @GOOS=openbsd GOARCH=386 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)openbsd-i386 $(BUILD_ARGS) $(CMD_REGISTRY)
-
-    @GOOS=openbsd GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_CLI)openbsd-amd64 $(BUILD_ARGS) $(CMD_CLI)
-    @GOOS=openbsd GOARCH=386 go build -o $(BIN_PREFIX_SCHEMA_CLI)openbsd-i386 $(BUILD_ARGS) $(CMD_CLI)
+	CGO_ENABLED=1 CC="zig cc -target x86_64-macos" CXX="zig c++ -target x86_64-macos"  GOOS=darwin GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_CLI)darwin-amd64 $(BUILD_ARGS) $(CMD_CLI)
+	CGO_ENABLED=1 CC="zig cc -target aarch64-macos" CXX="zig c++ -target aarch64-macos"  GOOS=darwin GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_CLI)darwin-arm64 $(BUILD_ARGS) $(CMD_CLI)
 
 create-checksums: ## Create checksums for binaries
 	@find ./dist -type f -exec sh -c 'sha256sum {} | cut -d " " -f 1 > {}.sha256' {} \;
@@ -102,4 +76,4 @@ build-image-registry: ## Build the registry container image
 
 build-image: build-image-cli build-image-registry ## Build all images
 
-build: go-generate build-linux build-darwin build-windows build-freebsd build-openbsd create-checksums ## Build binaries for all platform
+build: go-generate build-linux build-darwin build-windows create-checksums ## Build binaries for all platform

@@ -28,6 +28,10 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - checkout
+      - run:
+          name: Install zig
+          command: |
+            apt-get install -y zig
       - go/with-cache:
           steps:
             - run:
