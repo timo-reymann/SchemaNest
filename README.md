@@ -27,17 +27,84 @@ SchemaNest
 
 ## Installation
 
-> tbd
+#### Native
+
+1. Download the binary `schema-nest-cli*` for your OS from
+   the [latest release](https://github.com/timo-reymann/SchemaNest/releases/latest).
+2. Place the binary into a directory of your `PATH`
+3. Execute `schema-nest-cli`
+
+### Registry
+
+#### Using docker-compose
+
+1. Create a `config.toml`:
+   ```toml
+   # Connect to local database
+   database_dsn = "postgres://schema-nest:schema-nest@db/schema-nest"
+
+   # Allow uploads only with authentication
+   enable_upload_authentication = true
+
+   # Define API-Key(s)
+   [[api_keys]]
+   identifier = "frontend"
+   # make sure to set this to a proper secret (UUID, hash etc.)
+   key = "my-super-secret-api-key"
+   patterns = [
+     # Allow all schemas prefixed with @frontend/
+     "@frontend/*",
+     # Allow schema mjml-config
+     "mjml-config"
+   ]
+   ```
+2. Create the `docker-compose.yaml`
+    ```yaml
+    services:
+      registry:
+        image: timoreymann/schemanest-registry
+        command:
+          - schema-nest-registry
+          - serve-http
+          - -C
+          - /etc/SchemaNest/config.toml
+        volumes:
+          - ./config.toml:/etc/SchemaNest/config.toml
+        ports:
+          - 8080:8080
+      db:
+        image: postgres:15-alpine
+        environment:
+          POSTGRES_DB: schema-nest
+          POSTGRES_USER: schema-nest
+          POSTGRES_PASSWORD: schema-nest
+        volumes:
+          - schema-nest-db-data:/var/lib/postgresql/data
+        restart: always
+        healthcheck:
+          test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+          interval: 5s
+          timeout: 5s
+          retries: 5
+    volumes:
+      schema-nest-db-data:
+    ```
+3. Start it up with `docker compose up`
+4. Open your browser at [localhost:8080](http://localhost:8080)
+
+#### Native
+
+1. Download the binary `schema-nest-registry*` for your OS from
+   the [latest release](https://github.com/timo-reymann/SchemaNest/releases/latest).
+2. Execute it with `./schema-nest-registry-{os}-{arch}`
 
 ## Usage
-
-### CLI
 
 ```shell
 schema-nest-cli --help
 ```
 
-### Registry Server
+### Registry
 
 ```shell
 # Spin up server on 0.0.0.0:8080
@@ -88,6 +155,7 @@ To get started, please read the [Contribution Guidelines](./CONTRIBUTING.md).
 - [pre-commit](https://pre-commit.com/)
 - [Node.js](https://nodejs.org/en/download)
 - [yarn](https://classic.yarnpkg.com/lang/en/docs/install/)
+- [zig](https://ziglang.org/learn/getting-started/)
 
 ### Test
 
