@@ -75,7 +75,7 @@ jobs:
           steps:
             - run:
                 name: Build binaries
-                command: make build -j3
+                command: make build
       - persist_to_workspace:
           root: ./
           paths:
