@@ -108,5 +108,5 @@ make build
       enables you to add, update, and remove the artifacts from the store using a remote REST API.
 - [Confluence Schema Registry (for Kafka)](https://github.com/confluentinc/schema-registry)
     - Confluent Schema Registry provides a serving layer for your metadata. It provides a RESTful interface for storing
-      and retrieving your Avro®, JSON Schema, and Protobuf schemas. [...] 
+      and retrieving your Avro®, JSON Schema, and Protobuf schemas. [...]
 

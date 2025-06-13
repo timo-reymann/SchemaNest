@@ -18,7 +18,7 @@ func main() {
 	app := &cli.Command{
 		Name:    "schema-nest-cli",
 		Version: buildinfo.Version,
-		Usage:   "Upload schemas to the SchemaNest",
+		Usage:   "Interact with the SchemaNest API with ease.",
 		Flags: []cli.Flag{
 			&cli.StringFlag{
 				Name:     "base-url",

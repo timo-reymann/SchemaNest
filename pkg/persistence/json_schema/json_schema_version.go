@@ -44,7 +44,7 @@ func scanSingleRowForVersion(entity *JsonSchemaVersionEntity) func(scan func(des
 func (j *JsonSchemaVersionRepositoryImpl) Insert(ctx context.Context, entity *JsonSchemaVersionEntity) error {
 	err := j.DB.Insert(
 		`
-		INSERT INTO json_schema_version (version_major, version_minor, version_patch, content, description, json_schema_id) 
+		INSERT INTO json_schema_version (version_major, version_minor, version_patch, content, description, json_schema_id)
 		VALUES (?, ?, ?, ?, ?, ?)
         `,
 		entity.VersionMajor, entity.VersionMinor, entity.VersionPatch, entity.Content, entity.Description, entity.JsonSchemaId,
@@ -70,9 +70,9 @@ func (j *JsonSchemaVersionRepositoryImpl) ListForJsonSchema(ctx context.Context,
 			return true, err
 		},
 		`
-		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
-		FROM json_schema_version 
-		WHERE json_schema_id = (SELECT id FROM json_schema WHERE identifier = ?) 
+		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id
+		FROM json_schema_version
+		WHERE json_schema_id = (SELECT id FROM json_schema WHERE identifier = ?)
 		ORDER BY version_major DESC, version_minor DESC, version_patch DESC
 		`,
 		identifier)
@@ -89,10 +89,10 @@ func (j *JsonSchemaVersionRepositoryImpl) GetForJsonSchemaAndVersion(ctx context
 		ctx,
 		scanSingleRowForVersion(entity),
 		`
-		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
-		FROM json_schema_version 
-		WHERE json_schema_id = (SELECT id FROM json_schema WHERE identifier = ?) 
-		AND version_major = ? 
+		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id
+		FROM json_schema_version
+		WHERE json_schema_id = (SELECT id FROM json_schema WHERE identifier = ?)
+		AND version_major = ?
 		AND version_minor = ?
 		AND version_patch = ?
 		`,
@@ -112,7 +112,7 @@ func (j *JsonSchemaVersionRepositoryImpl) GetForLatestMajorVersion(ctx context.C
 		ctx,
 		scanSingleRowForVersion(entity),
 		`
-		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
+		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id
 		FROM json_schema_version
 		WHERE json_schema_id = (SELECT id
                         FROM json_schema
@@ -138,7 +138,7 @@ func (j *JsonSchemaVersionRepositoryImpl) GetForLatestMinorVersion(ctx context.C
 		ctx,
 		scanSingleRowForVersion(entity),
 		`
-		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
+		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id
 		FROM json_schema_version
 		WHERE json_schema_id = (SELECT id
                         FROM json_schema
@@ -165,7 +165,7 @@ func (j *JsonSchemaVersionRepositoryImpl) GetLatestVersion(ctx context.Context, 
 		ctx,
 		scanSingleRowForVersion(entity),
 		`
-		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id 
+		SELECT id, version_major, version_minor, version_patch, content, description, json_schema_id
 		FROM json_schema_version
 		WHERE json_schema_id = (SELECT id
                         FROM json_schema

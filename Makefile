@@ -1,7 +1,7 @@
 .PHONY: help
 
 SHELL := /bin/bash
-VERSION=$(shell git describe --tags `git rev-list --tags --max-count=1`)
+VERSION=$(shell git describe --tags)
 NOW=$(shell date +"%Y-%m-%d_%H:%M:%S")
 COMMIT_REF=$(shell git rev-parse --short HEAD)
 BUILD_ARGS=-ldflags "-X github.com/timo-reymann/SchemaNest/pkg/buildinfo.GitSha=$(COMMIT_REF) -X github.com/timo-reymann/SchemaNest/pkg/buildinfo.Version=$(VERSION) -X github.com/timo-reymann/SchemaNest/pkg/buildinfo.BuildTime=$(NOW)" -tags prod
@@ -39,6 +39,7 @@ build-linux: create-dist ## Build binaries for linux
 	@GOOS=linux GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_REGISTRY)linux-arm64 $(BUILD_ARGS) $(CMD_REGISTRY)
 
 	@GOOS=linux GOARCH=amd64 go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-amd64 $(BUILD_ARGS) $(CMD_CLI)
+	@GOOS=linux GOARCH=arm go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-arm $(BUILD_ARGS) $(CMD_CLI)
     @GOOS=linux GOARCH=386 go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-i386 $(BUILD_ARGS) $(CMD_CLI)
     @GOOS=linux GOARCH=arm go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-arm $(BUILD_ARGS) $(CMD_CLI)
     @GOOS=linux GOARCH=arm64 go build -o $(BIN_PREFIX_SCHEMA_CLI)linux-arm64 $(BUILD_ARGS) $(CMD_CLI)
@@ -82,5 +83,13 @@ create-checksums: ## Create checksums for binaries
 
 go-generate: ## Generate go files for migrations and openapi code
 	@go generate pkg/internal/ecosystems/generate.go
+
+build-image-cli: ## Build the CLI container image
+	@docker build . -t timoreymann/schemanest-cli:${VERSION} -f docker/cli.Dockerfile
+
+build-image-registry: ## Build the registry container image
+	@docker build . -t timoreymann/schemanest-registry:${VERSION} -f docker/registry.Dockerfile
+
+build-image: build-image-cli build-image-registry ## Build all images
 
 build: go-generate build-linux build-darwin build-windows build-freebsd build-openbsd create-checksums ## Build binaries for all platform
