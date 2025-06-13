@@ -107,6 +107,28 @@ jobs:
           folder: gh-pages/
           git_commit_author_email: "no-reply@timo-reymann.de"
           git_commit_author_name: "CircleCI"
+  build-oci-images:
+    executor: docker/docker
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./
+      - setup_remote_docker:
+          version: default
+      - run:
+          name: Build and publish image
+          command: |
+            echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
+            docker buildx create --use
+            make build-image
+      - docker/update-description:
+          image: timoreymann/schemanest-cli
+          docker-username: DOCKER_USERNAME
+          docker-password: DOCKER_TOKEN
+      - docker/update-description:
+          image: timoreymann/schemanest-registry
+          docker-username: DOCKER_USERNAME
+          docker-password: DOCKER_TOKEN
 
 workflows:
   version: 2
@@ -128,3 +150,7 @@ workflows:
             - test
             - test-ui
             - build-ui
+      - build-oci-images:
+          <<: *job_defaults
+          requires:
+            - build
