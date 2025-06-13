@@ -7,7 +7,7 @@ export default function Document() {
   return (
     <Html>
       <Head>
-          <link rel="icon" href="/favicon.ico" />
+        <link href="/favicon.ico" rel="icon" />
       </Head>
       <body
         className={clsx(
