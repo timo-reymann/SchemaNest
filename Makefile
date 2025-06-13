@@ -85,10 +85,20 @@ go-generate: ## Generate go files for migrations and openapi code
 	@go generate pkg/internal/ecosystems/generate.go
 
 build-image-cli: ## Build the CLI container image
-	@docker build . -t timoreymann/schemanest-cli:${VERSION} -f docker/cli.Dockerfile
+	@docker buildx build . \
+		-t timoreymann/schemanest-cli:${VERSION} \
+		-t timoreymann/schemanest-cli:latest \
+		-f docker/cli.Dockerfile \
+		--platform linux/amd64,linux/arm/v7,linux/arm64 \
+		--push
 
 build-image-registry: ## Build the registry container image
-	@docker build . -t timoreymann/schemanest-registry:${VERSION} -f docker/registry.Dockerfile
+	@docker buildx build . \
+		-t timoreymann/schemanest-registry:${VERSION} \
+		-t timoreymann/schemanest-registry:latest \
+		-f docker/registry.Dockerfile \
+		--platform linux/amd64,linux/arm/v7,linux/arm64 \
+		--push
 
 build-image: build-image-cli build-image-registry ## Build all images
 
