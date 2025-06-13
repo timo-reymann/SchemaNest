@@ -152,6 +152,8 @@ workflows:
             - build-ui
       - build-oci-images:
           <<: *job_defaults
+          requires:
+            - build
           filters:
             branches:
               only: main
