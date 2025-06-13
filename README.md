@@ -27,6 +27,16 @@ SchemaNest
 
 ## Installation
 
+### CLI
+
+#### Docker
+
+```sh
+docker run --rm -it -v $PWD:/workspace:ro -w /workspace  \
+  timoreymann/schemanest-cli schema-nest-cli \
+  --help
+```
+
 #### Native
 
 1. Download the binary `schema-nest-cli*` for your OS from
