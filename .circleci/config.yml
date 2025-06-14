@@ -192,3 +192,9 @@ workflows:
             branches:
               only:
                 - main
+      - attach-artifacts-to-release:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
