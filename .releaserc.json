@@ -26,6 +26,9 @@
       {
         "assets": "CHANGELOG.md"
       }
+    ],
+    [
+      "@semantic-release/github"
     ]
   ],
   "tagFormat": "v${version}"
