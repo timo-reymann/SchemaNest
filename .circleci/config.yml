@@ -1,9 +1,11 @@
 version: '2.1'
 
-job_defaults: &job_defaults
+job_only_tags: &job_only_tags
   filters:
     tags:
       only: /.*/
+    branches:
+      ignore: /.*/
 
 orbs:
   github-cli: circleci/github-cli@2.7.0
@@ -160,7 +162,30 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  release:
+    - build-ui:
+        <<: *job_only_tags
+        requires:
+          - test-ui
+    - build:
+        <<: *job_only_tags
+        requires:
+          - build-ui
+        matrix:
+          parameters:
+            platform:
+              - darwin
+              - linux
+              - windows
+    - attach-artifacts-to-release:
+        <<: *job_only_tags
+        requires:
+          - build
+    - build-oci-images:
+        <<: *job_only_tags
+        requires:
+          - build-linux
+  main:
     jobs:
       - build-gh-pages:
           filters:
@@ -169,11 +194,9 @@ workflows:
       - test
       - test-ui
       - build-ui:
-          <<: *job_defaults
           requires:
             - test-ui
       - build:
-          <<: *job_defaults
           requires:
             - test
             - build-ui
@@ -184,14 +207,11 @@ workflows:
                 - linux
                 - windows
       - build-oci-images:
-          <<: *job_defaults
           requires:
             - build-linux
           filters:
             branches:
               only: main
-            tags:
-              only: /.*/
       - semantic-release/with_existing_config:
           name: semantic-release
           requires:
@@ -201,11 +221,3 @@ workflows:
             branches:
               only:
                 - main
-      - attach-artifacts-to-release:
-          requires:
-            - build
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore: /.*/
