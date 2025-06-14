@@ -162,8 +162,8 @@ workflows:
           filters:
             branches:
               only: main
-      - test:
-      - test-ui:
+      - test
+      - test-ui
       - build-ui:
           <<: *job_defaults
           requires:
