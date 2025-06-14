@@ -56,6 +56,28 @@ jobs:
           command: |
             cd ui
             npm run lint
+  download-zig:
+    executor: go
+    parameters:
+      zig_version:
+        type: string
+        default: zig-x86_64-linux-0.15.0-dev.777+6810ffa42
+    steps:
+      - run:
+          name: Download zig <<parameters.zig_version>>
+          command: |
+            mkdir -p .zig && cd .zig
+            curl https://ziglang.org/builds/<<parameters.zig_version>>.tar.xz --output zig.tar.xz
+            tar -xf zig.tar.xz
+            rm zig.tar.xz
+      - run:
+          name: Set ZIG_PATH
+          command: |
+            echo 'export ZIG_PATH=$PWD/<<parameters.zig_version>>zig"' >> "$BASH_ENV"
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - .zig
   build:
     executor: go
     parameters:
@@ -68,15 +90,8 @@ jobs:
       - run:
           name: Install build dependencies
           command: |
-            mkdir -p .zig && cd .zig
-            ZIG_VERSION=zig-x86_64-linux-0.15.0-dev.777+6810ffa42
-            curl https://ziglang.org/builds/${ZIG_VERSION}.tar.xz --output zig.tar.xz
-            tar -xf zig.tar.xz
-            rm zig.tar.xz
-            sudo ln -s $PWD/zig-x86_64-linux-0.15.0-dev.777+6810ffa42/zig /usr/local/bin/zig
-
-            sudo apt-get update
-            sudo apt-get install -y clang
+            sudo ln -s ${ZIG_PATH}/zig /usr/local/bin/zig
+            sudo apt-get update && sudo apt-get install -y clang
       - go/with-cache:
           steps:
             - run:
@@ -164,12 +179,14 @@ workflows:
   version: 2
   release:
     jobs:
+      - download-zig
       - build-ui:
           <<: *job_only_tags
       - build:
           <<: *job_only_tags
           requires:
             - build-ui
+            - download-zig
           matrix:
             parameters:
               platform:
@@ -186,6 +203,7 @@ workflows:
             - build-linux
   main:
     jobs:
+      - download-zig
       - build-gh-pages:
           filters:
             branches:
@@ -199,6 +217,7 @@ workflows:
           requires:
             - test
             - build-ui
+            - download-zig
           matrix:
             parameters:
               platform:
