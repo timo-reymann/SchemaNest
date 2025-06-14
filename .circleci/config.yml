@@ -163,28 +163,27 @@ jobs:
 workflows:
   version: 2
   release:
-    - build-ui:
-        <<: *job_only_tags
-        requires:
-          - test-ui
-    - build:
-        <<: *job_only_tags
-        requires:
-          - build-ui
-        matrix:
-          parameters:
-            platform:
-              - darwin
-              - linux
-              - windows
-    - attach-artifacts-to-release:
-        <<: *job_only_tags
-        requires:
-          - build
-    - build-oci-images:
-        <<: *job_only_tags
-        requires:
-          - build-linux
+    jobs:
+      - build-ui:
+          <<: *job_only_tags
+      - build:
+          <<: *job_only_tags
+          requires:
+            - build-ui
+          matrix:
+            parameters:
+              platform:
+                - darwin
+                - linux
+                - windows
+      - attach-artifacts-to-release:
+          <<: *job_only_tags
+          requires:
+            - build
+      - build-oci-images:
+          <<: *job_only_tags
+          requires:
+            - build-linux
   main:
     jobs:
       - build-gh-pages:
