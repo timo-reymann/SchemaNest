@@ -142,6 +142,17 @@ jobs:
           image: timoreymann/schemanest-registry
           docker-username: DOCKER_USERNAME
           docker-password: DOCKER_TOKEN
+  attach-artifacts-to-release:
+    executor: go
+    steps:
+      - attach_workspace:
+          at: ./
+      - github-cli/install:
+          version: "2.21.2"
+      - run:
+          name: Attach binaries to release
+          command: |
+            gh release upload ${CIRCLE_TAG} dist/*
 
 workflows:
   version: 2
@@ -152,16 +163,14 @@ workflows:
             branches:
               only: main
       - test:
-          <<: *job_defaults
       - test-ui:
-          <<: *job_defaults
       - build-ui:
           <<: *job_defaults
+          requires:
+            - test-ui
       - build:
           <<: *job_defaults
           requires:
-            - test
-            - test-ui
             - build-ui
       - build-oci-images:
           <<: *job_defaults
@@ -172,3 +181,12 @@ workflows:
               only: main
             tags:
               only: /.*/
+      - semantic-release/with_existing_config:
+        name: semantic-release
+        requires:
+          - build
+          - build-oci-images
+        filters:
+          branches:
+            only:
+              - main
