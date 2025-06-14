@@ -56,6 +56,9 @@ jobs:
             npm run lint
   build:
     executor: go
+    parameters:
+      platform:
+        type: string
     steps:
       - checkout
       - attach_workspace:
@@ -76,7 +79,7 @@ jobs:
           steps:
             - run:
                 name: Build binaries
-                command: make build
+                command: make build-<<parameters.platform>> create-checksums
       - persist_to_workspace:
           root: ./
           paths:
@@ -174,6 +177,12 @@ workflows:
           requires:
             - test
             - build-ui
+          matrix:
+            parameters:
+              platform:
+                - darwin
+                - linux
+                - windows
       - build-oci-images:
           <<: *job_defaults
           requires:
