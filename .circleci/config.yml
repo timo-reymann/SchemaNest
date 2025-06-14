@@ -182,11 +182,11 @@ workflows:
             tags:
               only: /.*/
       - semantic-release/with_existing_config:
-        name: semantic-release
-        requires:
-          - build
-          - build-oci-images
-        filters:
-          branches:
-            only:
-              - main
+          name: semantic-release
+          requires:
+            - build
+            - build-oci-images
+          filters:
+            branches:
+              only:
+                - main
