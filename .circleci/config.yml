@@ -172,6 +172,7 @@ workflows:
       - build:
           <<: *job_defaults
           requires:
+            - test
             - build-ui
       - build-oci-images:
           <<: *job_defaults
