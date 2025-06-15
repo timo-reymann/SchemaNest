@@ -6,7 +6,6 @@ import (
 	"github.com/timo-reymann/SchemaNest/pkg/api"
 	"github.com/timo-reymann/SchemaNest/pkg/buildinfo"
 	"github.com/timo-reymann/SchemaNest/pkg/config"
-	"github.com/timo-reymann/SchemaNest/pkg/openapi"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/database"
 	"github.com/timo-reymann/SchemaNest/pkg/persistence/json_schema"
 	"github.com/timo-reymann/SchemaNest/pkg/ui"
@@ -81,7 +80,6 @@ func main() {
 						return err
 					}
 					r.HandleFunc("/", ui.CreateHandler())
-					r.HandleFunc("/api-spec.yml", openapi.SpecHandler)
 
 					addr := net.JoinHostPort("0.0.0.0", strconv.Itoa(port))
 					fmt.Println("Listening on", addr)

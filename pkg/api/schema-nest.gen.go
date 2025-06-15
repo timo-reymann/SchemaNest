@@ -153,6 +153,9 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
+	// GetApiSpecYml request
+	GetApiSpecYml(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// ListJSONSchemas request
 	ListJSONSchemas(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -172,6 +175,18 @@ type ClientInterface interface {
 	PostApiSchemaJsonSchemaIdentifierVersionVersionWithBody(ctx context.Context, identifier string, version string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	PostApiSchemaJsonSchemaIdentifierVersionVersion(ctx context.Context, identifier string, version string, body PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+}
+
+func (c *Client) GetApiSpecYml(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetApiSpecYmlRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
 }
 
 func (c *Client) ListJSONSchemas(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -256,6 +271,33 @@ func (c *Client) PostApiSchemaJsonSchemaIdentifierVersionVersion(ctx context.Con
 		return nil, err
 	}
 	return c.Client.Do(req)
+}
+
+// NewGetApiSpecYmlRequest generates requests for GetApiSpecYml
+func NewGetApiSpecYmlRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api-spec.yml")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
 }
 
 // NewListJSONSchemasRequest generates requests for ListJSONSchemas
@@ -532,6 +574,9 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
+	// GetApiSpecYmlWithResponse request
+	GetApiSpecYmlWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiSpecYmlResponse, error)
+
 	// ListJSONSchemasWithResponse request
 	ListJSONSchemasWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListJSONSchemasResponse, error)
 
@@ -551,6 +596,27 @@ type ClientWithResponsesInterface interface {
 	PostApiSchemaJsonSchemaIdentifierVersionVersionWithBodyWithResponse(ctx context.Context, identifier string, version string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiSchemaJsonSchemaIdentifierVersionVersionResponse, error)
 
 	PostApiSchemaJsonSchemaIdentifierVersionVersionWithResponse(ctx context.Context, identifier string, version string, body PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiSchemaJsonSchemaIdentifierVersionVersionResponse, error)
+}
+
+type GetApiSpecYmlResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r GetApiSpecYmlResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetApiSpecYmlResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
 }
 
 type ListJSONSchemasResponse struct {
@@ -685,6 +751,15 @@ func (r PostApiSchemaJsonSchemaIdentifierVersionVersionResponse) StatusCode() in
 	return 0
 }
 
+// GetApiSpecYmlWithResponse request returning *GetApiSpecYmlResponse
+func (c *ClientWithResponses) GetApiSpecYmlWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiSpecYmlResponse, error) {
+	rsp, err := c.GetApiSpecYml(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetApiSpecYmlResponse(rsp)
+}
+
 // ListJSONSchemasWithResponse request returning *ListJSONSchemasResponse
 func (c *ClientWithResponses) ListJSONSchemasWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*ListJSONSchemasResponse, error) {
 	rsp, err := c.ListJSONSchemas(ctx, reqEditors...)
@@ -745,6 +820,22 @@ func (c *ClientWithResponses) PostApiSchemaJsonSchemaIdentifierVersionVersionWit
 		return nil, err
 	}
 	return ParsePostApiSchemaJsonSchemaIdentifierVersionVersionResponse(rsp)
+}
+
+// ParseGetApiSpecYmlResponse parses an HTTP response from a GetApiSpecYmlWithResponse call
+func ParseGetApiSpecYmlResponse(rsp *http.Response) (*GetApiSpecYmlResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetApiSpecYmlResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
 }
 
 // ParseListJSONSchemasResponse parses an HTTP response from a ListJSONSchemasWithResponse call
@@ -905,6 +996,9 @@ func ParsePostApiSchemaJsonSchemaIdentifierVersionVersionResponse(rsp *http.Resp
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
+
+	// (GET /api-spec.yml)
+	GetApiSpecYml(w http.ResponseWriter, r *http.Request)
 	// List all available JSON schemas
 	// (GET /api/schema/json-schema)
 	ListJSONSchemas(w http.ResponseWriter, r *http.Request)
@@ -933,6 +1027,20 @@ type ServerInterfaceWrapper struct {
 }
 
 type MiddlewareFunc func(http.Handler) http.Handler
+
+// GetApiSpecYml operation middleware
+func (siw *ServerInterfaceWrapper) GetApiSpecYml(w http.ResponseWriter, r *http.Request) {
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.GetApiSpecYml(w, r)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r)
+}
 
 // ListJSONSchemas operation middleware
 func (siw *ServerInterfaceWrapper) ListJSONSchemas(w http.ResponseWriter, r *http.Request) {
@@ -1226,6 +1334,7 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 		ErrorHandlerFunc:   options.ErrorHandlerFunc,
 	}
 
+	m.HandleFunc("GET "+options.BaseURL+"/api-spec.yml", wrapper.GetApiSpecYml)
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema", wrapper.ListJSONSchemas)
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}", wrapper.GetApiSchemaJsonSchemaIdentifier)
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}/channel/{channel}", wrapper.GetApiSchemaJsonSchemaIdentifierChannelChannel)
@@ -1239,23 +1348,23 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/+xYXW/bNhT9KwS3R8Vyt75Mb16zFe6KzliGvGR5uJGuYwYSyZJXCQzD/33ghz6tuE6a",
-	"BdvQp6oSeXjuOYeXdHY8V5VWEiVZnu24zTdYgX/8xRhl3AMUhSChJJQrozQaEmh5tobSYsJ179WOYzOn",
-	"QJsbod00ngUoVqG1cIs84bTVyDNuyQh5y/f7hBv8XAuDBc+uIsh1O0zd3GFOfJ/wD1bJC8/wHAlEaZ9I",
-	"b8BqTPK8+x9bK8NoM0E14fdorFDS431vcM0z/l3aiZhGBdOO62UzY1xoC3W81qVcK7fa19XCAjEGllkk",
-	"drP1L0sgtMQik6l6RYGSxFrghK/L9ttolSmgsFQU40vqxWErMHSoW49SMmA0XuS4rh+FJcdDEFZPsNPb",
-	"sW+RwRjYDoF7NT4hnPfdrOP74/6k6i57OX1ihQ3/iSIHvnypvmFY4lRmUaMBwoIJSYoJskx7uLEgFdxN",
-	"NZMLrECSyJn/fhhdIQlv0Ti2lZDHEdz3owgaKN8cQfDfjyCMrAslNcQa+EMj9wm3mNdG0NZbEgRZaPEb",
-	"bt3TDYJB86syFRDP+GK1PHNfktC/HVIY0THaEGm+d8AitpNcSYLc7wAJfs6folLsD9xWIF0ttSnjRJul",
-	"KYlKnZnwcVagE2eoyWK1ZOe4FlK0bSfE6RNackQElW6Vwcs29Hw+m8/eOFSlUYIWPOM/zuazeVBp4wVI",
-	"QYuY1/TOKnkWu02247foK1E+W0LJZcEz7nb4h4vfP13EU82ZYbWSNuj5w3zeCIHSTwetS5F7AL9AdySe",
-	"vnuao8mLPYpNnedo7bouWUs0mF1XFZhtpMygLBncgyjhpkTmKmDNwexGPyJDuusa4/5RTd4jLbQIVHtN",
-	"rd9SNRiokNBYnl3tuHDUnQc8aZIy6MBdwMnUmPQEG/ex61cxwPf1CfWbBuT1DEP/4i5xb+dvD7d4bxR7",
-	"ELRhXc1MKmJrVctiZN57bI9Sy9SaAXM1NGfiqdal+QakxDLdxYfnm/kuAMR//klrk0mwvF349UIybqUH",
-	"OfgY7jx9g4u2b714HoY3rJCK3o72fRJYI9TJGQmwzw5G0ODfvNf/WzaeblxESHfx4fmbO/azy/by8cqb",
-	"u7v1fEvFY6lIuFZ2wtuVsv9Tcz/XaOlnVWy/ztf9QVDeHNr2zqD/IdG3LxJvTvafXuyCEf4eMnWriz+s",
-	"S4NQbNkDWFbrUkGBxeAm730Ld/hFTRueXV3vk51TrQtVqIgBk/jQvzzEY6JxxQn0dwAAAP//RBwa/rsR",
-	"AAA=",
+	"H4sIAAAAAAAC/+xYXW/bNhT9KwS3R8Vyu75Mb16zFe6KzqiHAEOWB1q6thlIJEteORAM/feBH/q06jpp",
+	"FmzDnsJI5OG595x7SflIU1koKUCgocmRmnQPBXPDn7WW2g5YlnHkUrB8paUCjRwMTbYsNxBR1Xt0pNCs",
+	"ycCkmiu7jCYeihRgDNsBjShWCmhCDWoudrSuI6rhc8k1ZDS5DSB37TS5uYcUaR3R90aKtWN4Dch4bh5J",
+	"b8BqTPK6+49spSa4n6Aa0QNow6VweN9r2NKEfhd3SYxDBuOO602zYhxoC3U+1qXYSrvbt8VCPDHCDDGA",
+	"ZFO5hzlDMEgCk6l4eQYC+ZbDhK7L9t1olykgv1VIxteyF6atmMbTvPUoRQNG403O5/UDN2h5cITiEXI6",
+	"OeoWmWnNqiFwL8ZHmPPQrTpfH4eLorvp+fSRETb8J4Ic6PK1+IZmCUuJAQWaIWSEC5SEoyHKwY0TUrD7",
+	"qWayhoIJ5Clx70+tywXCDrRlW3BxHsG+P4ugGKb7Mwju/RmEkXQ+pIZYA38qZB1RA2mpOVZOEp+QheK/",
+	"QmVHG2Aa9C9SFwxpQher5ZV9E/n+bZH8jI7RHlHR2gLz0E5SKZClrgIEc2t+54Ukn6AqmLCxlDoPC00S",
+	"xzuO+3IzS2URIy/klfbzYm+Zj2Cc/4ZpWqyW5Bq2XPC2E/WmRxQ55nbjwcO2DuhhPns1e21hpQLBFKcJ",
+	"/WE2n8195vYuKTFT/MooSGdVkdsHO8BTwT4Bllq4DsUUJ1lLijpwzex4mdGEvgNcKL5WkP5R5NTKZ5QU",
+	"xivwej6fMINvrD3M2iXaMgvVFd8bKa5Cb+w4Dne2/ej9+reP63AGT+9tZQPhljOlcp46ALdBd4BfXuvN",
+	"QeoYj+Iq0xSM2ZY5aYl6a5ZFwXQVKBOW54QdGM/ZJgdiIyDNNeJMGuJj18brL+YkqOFW9Fpw/wBQTLMC",
+	"ELShye2RckvduoNGja8H50VXjqhLiHoJG3fduxcRwJ1CE9lv2qXLp5/6J7W18Gb+5tSDvVnkgeOedDET",
+	"IZFsZSmykXjvoD34DZFbwoiNoTnBL5UuTvdMCMjjYxg8Xcy3HiD8+TuljSbB0nbjlzPJuPGf+OCDv6H1",
+	"Be53mmf2w/A+6F3Rq2jXwhlpEnWxRzzsk43hc/BPrvV/l4yXCxcQ4mMYPL24Qz+7aa9KL1zc3R3tf1d8",
+	"yRURVdJMaLuS5j8q7ucSDP4ks+rbdK1PjPLqVLa3GtxnT1++QLw52X98tguG//Vm6lYXfgbINbCsIg/M",
+	"kFLlkmWQDb47nG7+i2NR4p4mt3d1dLRZ60zlIyKMCHjoXx7CMdGoYhP0VwAAAP//VLjTImkSAAA=",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

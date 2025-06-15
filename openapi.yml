@@ -128,8 +128,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       security:
-        - ApiKeyAuth: []
-        - {}
+        - ApiKeyAuth: [ ]
+        - { }
+  /api-spec.yml:
+    get:
+      description: Return the api definition
+      responses:
+        200:
+          description: Schema definition
 components:
   schemas:
     JsonSchemaInfo:
@@ -159,7 +165,7 @@ components:
         - versions
       properties:
         versions:
-            $ref: '#/components/schemas/JsonSchemaVersions'
+          $ref: '#/components/schemas/JsonSchemaVersions'
         description:
           type: string
           description: Description for the
