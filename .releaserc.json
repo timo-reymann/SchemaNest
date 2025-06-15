@@ -33,7 +33,7 @@
             "to": "version: \"${nextRelease.version}\"",
             "results": [
               {
-                "file": "pyproject.toml",
+                "file": "openapi.yml",
                 "hasChanged": true
               }
             ]
