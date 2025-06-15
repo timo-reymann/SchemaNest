@@ -2,10 +2,10 @@ openapi: 3.0.0
 info:
   title: SchemaNest
   description: API Definition for SchemaNest
-  version: 0.0.1
+  version: "v0.1.2"
   contact:
     name: Timo Reymann
-    url: https://timo-reymann.de
+    url: https://github.com/timo-reymann/SchemaNest
 paths:
   /api/schema/json-schema:
     get:
