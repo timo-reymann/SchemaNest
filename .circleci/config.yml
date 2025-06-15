@@ -163,6 +163,7 @@ jobs:
   attach-artifacts-to-release:
     executor: go
     steps:
+      - checkout
       - attach_workspace:
           at: ./
       - github-cli/install:
