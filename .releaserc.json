@@ -25,9 +25,7 @@
       "@semantic-release/git",
       {
         "assets": [
-          "CHANGELOG.md",
-          "README.md",
-          "openapi.yml"
+          "CHANGELOG.md"
         ]
       }
     ],
