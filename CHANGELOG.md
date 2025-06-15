@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/timo-reymann/SchemaNest/compare/v0.1.0...v0.1.1) (2025-06-15)
+
+
+### Bug Fixes
+
+* Fix sonar findings in UI ([e2828da](https://github.com/timo-reymann/SchemaNest/commit/e2828dab9d943bfe2c94110c0739f1b4f00d833e))
+
 ## [0.1.0](https://github.com/timo-reymann/SchemaNest/compare/v0.0.1...v0.1.0) (2025-06-14)
 
 
