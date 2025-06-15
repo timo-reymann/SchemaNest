@@ -179,7 +179,8 @@ workflows:
   version: 2
   release:
     jobs:
-      - download-zig
+      - download-zig:
+          <<: *job_only_tags
       - build-ui:
           <<: *job_only_tags
       - build:
