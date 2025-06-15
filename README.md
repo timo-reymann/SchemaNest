@@ -39,7 +39,7 @@ SchemaNest
 
 ```sh
 docker run --rm -it -v $PWD:/workspace:ro -w /workspace  \
-  timoreymann/schemanest-cli schema-nest-cli:v0.1.2 \
+  timoreymann/schemanest-cli schema-nest-cli \
   --help
 ```
 

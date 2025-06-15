@@ -27,30 +27,6 @@
         "replacements": [
           {
             "files": [
-              "openapi.yml"
-            ],
-            "from": "version: \"v[0-9.]+\"",
-            "to": "version: \"${nextRelease.version}\"",
-            "results": [
-              {
-                "file": "openapi.yml",
-                "hasChanged": true
-              }
-            ]
-          },
-          {
-            "files": [
-              "README.md"
-            ],
-            "from": "timoreymann/schema-nest-cli:v[0-9.]+",
-            "to": "timoreymann/schema-nest-cli:${nextRelease.version}",
-            "results": {
-              "file": "README.md",
-              "hasChanged": true
-            }
-          },
-          {
-            "files": [
               "README.md"
             ],
             "from": "timoreymann/schema-nest-registry:v[0-9.]+",
