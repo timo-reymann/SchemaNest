@@ -39,7 +39,7 @@ SchemaNest
 
 ```sh
 docker run --rm -it -v $PWD:/workspace:ro -w /workspace  \
-  timoreymann/schemanest-cli schema-nest-cli \
+  timoreymann/schemanest-cli schema-nest-cli:v0.1.2 \
   --help
 ```
 
@@ -78,7 +78,7 @@ docker run --rm -it -v $PWD:/workspace:ro -w /workspace  \
     ```yaml
     services:
       registry:
-        image: timoreymann/schemanest-registry
+        image: timoreymann/schemanest-registry:v0.1.2
         command:
           - schema-nest-registry
           - serve-http
