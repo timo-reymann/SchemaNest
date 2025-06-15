@@ -27,7 +27,7 @@
         "replacements": [
           {
             "files": [
-              "openapi.toml"
+              "openapi.yml"
             ],
             "from": "version: = \"v[0-9.]+\"",
             "to": "version: \"${nextRelease.version}\"",
