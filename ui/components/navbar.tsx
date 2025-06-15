@@ -22,6 +22,10 @@ const navItems = [
     label: "API Documentation",
     href: "/api-docs",
   },
+  {
+    label: "Upload",
+    href: "/upload",
+  },
 ];
 
 export const Navbar = () => {

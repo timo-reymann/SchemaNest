@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand/vanilla";
 
-import { getJSON } from "@/util/fetch";
+import { getJSON, postJSON } from "@/util/fetch";
 
 export interface JsonSchemaInfo {
   identifier: string;
@@ -44,6 +44,13 @@ export interface JsonSchemasSlice {
   fetchSchemaDetailsByVersion: (
     identifier: string,
   ) => Promise<JsonSchemaDetails>;
+
+  uploadSchema(input: {
+    apiKey: string | undefined;
+    identifier: string;
+    version: string;
+    schema: File;
+  }): Promise<void>;
 }
 
 export const createJsonSchemaSlice: StateCreator<JsonSchemasSlice> = (
@@ -119,6 +126,22 @@ export const createJsonSchemaSlice: StateCreator<JsonSchemasSlice> = (
       set({
         schemaLoading: false,
       });
+    }
+  },
+  async uploadSchema(input: {
+    apiKey: string | undefined;
+    identifier: string;
+    version: string;
+    schema: File;
+  }): Promise<void> {
+    let response = await postJSON(
+      `/api/schema/json-schema/${encodeURIComponent(input.identifier)}/version/${input.version}`,
+      JSON.parse(await input.schema.text()),
+      input.apiKey ? { Authorization: `Bearer ${input.apiKey}` } : {},
+    );
+
+    if (response.status != 201) {
+      throw (await response.json()).error;
     }
   },
 });

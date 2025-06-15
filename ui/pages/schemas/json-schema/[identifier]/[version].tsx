@@ -332,12 +332,7 @@ export default function JsonSchemaVersionPage() {
       title: "Endpoints",
       id: "endpoints",
       icon: <LinkIcon fontSize={16} />,
-      content: (
-        <JsonSchemaLinks
-          identifier={identifier}
-          version={version}
-        />
-      ),
+      content: <JsonSchemaLinks identifier={identifier} version={version} />,
     },
     {
       title: "Compare",

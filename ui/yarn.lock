@@ -873,6 +873,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@heroui/toast@npm:^2.0.11":
+  version: 2.0.11
+  resolution: "@heroui/toast@npm:2.0.11"
+  dependencies:
+    "@heroui/react-utils": "npm:2.1.11"
+    "@heroui/shared-icons": "npm:2.1.9"
+    "@heroui/shared-utils": "npm:2.1.9"
+    "@heroui/spinner": "npm:2.2.18"
+    "@heroui/use-is-mobile": "npm:2.2.10"
+    "@react-aria/interactions": "npm:3.25.2"
+    "@react-aria/toast": "npm:3.0.4"
+    "@react-aria/utils": "npm:3.29.1"
+    "@react-stately/toast": "npm:3.1.1"
+  peerDependencies:
+    "@heroui/system": ">=2.4.10"
+    "@heroui/theme": ">=2.4.12"
+    framer-motion: ">=11.5.6 || >=12.0.0-alpha.1"
+    react: ">=18 || >=19.0.0-rc.0"
+    react-dom: ">=18 || >=19.0.0-rc.0"
+  checksum: 10c0/a57bd3fb7e48be1063af2025915f95c12657d36e4be806e84108762f58388c00cd5dec2128fe5a373ff17f7b682afc23c3bb3a9b94a75c96b41d1a040a9e6246
+  languageName: node
+  linkType: hard
+
 "@heroui/tooltip@npm:2.2.18":
   version: 2.2.18
   resolution: "@heroui/tooltip@npm:2.2.18"
@@ -1755,6 +1778,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-aria/landmark@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "@react-aria/landmark@npm:3.0.4"
+  dependencies:
+    "@react-aria/utils": "npm:^3.29.1"
+    "@react-types/shared": "npm:^3.30.0"
+    "@swc/helpers": "npm:^0.5.0"
+    use-sync-external-store: "npm:^1.4.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+  checksum: 10c0/e87699d572c95fc10e1afa448e2cd9b64f730eba3af2dc2f2e584cf44f72d3db1e87e48c7c8a38dc1fd2618f332a77f06e6337a97ee455f30fd16e47904ea588
+  languageName: node
+  linkType: hard
+
 "@react-aria/listbox@npm:3.14.5":
   version: 3.14.5
   resolution: "@react-aria/listbox@npm:3.14.5"
@@ -1938,6 +1976,25 @@ __metadata:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
     react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
   checksum: 10c0/854b15135636bb4a169ea9c5fcbb874a4f7c46994497fefc73f1e7b6e57482b92cc183b2b0b7aeaf5ad2f11b5187885762cd9a6c203a483bf13edab95b523a39
+  languageName: node
+  linkType: hard
+
+"@react-aria/toast@npm:3.0.4":
+  version: 3.0.4
+  resolution: "@react-aria/toast@npm:3.0.4"
+  dependencies:
+    "@react-aria/i18n": "npm:^3.12.10"
+    "@react-aria/interactions": "npm:^3.25.2"
+    "@react-aria/landmark": "npm:^3.0.4"
+    "@react-aria/utils": "npm:^3.29.1"
+    "@react-stately/toast": "npm:^3.1.1"
+    "@react-types/button": "npm:^3.12.2"
+    "@react-types/shared": "npm:^3.30.0"
+    "@swc/helpers": "npm:^0.5.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+    react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+  checksum: 10c0/4d6fe5582a1ba7b459c904d83b05e04819910c70908e2a697061b2dad4c80c08c4d442e696b56e6bf79bff72a6f14816d49e59da61be28449a67564d0a5aa27a
   languageName: node
   linkType: hard
 
@@ -2187,6 +2244,18 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
   checksum: 10c0/3e80b28817fb631a3a69612beec6ff79930409144e43e9f0bab67f0e1adbdc2644061c6481f1ae2700efb58ad399d6bfe7fa48362c4068341d3150bb94103251
+  languageName: node
+  linkType: hard
+
+"@react-stately/toast@npm:3.1.1, @react-stately/toast@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "@react-stately/toast@npm:3.1.1"
+  dependencies:
+    "@swc/helpers": "npm:^0.5.0"
+    use-sync-external-store: "npm:^1.4.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+  checksum: 10c0/9aa717cb5c07f761be365089ddfca3a43d096d80719b23573ac5032b893ec53d2f59ee064e1c941fe5a5a4a0798051e3db3633157906cea07593fdb6a2972f20
   languageName: node
   linkType: hard
 
@@ -6071,6 +6140,7 @@ __metadata:
     "@heroui/table": "npm:^2.2.19"
     "@heroui/tabs": "npm:^2.2.17"
     "@heroui/theme": "npm:2.4.17"
+    "@heroui/toast": "npm:^2.0.11"
     "@heroui/use-theme": "npm:^2.1.8"
     "@monaco-editor/react": "npm:^4.7.0"
     "@next/eslint-plugin-next": "npm:15.3.3"

@@ -131,11 +131,22 @@ paths:
         - ApiKeyAuth: [ ]
         - { }
   /api-spec.yml:
+    summary: Get API Specification
     get:
-      description: Return the api definition
       responses:
         200:
           description: Schema definition
+  /ui-config:
+    description: UI configuration
+    get:
+      summary: Get the UI configuration
+      responses:
+        200:
+          description: "Get UI configuration"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UIConfig"
 components:
   schemas:
     JsonSchemaInfo:
@@ -153,7 +164,6 @@ components:
           description: Description for the schema as set by the latest version
         latestVersion:
           $ref: "#/components/schemas/VersionParts"
-
     JsonSchemaList:
       type: array
       items:
@@ -208,6 +218,15 @@ components:
         patch:
           type: integer
           description: Semantic patch version
+    UIConfig:
+      type: object
+      additionalProperties: false
+      required:
+        - apiKeyAuthEnabled
+      properties:
+        apiKeyAuthEnabled:
+          type: boolean
+          description: Whether API Key authentication has been enabled
   securitySchemes:
     ApiKey:
       type: http

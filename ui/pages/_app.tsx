@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import { Viewport } from "next";
 import clsx from "clsx";
 import { AppProps } from "next/app";
+import { ToastProvider } from "@heroui/toast";
 
 import { Providers } from "@/styles/providers";
 import { fontSans } from "@/config/fonts";
@@ -33,6 +34,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           <Navbar />
           <main className="container mx-auto pt-1 px-3 flex-grow">
             <Component {...pageProps} />
+            <ToastProvider maxVisibleToasts={2} />
           </main>
         </div>
       </Providers>
