@@ -62,6 +62,12 @@ type JsonSchemaVersion struct {
 // JsonSchemaVersions defines model for JsonSchemaVersions.
 type JsonSchemaVersions = []JsonSchemaVersion
 
+// UIConfig defines model for UIConfig.
+type UIConfig struct {
+	// ApiKeyAuthEnabled Whether API Key authentication has been enabled
+	ApiKeyAuthEnabled bool `json:"apiKeyAuthEnabled"`
+}
+
 // VersionParts Version seperated into its parts
 type VersionParts struct {
 	// Major Semantic major version
@@ -175,6 +181,9 @@ type ClientInterface interface {
 	PostApiSchemaJsonSchemaIdentifierVersionVersionWithBody(ctx context.Context, identifier string, version string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	PostApiSchemaJsonSchemaIdentifierVersionVersion(ctx context.Context, identifier string, version string, body PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetUiConfig request
+	GetUiConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *Client) GetApiSpecYml(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -263,6 +272,18 @@ func (c *Client) PostApiSchemaJsonSchemaIdentifierVersionVersionWithBody(ctx con
 
 func (c *Client) PostApiSchemaJsonSchemaIdentifierVersionVersion(ctx context.Context, identifier string, version string, body PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewPostApiSchemaJsonSchemaIdentifierVersionVersionRequest(c.Server, identifier, version, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetUiConfig(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetUiConfigRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -531,6 +552,33 @@ func NewPostApiSchemaJsonSchemaIdentifierVersionVersionRequestWithBody(server st
 	return req, nil
 }
 
+// NewGetUiConfigRequest generates requests for GetUiConfig
+func NewGetUiConfigRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/ui-config")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 func (c *Client) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
 	for _, r := range c.RequestEditors {
 		if err := r(ctx, req); err != nil {
@@ -596,6 +644,9 @@ type ClientWithResponsesInterface interface {
 	PostApiSchemaJsonSchemaIdentifierVersionVersionWithBodyWithResponse(ctx context.Context, identifier string, version string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*PostApiSchemaJsonSchemaIdentifierVersionVersionResponse, error)
 
 	PostApiSchemaJsonSchemaIdentifierVersionVersionWithResponse(ctx context.Context, identifier string, version string, body PostApiSchemaJsonSchemaIdentifierVersionVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*PostApiSchemaJsonSchemaIdentifierVersionVersionResponse, error)
+
+	// GetUiConfigWithResponse request
+	GetUiConfigWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetUiConfigResponse, error)
 }
 
 type GetApiSpecYmlResponse struct {
@@ -751,6 +802,28 @@ func (r PostApiSchemaJsonSchemaIdentifierVersionVersionResponse) StatusCode() in
 	return 0
 }
 
+type GetUiConfigResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *UIConfig
+}
+
+// Status returns HTTPResponse.Status
+func (r GetUiConfigResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetUiConfigResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 // GetApiSpecYmlWithResponse request returning *GetApiSpecYmlResponse
 func (c *ClientWithResponses) GetApiSpecYmlWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetApiSpecYmlResponse, error) {
 	rsp, err := c.GetApiSpecYml(ctx, reqEditors...)
@@ -820,6 +893,15 @@ func (c *ClientWithResponses) PostApiSchemaJsonSchemaIdentifierVersionVersionWit
 		return nil, err
 	}
 	return ParsePostApiSchemaJsonSchemaIdentifierVersionVersionResponse(rsp)
+}
+
+// GetUiConfigWithResponse request returning *GetUiConfigResponse
+func (c *ClientWithResponses) GetUiConfigWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetUiConfigResponse, error) {
+	rsp, err := c.GetUiConfig(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetUiConfigResponse(rsp)
 }
 
 // ParseGetApiSpecYmlResponse parses an HTTP response from a GetApiSpecYmlWithResponse call
@@ -994,6 +1076,32 @@ func ParsePostApiSchemaJsonSchemaIdentifierVersionVersionResponse(rsp *http.Resp
 	return response, nil
 }
 
+// ParseGetUiConfigResponse parses an HTTP response from a GetUiConfigWithResponse call
+func ParseGetUiConfigResponse(rsp *http.Response) (*GetUiConfigResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetUiConfigResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest UIConfig
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
 
@@ -1017,6 +1125,9 @@ type ServerInterface interface {
 	// Create a new json schema for a version
 	// (POST /api/schema/json-schema/{identifier}/version/{version})
 	PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request, identifier string, version string)
+	// Get the UI configuration
+	// (GET /ui-config)
+	GetUiConfig(w http.ResponseWriter, r *http.Request)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -1214,6 +1325,20 @@ func (siw *ServerInterfaceWrapper) PostApiSchemaJsonSchemaIdentifierVersionVersi
 	handler.ServeHTTP(w, r)
 }
 
+// GetUiConfig operation middleware
+func (siw *ServerInterfaceWrapper) GetUiConfig(w http.ResponseWriter, r *http.Request) {
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.GetUiConfig(w, r)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r)
+}
+
 type UnescapedCookieParamError struct {
 	ParamName string
 	Err       error
@@ -1341,6 +1466,7 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}/latest", wrapper.GetApiSchemaJsonSchemaIdentifierLatest)
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}/version/{version}", wrapper.GetApiSchemaJsonSchemaIdentifierVersionVersion)
 	m.HandleFunc("POST "+options.BaseURL+"/api/schema/json-schema/{identifier}/version/{version}", wrapper.PostApiSchemaJsonSchemaIdentifierVersionVersion)
+	m.HandleFunc("GET "+options.BaseURL+"/ui-config", wrapper.GetUiConfig)
 
 	return m
 }
@@ -1348,23 +1474,25 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
+	"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",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file
