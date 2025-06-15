@@ -70,12 +70,7 @@ jobs:
             curl https://ziglang.org/builds/<<parameters.zig_version>>.tar.xz --output zig.tar.xz
             tar -xf zig.tar.xz
             rm zig.tar.xz
-      - run:
-          name: Set ZIG_PATH
-          command: |
-            export ZIG_PATH="$PWD/.zig/<<parameters.zig_version>>"
-            echo "export ZIG_PATH=$ZIG_PATH" >> "$BASH_ENV"
-            echo "$ZIG_PATH"
+            ln -s <<parameters.zig_version>> current
       - persist_to_workspace:
           root: ./
           paths:
@@ -92,7 +87,7 @@ jobs:
       - run:
           name: Install build dependencies
           command: |
-            sudo ln -s ${ZIG_PATH}/zig /usr/local/bin/zig
+            sudo ln -s .zig/current/zig /usr/local/bin/zig
             sudo apt-get update && sudo apt-get install -y clang
       - go/with-cache:
           steps:
