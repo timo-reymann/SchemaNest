@@ -78,7 +78,7 @@ docker run --rm -it -v $PWD:/workspace:ro -w /workspace  \
     ```yaml
     services:
       registry:
-        image: timoreymann/schemanest-registry:v0.1.2
+        image: timoreymann/schemanest-registry
         command:
           - schema-nest-registry
           - serve-http
