@@ -107,11 +107,9 @@ const JsonSchemaDiffViewer = React.memo(
 export function JsonSchemaLinks({
   identifier,
   version,
-  schema,
 }: Readonly<{
   identifier: string;
   version: string;
-  schema: Partial<JsonSchemaDetails>;
 }>) {
   const hostname = window.location.origin;
 
@@ -177,7 +175,6 @@ export function JsonSchemaLinks({
 
 export function JsonSchemaComparer({
   currentSchema,
-  identifier,
   schemaInfo,
   theme,
   otherSchema,
@@ -190,7 +187,6 @@ export function JsonSchemaComparer({
   otherSchema: Object | null;
   otherVersion: string | undefined;
   onVersionChanged: (version: string) => void;
-  identifier: string;
   schemaInfo: Partial<JsonSchemaDetails>;
   theme: string;
 }>) {
@@ -339,7 +335,6 @@ export default function JsonSchemaVersionPage() {
       content: (
         <JsonSchemaLinks
           identifier={identifier}
-          schema={details}
           version={version}
         />
       ),
@@ -354,7 +349,6 @@ export default function JsonSchemaVersionPage() {
             <JsonSchemaComparer
               currentSchema={schema}
               currentVersion={version}
-              identifier={identifier}
               otherSchema={comparedSchema}
               otherVersion={comparedVersion}
               schemaInfo={details}
