@@ -73,7 +73,9 @@ jobs:
       - run:
           name: Set ZIG_PATH
           command: |
-            echo 'export ZIG_PATH=$PWD/<<parameters.zig_version>>/zig"' >> "$BASH_ENV"
+            export ZIG_PATH="$PWD/<<parameters.zig_version>>/zig"
+            echo "export ZIG_PATH=$ZIG_PATH" >> "$BASH_ENV"
+            echo "$ZIG_PATH"
       - persist_to_workspace:
           root: ./
           paths:
