@@ -29,7 +29,7 @@
             "files": [
               "openapi.yml"
             ],
-            "from": "version: = \"v[0-9.]+\"",
+            "from": "version: \"v[0-9.]+\"",
             "to": "version: \"${nextRelease.version}\"",
             "results": [
               {
