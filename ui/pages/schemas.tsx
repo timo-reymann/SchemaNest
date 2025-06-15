@@ -16,7 +16,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 
 const MAX_PER_PAGE = 25;
 
-function SchemaCard({ schema }: { schema: JsonSchemaInfo }) {
+function SchemaCard({ schema }: Readonly<{ schema: JsonSchemaInfo }>) {
   const [showHelp, setShowHelp] = useState(false);
 
   return (

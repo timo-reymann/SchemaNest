@@ -108,11 +108,11 @@ export function JsonSchemaLinks({
   identifier,
   version,
   schema,
-}: {
+}: Readonly<{
   identifier: string;
   version: string;
   schema: Partial<JsonSchemaDetails>;
-}) {
+}>) {
   const hostname = window.location.origin;
 
   const buildApiLink = (path: string) => `${hostname}/api${path}`;
@@ -184,7 +184,7 @@ export function JsonSchemaComparer({
   otherVersion,
   onVersionChanged,
   currentVersion,
-}: {
+}: Readonly<{
   currentSchema: Object;
   currentVersion: string;
   otherSchema: Object | null;
@@ -193,7 +193,7 @@ export function JsonSchemaComparer({
   identifier: string;
   schemaInfo: Partial<JsonSchemaDetails>;
   theme: string;
-}) {
+}>) {
   return (
     <div>
       <Select
@@ -303,7 +303,7 @@ export default function JsonSchemaVersionPage() {
     (async () => {
       const otherSchema = await fetchSchemaByVersion(
         identifier,
-        comparedVersion!,
+        comparedVersion,
       );
 
       setComparedSchema(otherSchema);

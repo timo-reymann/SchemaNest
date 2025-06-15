@@ -5,10 +5,10 @@ import { useEffect } from "react";
 export default function Error({
   error,
   reset,
-}: {
+}: Readonly<{
   error: Error;
   reset: () => void;
-}) {
+}>) {
   useEffect(() => {
     // Log the error to an error reporting service
     /* eslint-disable no-console */

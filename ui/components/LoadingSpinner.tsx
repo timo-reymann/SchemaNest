@@ -1,7 +1,7 @@
 import { Spinner } from "@heroui/spinner";
 import React from "react";
 
-export default function LoadingSpinner({ label }: { label: string }) {
+export default function LoadingSpinner({ label }: Readonly<{ label: string }>) {
   return (
     <div className="flex h-full w-full">
       <Spinner
