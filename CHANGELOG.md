@@ -1,3 +1,16 @@
+## [0.2.0](https://github.com/timo-reymann/SchemaNest/compare/v0.1.2...v0.2.0) (2025-06-15)
+
+
+### Features
+
+* **api:** Expose ui relevant config ([6f2c0fd](https://github.com/timo-reymann/SchemaNest/commit/6f2c0fdbc9782ad03303a9b03b5bb1693f49a6b8))
+* **ui:** Add schema upload ([ce87afa](https://github.com/timo-reymann/SchemaNest/commit/ce87afa4f99bc6f25a925cd55f9942a1225769ce))
+
+
+### Bug Fixes
+
+* **ui:** Fix active link display ([434a3eb](https://github.com/timo-reymann/SchemaNest/commit/434a3ebb3b399350a7665248f6070a09735cd34a))
+
 ## [0.1.2](https://github.com/timo-reymann/SchemaNest/compare/v0.1.1...v0.1.2) (2025-06-15)
 
 
