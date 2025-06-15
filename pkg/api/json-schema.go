@@ -13,6 +13,8 @@ import (
 	"strings"
 )
 
+const errMsgVersionNotFound = "version not found"
+
 func (s *SchemaNestApi) ListJSONSchemas(w http.ResponseWriter, r *http.Request) {
 	entities, err := s.context.JsonSchemaRepository.List(r.Context())
 	if err != nil {
@@ -67,29 +69,8 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifier(w http.ResponseWriter, 
 }
 
 func (s *SchemaNestApi) PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request, identifier string, version string) {
-	if s.context.Config.EnableUploadAuthentication {
-		authHeader := r.Header.Get("Authorization")
-		if authHeader == "" {
-			SendError(w, http.StatusUnauthorized, "authorization header not set")
-			return
-		}
-
-		headerParts := strings.Split(authHeader, " ")
-		if len(headerParts) != 2 || headerParts[0] != "Bearer" {
-			SendError(w, http.StatusBadRequest, "invalid authorization header")
-			return
-		}
-
-		apiKey, found := s.context.Config.LookupApiKey(headerParts[1])
-		if !found {
-			SendError(w, http.StatusForbidden, "invalid api key")
-			return
-		}
-
-		if !apiKey.IsUsableForSchemaIdentifier(identifier) {
-			SendError(w, http.StatusForbidden, fmt.Sprintf("the api key you provided can not be used to upload JSON schemas with the identifier '%s'", identifier))
-			return
-		}
+	if s.context.Config.EnableUploadAuthentication && !s.isAuthenticated(w, r, identifier) {
+		return
 	}
 
 	v, err := semver.NewVersion(version)
@@ -146,6 +127,32 @@ func (s *SchemaNestApi) PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.R
 	w.WriteHeader(http.StatusCreated)
 }
 
+func (s *SchemaNestApi) isAuthenticated(w http.ResponseWriter, r *http.Request, identifier string) bool {
+	authHeader := r.Header.Get("Authorization")
+	if authHeader == "" {
+		SendError(w, http.StatusUnauthorized, "authorization header not set")
+		return false
+	}
+
+	headerParts := strings.Split(authHeader, " ")
+	if len(headerParts) != 2 || headerParts[0] != "Bearer" {
+		SendError(w, http.StatusBadRequest, "invalid authorization header")
+		return false
+	}
+
+	apiKey, found := s.context.Config.LookupApiKey(headerParts[1])
+	if !found {
+		SendError(w, http.StatusForbidden, "invalid api key")
+		return false
+	}
+
+	if !apiKey.IsUsableForSchemaIdentifier(identifier) {
+		SendError(w, http.StatusForbidden, fmt.Sprintf("the api key you provided can not be used to upload JSON schemas with the identifier '%s'", identifier))
+		return false
+	}
+	return true
+}
+
 func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierChannelChannel(w http.ResponseWriter, r *http.Request, identifier string, channelIdentifier string) {
 	parsedChannel, err := channel.Parse(channelIdentifier)
 	if err != nil {
@@ -161,7 +168,7 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierChannelChannel(w http.Re
 	}
 
 	if entity == nil {
-		SendError(w, http.StatusNotFound, "version not found")
+		SendError(w, http.StatusNotFound, errMsgVersionNotFound)
 		return
 	}
 
@@ -176,7 +183,7 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierLatest(w http.ResponseWr
 	}
 
 	if entity == nil {
-		SendError(w, http.StatusNotFound, "version not found")
+		SendError(w, http.StatusNotFound, errMsgVersionNotFound)
 		return
 	}
 
@@ -197,7 +204,7 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierVersionVersion(w http.Re
 	}
 
 	if entity == nil {
-		SendError(w, http.StatusNotFound, "version not found")
+		SendError(w, http.StatusNotFound, errMsgVersionNotFound)
 		return
 	}
 
