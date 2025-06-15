@@ -1,3 +1,11 @@
+## [0.1.2](https://github.com/timo-reymann/SchemaNest/compare/v0.1.1...v0.1.2) (2025-06-15)
+
+
+### Bug Fixes
+
+* Fix publish ([fadd099](https://github.com/timo-reymann/SchemaNest/commit/fadd09986b6efc9a1d129d4053a8ee8d4a52d0df))
+* Fix sonar findings in API ([f2b4d47](https://github.com/timo-reymann/SchemaNest/commit/f2b4d4734bff98f0fd37f29ce252bc8a0d550dde))
+
 ## [0.1.1](https://github.com/timo-reymann/SchemaNest/compare/v0.1.0...v0.1.1) (2025-06-15)
 
 
