@@ -20,7 +20,7 @@ function SchemaCard({ schema }: Readonly<{ schema: JsonSchemaInfo }>) {
   const [showHelp, setShowHelp] = useState(false);
 
   return (
-    <Card className="max-w[340px]">
+    <Card className="max-w[500px] h-[180px]">
       <CardHeader className="justify-between">
         <div className="flex gap-5">
           <JsonSchemaIcon size={56} />
@@ -164,7 +164,7 @@ export default function SchemasPage() {
           onValueChange={updateSearch}
         />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 p-4">
         {results.length === 0 && (
           <div className="col col-span-full text-center">No results</div>
         )}
