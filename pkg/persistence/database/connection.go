@@ -46,10 +46,18 @@ func (dbc *DBConnection) MigrateUp() error {
 	return err
 }
 
+func (dbc *DBConnection) prepareQuery(query string) string {
+	if dbc.ConnType == Postgres {
+		return ReplacePlaceholders(query)
+	}
+
+	return query
+}
+
 // Query the database and map the results using the provided rowMapper function.
 // The rowMapper function gets the sql.Rows#Scan method as an argument, if it returns false, the loop will break, the same if it returns an error.
 func (dbc *DBConnection) Query(ctx context.Context, rowMapper func(scan func(dest ...any) error) (bool, error), sql string, parameters ...any) error {
-	q, err := dbc.sql.QueryContext(ctx, sql, parameters...)
+	q, err := dbc.sql.QueryContext(ctx, dbc.prepareQuery(sql), parameters...)
 
 	if err != nil {
 		return errors.Join(errors.New("failed to run query"), err)
@@ -77,7 +85,7 @@ func (dbc *DBConnection) Query(ctx context.Context, rowMapper func(scan func(des
 }
 
 func (dbc *DBConnection) Insert(sql string, parameters ...any) error {
-	stmt, err := dbc.sql.Prepare(sql)
+	stmt, err := dbc.sql.Prepare(dbc.prepareQuery(sql))
 	if err != nil {
 		return err
 	}
