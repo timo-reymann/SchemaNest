@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { useBoundStore } from "@/store/main";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { createHead } from "@/util/layoutHelpers";
 
 const semverRegex = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/;
 
@@ -65,48 +66,55 @@ export default function Upload() {
   };
 
   return (
-    <Form className="w-full" onSubmit={upload}>
-      {config?.apiKeyAuthEnabled && (
+    <>
+      {createHead("Upload")}
+      <Form className="w-full" onSubmit={upload}>
+        {config?.apiKeyAuthEnabled && (
+          <Input
+            isRequired
+            errorMessage="Please enter a API key"
+            label="API-Key"
+            labelPlacement="outside"
+            name="apiKey"
+            placeholder="API-Key for uploading"
+            type="password"
+          />
+        )}
         <Input
           isRequired
-          errorMessage="Please enter a API key"
-          label="API-Key"
+          errorMessage="Please enter a valid identifier"
+          label="Identifier"
           labelPlacement="outside"
-          name="apiKey"
-          placeholder="API-Key for uploading"
-          type="password"
+          name="identifier"
+          placeholder="Identifier for the schema"
+          type="text"
         />
-      )}
-      <Input
-        isRequired
-        errorMessage="Please enter a valid identifier"
-        label="Identifier"
-        labelPlacement="outside"
-        name="identifier"
-        placeholder="Identifier for the schema"
-        type="text"
-      />
-      <Input
-        isRequired
-        label="Version"
-        labelPlacement="outside"
-        name="version"
-        placeholder="x.y.z"
-        type="text"
-        validate={validateVersion}
-      />
-      <Input
-        isRequired
-        errorMessage="Schema file is required for upload"
-        label="Schema file"
-        labelPlacement="outside"
-        name="schema"
-        placeholder="Schema file"
-        type="file"
-      />
-      <Button color="primary" isLoading={status === "uploading"} type="submit">
-        Upload
-      </Button>
-    </Form>
+        <Input
+          isRequired
+          label="Version"
+          labelPlacement="outside"
+          name="version"
+          placeholder="x.y.z"
+          type="text"
+          validate={validateVersion}
+        />
+        <Input
+          isRequired
+          errorMessage="Schema file is required for upload"
+          label="Schema file"
+          labelPlacement="outside"
+          name="schema"
+          placeholder="Schema file"
+          type="file"
+        />
+        <Button
+          color="primary"
+          isLoading={status === "uploading"}
+          type="submit"
+        >
+          Upload
+        </Button>
+      </Form>
+    </>
   );
 }
