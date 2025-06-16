@@ -19,8 +19,6 @@ SchemaNest
     Where schemas grow, thrive, and scale with your team.
 </p>
 
-> This project is under active development.
-
 ## Features
 
 - Supports uploading and versioning JSON schemas to a central repository.
