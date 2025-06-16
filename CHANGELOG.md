@@ -1,3 +1,10 @@
+## [0.2.2](https://github.com/timo-reymann/SchemaNest/compare/v0.2.1...v0.2.2) (2025-06-16)
+
+
+### Bug Fixes
+
+* **api:** Fix postgres placeholders ([d9c807a](https://github.com/timo-reymann/SchemaNest/commit/d9c807a403fa7bc8adf4fb5e3c8067afd1163bc4))
+
 ## [0.2.1](https://github.com/timo-reymann/SchemaNest/compare/v0.2.0...v0.2.1) (2025-06-16)
 
 
