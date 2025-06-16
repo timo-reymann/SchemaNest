@@ -1,3 +1,11 @@
+## [0.2.1](https://github.com/timo-reymann/SchemaNest/compare/v0.2.0...v0.2.1) (2025-06-16)
+
+
+### Bug Fixes
+
+* **ui:** Add upload title ([12a1764](https://github.com/timo-reymann/SchemaNest/commit/12a17649cc1917ef89d4cdcc54d8307682f57c1d))
+* **ui:** Fix grid height with different description lengths ([af86261](https://github.com/timo-reymann/SchemaNest/commit/af86261a0d3cdad20d71b4becca87d88b5c74a07))
+
 ## [0.2.0](https://github.com/timo-reymann/SchemaNest/compare/v0.1.2...v0.2.0) (2025-06-15)
 
 
