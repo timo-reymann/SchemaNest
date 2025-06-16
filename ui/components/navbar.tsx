@@ -15,16 +15,16 @@ import { GithubIcon, Logo } from "@/components/icons";
 
 const navItems = [
   {
-    label: "Overview",
+    label: "Schemas",
     href: "/schemas",
-  },
-  {
-    label: "API Documentation",
-    href: "/api-docs",
   },
   {
     label: "Upload",
     href: "/upload",
+  },
+  {
+    label: "API Documentation",
+    href: "/api-docs",
   },
 ];
 
