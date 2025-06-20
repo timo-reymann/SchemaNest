@@ -1,3 +1,10 @@
+## [0.2.4](https://github.com/timo-reymann/SchemaNest/compare/v0.2.3...v0.2.4) (2025-06-20)
+
+
+### Bug Fixes
+
+* **deps:** update hero ui ([79d1c47](https://github.com/timo-reymann/SchemaNest/commit/79d1c4795e3677ee0bbd1960a947ea22a956a84b))
+
 ## [0.2.3](https://github.com/timo-reymann/SchemaNest/compare/v0.2.2...v0.2.3) (2025-06-19)
 
 
