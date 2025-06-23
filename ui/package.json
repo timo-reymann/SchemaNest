@@ -36,7 +36,7 @@
     "@react-aria/visually-hidden": "3.8.25",
     "@tailwindcss/postcss": "^4.1.8",
     "clsx": "2.1.1",
-    "framer-motion": "12.18.1",
+    "framer-motion": "12.19.1",
     "intl-messageformat": "10.7.16",
     "mobx": "^6.13.7",
     "next": "15.3.4",
