@@ -1,3 +1,10 @@
+## [0.2.6](https://github.com/timo-reymann/SchemaNest/compare/v0.2.5...v0.2.6) (2025-06-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency zustand to v5.0.6 ([68345c8](https://github.com/timo-reymann/SchemaNest/commit/68345c81d259919d8d4c8c125984cdfefb0c3f6a))
+
 ## [0.2.5](https://github.com/timo-reymann/SchemaNest/compare/v0.2.4...v0.2.5) (2025-06-24)
 
 
