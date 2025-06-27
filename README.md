@@ -24,6 +24,7 @@ SchemaNest
 - Supports uploading and versioning JSON schemas to a central repository.
 - Provides a web interface for browsing and searching schemas.
 - CLI tool for uploading schemas from the command line.
+- Accessible by default for screen-readers and visually impaired people.
 
 ## Requirements
 
