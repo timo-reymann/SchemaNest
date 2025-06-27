@@ -1,3 +1,15 @@
+## [0.3.0](https://github.com/timo-reymann/SchemaNest/compare/v0.2.8...v0.3.0) (2025-06-27)
+
+
+### Features
+
+* Add set up guide for tools ([adc51b1](https://github.com/timo-reymann/SchemaNest/commit/adc51b1f256be808c2b045d6fece435f1e3be1f2))
+
+
+### Bug Fixes
+
+* Fix import of themes ([0b1eb9b](https://github.com/timo-reymann/SchemaNest/commit/0b1eb9b7b409fbf4b3fd07ad0d855d44310a7262))
+
 ## [0.2.8](https://github.com/timo-reymann/SchemaNest/compare/v0.2.7...v0.2.8) (2025-06-27)
 
 
