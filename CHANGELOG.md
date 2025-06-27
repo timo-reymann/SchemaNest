@@ -1,3 +1,10 @@
+## [0.2.7](https://github.com/timo-reymann/SchemaNest/compare/v0.2.6...v0.2.7) (2025-06-27)
+
+
+### Bug Fixes
+
+* **ui:** Fix mobile navigation ([4cad7a4](https://github.com/timo-reymann/SchemaNest/commit/4cad7a4495ca8835d5eb51932dd463c7e169e5e0))
+
 ## [0.2.6](https://github.com/timo-reymann/SchemaNest/compare/v0.2.5...v0.2.6) (2025-06-26)
 
 
