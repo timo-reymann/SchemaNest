@@ -3,11 +3,10 @@ import { Snippet } from "@heroui/snippet";
 import React from "react";
 // @ts-ignore
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import {
-  dracula as codeDark,
-  oneLight as codeLight,
-  // @ts-ignore
-} from "react-syntax-highlighter/dist/esm/styles/prism";
+// @ts-ignore
+import {default as codeDark} from  "react-syntax-highlighter/dist/esm/styles/prism/dracula"
+// @ts-ignore
+import {default as codeLight} from "react-syntax-highlighter/dist/esm/styles/prism/one-light"
 
 export function CodeHighlight({
   code,
