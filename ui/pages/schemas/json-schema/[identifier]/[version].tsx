@@ -1,7 +1,6 @@
 "use client";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { DiffEditor, Editor } from "@monaco-editor/react";
 import { useTheme } from "next-themes";
 import { Code } from "@heroui/code";
 import { Tab, Tabs } from "@heroui/tabs";
@@ -12,17 +11,8 @@ import {
   LinkIcon,
 } from "@heroui/shared-icons";
 import { Chip } from "@heroui/chip";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@heroui/table";
-import { Snippet } from "@heroui/snippet";
-import { Select, SelectItem } from "@heroui/select";
 import NextLink from "next/link";
+import GearIcon from "next/dist/client/components/react-dev-overlay/ui/icons/gear-icon";
 
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useBoundStore } from "@/store/main";
@@ -30,202 +20,10 @@ import { title } from "@/components/primitives";
 import { createHead } from "@/util/layoutHelpers";
 import { JsonSchemaDetails } from "@/store/jsonSchemas.slice";
 import { DiffIcon } from "@/components/icons";
-
-const JsonSchemaViewer = React.memo(
-  function JsonSchemaViewer({
-    theme,
-    content,
-    schema,
-  }: {
-    theme: string;
-    content: Object;
-    schema?: Object;
-  }) {
-    return (
-      <Editor
-        beforeMount={(monaco) => {
-          monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-            validate: true,
-            schemas: [
-              {
-                uri: "in-memory",
-                fileMatch: ["*"],
-                schema,
-              },
-            ],
-          });
-        }}
-        defaultLanguage="json"
-        height="50vh"
-        options={{
-          readOnly: schema === undefined,
-          contextmenu: false,
-        }}
-        theme={theme === "dark" ? "vs-dark" : "vs-light"}
-        value={JSON.stringify(content, null, "  ")}
-      />
-    );
-  },
-  (prev, next) => prev.content === next.content && prev.theme == next.theme,
-);
-
-const JsonSchemaDiffViewer = React.memo(
-  function JsonSchemaDiffViewer({
-    theme,
-    currentSchema,
-    otherSchema,
-  }: {
-    theme: string;
-    currentSchema: Object;
-    otherSchema: Object;
-  }) {
-    const modified = JSON.stringify(otherSchema, null, 2);
-    const original = JSON.stringify(currentSchema, null, 2);
-
-    return (
-      <DiffEditor
-        height="50vh"
-        keepCurrentModifiedModel={true}
-        keepCurrentOriginalModel={true}
-        language="json"
-        modified={modified}
-        options={{
-          readOnly: true,
-          contextmenu: false,
-        }}
-        original={original}
-        theme={theme === "dark" ? "vs-dark" : "vs-light"}
-      />
-    );
-  },
-  (prev, next) =>
-    prev.theme === next.theme &&
-    prev.currentSchema === next.currentSchema &&
-    prev.otherSchema === next.otherSchema,
-);
-
-export function JsonSchemaLinks({
-  identifier,
-  version,
-}: Readonly<{
-  identifier: string;
-  version: string;
-}>) {
-  const hostname = window.location.origin;
-
-  const buildApiLink = (path: string) => `${hostname}/api${path}`;
-  const [major, minor] = version.split(".");
-
-  const links = [
-    {
-      label: "Get JSON schema for the currently selected version",
-      method: "GET",
-      url: buildApiLink(`/schema/json-schema/${identifier}/version/${version}`),
-    },
-    {
-      label: "Get latest JSON schema version",
-      method: "GET",
-      url: buildApiLink(`/schema/json-schema/${identifier}/latest`),
-    },
-    {
-      label: "Get schema for latest minor for current version",
-      method: "GET",
-      url: buildApiLink(`/schema/json-schema/${identifier}/channel/${major}.x`),
-    },
-    {
-      label: "Get schema for latest patch for current version",
-      method: "GET",
-      url: buildApiLink(
-        `/schema/json-schema/${identifier}/channel/${major}.${minor}.x`,
-      ),
-    },
-    {
-      label: "Create new schema definition for a given version",
-      method: "POST",
-      url: buildApiLink(`/schema/json-schema/${identifier}/version/{version}`),
-    },
-  ];
-
-  return (
-    <Table isStriped aria-label="Links for schema">
-      <TableHeader>
-        <TableColumn minWidth={200}>Operation</TableColumn>
-        <TableColumn minWidth={200}>Endpoint</TableColumn>
-      </TableHeader>
-      <TableBody>
-        {links.map((l) => (
-          <TableRow key={l.label}>
-            <TableCell>{l.label}</TableCell>
-            <TableCell>
-              <div className="flex gap-2 items-center">
-                <Chip color={l.method === "GET" ? "primary" : "secondary"}>
-                  {l.method}
-                </Chip>
-                <Snippet hideSymbol className="w-full">
-                  <span>{l.url}</span>
-                </Snippet>
-              </div>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  );
-}
-
-export function JsonSchemaComparer({
-  currentSchema,
-  schemaInfo,
-  theme,
-  otherSchema,
-  otherVersion,
-  onVersionChanged,
-  currentVersion,
-}: Readonly<{
-  currentSchema: Object;
-  currentVersion: string;
-  otherSchema: Object | null;
-  otherVersion: string | undefined;
-  onVersionChanged: (version: string) => void;
-  schemaInfo: Partial<JsonSchemaDetails>;
-  theme: string;
-}>) {
-  return (
-    <div>
-      <Select
-        isVirtualized
-        className="mb-3"
-        label="Select version to compare against"
-        placeholder="..."
-        selectedKeys={otherVersion ? [otherVersion] : []}
-        onSelectionChange={(k) => onVersionChanged(k.currentKey!)}
-      >
-        {schemaInfo
-          .versions!.filter((v) => v.version !== currentVersion)
-          .map((version) => (
-            <SelectItem key={version.version}>{version.version}</SelectItem>
-          ))}
-      </Select>
-      {otherSchema && otherVersion ? (
-        <>
-          <div className="flex justify-around mt-3 mb-1">
-            <div className="text-center font-light">{currentVersion}</div>
-            <div className="text-center font-light">{otherVersion}</div>
-          </div>
-          <JsonSchemaDiffViewer
-            currentSchema={currentSchema}
-            otherSchema={otherSchema}
-            theme={theme}
-          />
-        </>
-      ) : (
-        <p className="text-center">
-          Please select a version to compare the schema with.
-        </p>
-      )}
-    </div>
-  );
-}
+import { JsonSchemaSetupInstructions } from "@/components/json-schema/JsonSchemaSetupInstructions";
+import { JsonSchemaViewer } from "@/components/json-schema/JsonSchemaViewer";
+import { JsonSchemaLinks } from "@/components/json-schema/JsonSchemaLinks";
+import { JsonSchemaComparer } from "@/components/json-schema/JsonSchemaComparer";
 
 export default function JsonSchemaVersionPage() {
   const { theme } = useTheme();
@@ -363,6 +161,18 @@ export default function JsonSchemaVersionPage() {
       id: "validate-document",
       icon: <CheckIcon fontSize={16} />,
       content: <JsonSchemaViewer content={{}} schema={schema} theme={theme!} />,
+    },
+    {
+      title: "Tool Setup",
+      id: "setup",
+      icon: <GearIcon />,
+      content: (
+        <JsonSchemaSetupInstructions
+          identifier={identifier}
+          schema={details}
+          version={version}
+        />
+      ),
     },
     {
       title: "History",

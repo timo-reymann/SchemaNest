@@ -1,20 +1,35 @@
-import {useTheme} from "next-themes";
-import {Snippet} from "@heroui/snippet";
+import { useTheme } from "next-themes";
+import { Snippet } from "@heroui/snippet";
 import React from "react";
 // @ts-ignore
-import SyntaxHighlighter from "react-syntax-highlighter"
-// @ts-ignore
-import {darcula, idea} from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import {
+  dracula as codeDark,
+  oneLight as codeLight,
+  // @ts-ignore
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 
-export function CodeHighlight({code, language}: Readonly<{ code: string, language: string }>) {
-    const theme = useTheme()
-    const style = theme.theme == "light" ? idea : darcula
+export function CodeHighlight({
+  code,
+  language,
+}: Readonly<{ code: string; language: string }>) {
+  const theme = useTheme();
+  const style = theme.theme == "light" ? codeLight : codeDark;
 
-    return <Snippet style={{background: style.hljs.background}}
-                    hideSymbol={true}>
-        <SyntaxHighlighter language={language}
-                           style={theme.theme == "light" ? idea : darcula}>
-            {code}
-        </SyntaxHighlighter>
+  return (
+    <Snippet
+      className="pt-0 pb-0 pl-0 pr-0"
+      hideSymbol={true}
+      style={{ background: style['pre[class*="language-"]'].background }}
+    >
+      <SyntaxHighlighter
+        className="lg:max-w-[500px] xl:max-w-[640px] sm:max-w-[500px] p-0"
+        language={language}
+        style={style}
+        wrapLongLines={true}
+      >
+        {code}
+      </SyntaxHighlighter>
     </Snippet>
+  );
 }
