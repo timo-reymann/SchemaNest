@@ -1,3 +1,10 @@
+## [0.2.8](https://github.com/timo-reymann/SchemaNest/compare/v0.2.7...v0.2.8) (2025-06-27)
+
+
+### Bug Fixes
+
+* **ui:** Disable dark reader ([eca449f](https://github.com/timo-reymann/SchemaNest/commit/eca449f15e10969e836048ef2ecb75e893e8f2b0))
+
 ## [0.2.7](https://github.com/timo-reymann/SchemaNest/compare/v0.2.6...v0.2.7) (2025-06-27)
 
 
