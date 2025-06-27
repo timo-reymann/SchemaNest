@@ -9,6 +9,7 @@ export default function Document() {
             <Head>
                 <link href="/favicon.ico" rel="icon"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta name="darkreader-lock"/>
             </Head>
             <body
                 className={clsx(
