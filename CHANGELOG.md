@@ -1,3 +1,10 @@
+## [0.5.0](https://github.com/timo-reymann/SchemaNest/compare/v0.4.0...v0.5.0) (2025-06-30)
+
+
+### Features
+
+* **api:** Include error message for invalid json schema upload ([998aff5](https://github.com/timo-reymann/SchemaNest/commit/998aff50c03e55ea5479660d2be3bba5b2375dbf))
+
 ## [0.4.0](https://github.com/timo-reymann/SchemaNest/compare/v0.3.1...v0.4.0) (2025-06-30)
 
 
