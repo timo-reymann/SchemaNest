@@ -1,3 +1,10 @@
+## [0.7.0](https://github.com/timo-reymann/SchemaNest/compare/v0.6.0...v0.7.0) (2025-06-30)
+
+
+### Features
+
+* **ui:** Add tool icons for set up instructions ([38643a7](https://github.com/timo-reymann/SchemaNest/commit/38643a75ec23b166f08279d066554ce6903961d9))
+
 ## [0.6.0](https://github.com/timo-reymann/SchemaNest/compare/v0.5.0...v0.6.0) (2025-06-30)
 
 
