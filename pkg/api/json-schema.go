@@ -88,7 +88,7 @@ func (s *SchemaNestApi) PostApiSchemaJsonSchemaIdentifierVersionVersion(w http.R
 	decoded := map[string]any{}
 	err = json.NewDecoder(bytes.NewBuffer(raw)).Decode(&decoded)
 	if err != nil {
-		SendError(w, http.StatusBadRequest, "invalid JSON schema")
+		SendError(w, http.StatusBadRequest, "invalid JSON schema: "+err.Error())
 		return
 	}
 
