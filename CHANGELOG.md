@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/timo-reymann/SchemaNest/compare/v0.3.0...v0.3.1) (2025-06-30)
+
+
+### Bug Fixes
+
+* **cli:** Handle errors with schema upload to due server error ([8690a20](https://github.com/timo-reymann/SchemaNest/commit/8690a2003d28dc0323aa969499cde220655f5750))
+
 ## [0.3.0](https://github.com/timo-reymann/SchemaNest/compare/v0.2.8...v0.3.0) (2025-06-27)
 
 
