@@ -1,6 +1,7 @@
 package client
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"github.com/timo-reymann/SchemaNest/pkg/api"
@@ -28,7 +29,7 @@ func NewClient(baseUrl string, apiKey string) (*Client, error) {
 }
 
 func (c *Client) UploadJsonSchema(identifier, version, localPath string) error {
-	file, err := os.Open(localPath)
+	content, err := os.ReadFile(localPath)
 	if err != nil {
 		return fmt.Errorf("failed to open file %s: %s", localPath, err)
 	}
@@ -38,7 +39,7 @@ func (c *Client) UploadJsonSchema(identifier, version, localPath string) error {
 		identifier,
 		version,
 		"application/json",
-		file,
+		bytes.NewBuffer(content),
 		func(ctx context.Context, req *http.Request) error {
 			if c.apiKey != "" {
 				req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.apiKey))
