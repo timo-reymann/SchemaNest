@@ -52,7 +52,10 @@ func (c *Client) UploadJsonSchema(identifier, version, localPath string) error {
 	}
 
 	if res.StatusCode() != http.StatusCreated {
-		return fmt.Errorf("failed to upload file: %s", res.JSON409.Error)
+		if res.StatusCode() == http.StatusConflict {
+			return fmt.Errorf("failed to upload file: %s", res.JSON409.Error)
+		}
+		return fmt.Errorf("failed to upload file: %s", res.Body)
 	}
 	return nil
 }
