@@ -176,7 +176,17 @@ export default function JsonSchemaVersionPage() {
       title: "Validate document",
       id: "validate-document",
       icon: <CheckIcon fontSize={16} />,
-      content: <JsonSchemaViewer content={{}} schema={schema} theme={theme!} />,
+      content: (
+        <>
+          <p className="mb-2">
+            Below you can find an editor which you can use to paste JSON or
+            write from scratch and get validation inline.
+            <br />
+            To check a finding hover over the yellow underlined characters.
+          </p>
+          <JsonSchemaViewer content={{}} schema={schema} theme={theme!} />
+        </>
+      ),
     },
     {
       title: "Tool Setup",

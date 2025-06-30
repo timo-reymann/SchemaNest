@@ -13,12 +13,6 @@ export const JsonSchemaViewer = React.memo(
   }) {
     return (
       <>
-        <p className="mb-2">
-          Below you can find an editor which you can use to paste JSON or write
-          from scratch and get validation inline.
-          <br />
-          To check a finding hover over the yellow underlined characters.
-        </p>
         <Editor
           beforeMount={(monaco) => {
             monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
