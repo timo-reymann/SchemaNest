@@ -37,6 +37,7 @@ export default function JsonSchemaVersionPage() {
   const fetchSchemaDetailsByVersion = useBoundStore(
     (s) => s.fetchSchemaDetailsByVersion,
   );
+  const fetchLatestVersion = useBoundStore((s) => s.fetchLatestVersion);
   const loading = useBoundStore((s) => s.schemaLoading);
   const [tab, setTab] = useState("view");
   const [schema, setSchema] = useState<Object>({});
@@ -49,6 +50,21 @@ export default function JsonSchemaVersionPage() {
     if (!router.isReady || !identifier || !version) {
       return;
     }
+
+    if (version === "latest") {
+      (async () => {
+        try {
+          const latest = await fetchLatestVersion(identifier);
+
+          await router.push(
+            `/schemas/json-schema/${encodeURIComponent(identifier)}/${latest.major}.${latest.minor}.${latest.patch}`,
+          );
+        } catch {
+          setExists(false);
+        }
+      })();
+    }
+
     setComparedSchema(null);
     setComparedVersion(undefined);
     (async () => {

@@ -2,14 +2,16 @@ import { StateCreator } from "zustand/vanilla";
 
 import { getJSON, postJSON } from "@/util/fetch";
 
+export interface JsonSchemaVersion {
+  major: number;
+  minor: number;
+  patch: number;
+}
+
 export interface JsonSchemaInfo {
   identifier: string;
   description: string | undefined;
-  latestVersion: {
-    major: number;
-    minor: number;
-    patch: number;
-  };
+  latestVersion: JsonSchemaVersion;
 }
 
 export interface JsonSchemaDetails {
@@ -44,6 +46,7 @@ export interface JsonSchemasSlice {
   fetchSchemaDetailsByVersion: (
     identifier: string,
   ) => Promise<JsonSchemaDetails>;
+  fetchLatestVersion: (identifier: string) => Promise<JsonSchemaVersion>;
 
   uploadSchema(input: {
     apiKey: string | undefined;
@@ -108,6 +111,26 @@ export const createJsonSchemaSlice: StateCreator<JsonSchemasSlice> = (
       }
 
       return res as Object;
+    } finally {
+      set({
+        schemaLoading: false,
+      });
+    }
+  },
+  fetchLatestVersion: async (identifier: string) => {
+    set({
+      schemaLoading: true,
+    });
+    try {
+      const res = await getJSON<JsonSchemaVersion & Error>(
+        `/api/schema/json-schema/${encodeURIComponent(identifier)}/latest-version`,
+      );
+
+      if (res.error) {
+        throw res.error;
+      }
+
+      return res as JsonSchemaVersion;
     } finally {
       set({
         schemaLoading: false,

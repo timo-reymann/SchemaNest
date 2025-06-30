@@ -4,9 +4,9 @@ import React from "react";
 // @ts-ignore
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // @ts-ignore
-import {default as codeDark} from  "react-syntax-highlighter/dist/esm/styles/prism/dracula"
+import { default as codeDark } from "react-syntax-highlighter/dist/esm/styles/prism/dracula";
 // @ts-ignore
-import {default as codeLight} from "react-syntax-highlighter/dist/esm/styles/prism/one-light"
+import { default as codeLight } from "react-syntax-highlighter/dist/esm/styles/prism/one-light";
 
 export function CodeHighlight({
   code,
