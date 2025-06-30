@@ -1,6 +1,8 @@
 import { Code } from "@heroui/code";
 import { Accordion, AccordionItem } from "@heroui/accordion";
 import React from "react";
+import { VscVscode } from "react-icons/vsc";
+import { SiIntellijidea, SiPrecommit } from "react-icons/si";
 
 import { CodeHighlight } from "@/components/CodeHighlight";
 import { JsonSchemaDetails } from "@/store/jsonSchemas.slice";
@@ -58,6 +60,7 @@ export function JsonSchemaSetupInstructions({
       <Accordion>
         <AccordionItem
           key="idea"
+          startContent={<SiIntellijidea size={32} />}
           subtitle="Using editor settings to get completion and validation in your favorite IDE"
           title="IntellIJ IDEA IDEs"
         >
@@ -118,6 +121,7 @@ export function JsonSchemaSetupInstructions({
         </AccordionItem>
         <AccordionItem
           key="vscode"
+          startContent={<VscVscode color="#0089d2" size={32} />}
           subtitle="Using editor settings to get completion and validation"
           title="Visual Studio Code"
         >
@@ -162,6 +166,7 @@ export function JsonSchemaSetupInstructions({
         </AccordionItem>
         <AccordionItem
           key="pre-commit"
+          startContent={<SiPrecommit color="fab040" size={32} />}
           subtitle="Validate JSON and YAML files before commiting"
           title="pre-commit"
         >
