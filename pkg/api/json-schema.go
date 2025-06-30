@@ -190,6 +190,20 @@ func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierLatest(w http.ResponseWr
 	_ = sendRawJSON(w, entity.Content)
 }
 
+func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierLatestVersion(w http.ResponseWriter, r *http.Request, identifier string) {
+	entity, err := s.context.JsonSchemaVersionRepository.GetLatestVersion(r.Context(), identifier)
+	if entity == nil || err != nil {
+		SendError(w, http.StatusNotFound, errMsgVersionNotFound)
+		return
+	}
+
+	_ = sendJSON(w, VersionParts{
+		Major: int(entity.VersionMajor),
+		Minor: int(entity.VersionMinor),
+		Patch: int(entity.VersionPatch),
+	})
+}
+
 func (s *SchemaNestApi) GetApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request, identifier string, version string) {
 	semver, err := semver.NewVersion(version)
 	if err != nil || semver.Metadata() != "" {

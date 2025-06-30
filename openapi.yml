@@ -53,6 +53,22 @@ paths:
                 type: object
         '404':
           description: "JSON Schema with identifier not found"
+  /api/schema/json-schema/{identifier}/latest-version:
+    get:
+      summary: Get the version of the latest JSON Schema
+      parameters:
+        - in: path
+          name: identifier
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Latest JSON schema version
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VersionParts"
   /api/schema/json-schema/{identifier}/channel/{channel}:
     get:
       summary: Get latest version of a JSON schema for a channel

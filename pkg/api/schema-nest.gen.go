@@ -174,6 +174,9 @@ type ClientInterface interface {
 	// GetApiSchemaJsonSchemaIdentifierLatest request
 	GetApiSchemaJsonSchemaIdentifierLatest(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GetApiSchemaJsonSchemaIdentifierLatestVersion request
+	GetApiSchemaJsonSchemaIdentifierLatestVersion(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GetApiSchemaJsonSchemaIdentifierVersionVersion request
 	GetApiSchemaJsonSchemaIdentifierVersionVersion(ctx context.Context, identifier string, version string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -236,6 +239,18 @@ func (c *Client) GetApiSchemaJsonSchemaIdentifierChannelChannel(ctx context.Cont
 
 func (c *Client) GetApiSchemaJsonSchemaIdentifierLatest(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetApiSchemaJsonSchemaIdentifierLatestRequest(c.Server, identifier)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetApiSchemaJsonSchemaIdentifierLatestVersion(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetApiSchemaJsonSchemaIdentifierLatestVersionRequest(c.Server, identifier)
 	if err != nil {
 		return nil, err
 	}
@@ -457,6 +472,40 @@ func NewGetApiSchemaJsonSchemaIdentifierLatestRequest(server string, identifier 
 	return req, nil
 }
 
+// NewGetApiSchemaJsonSchemaIdentifierLatestVersionRequest generates requests for GetApiSchemaJsonSchemaIdentifierLatestVersion
+func NewGetApiSchemaJsonSchemaIdentifierLatestVersionRequest(server string, identifier string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "identifier", runtime.ParamLocationPath, identifier)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/schema/json-schema/%s/latest-version", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewGetApiSchemaJsonSchemaIdentifierVersionVersionRequest generates requests for GetApiSchemaJsonSchemaIdentifierVersionVersion
 func NewGetApiSchemaJsonSchemaIdentifierVersionVersionRequest(server string, identifier string, version string) (*http.Request, error) {
 	var err error
@@ -637,6 +686,9 @@ type ClientWithResponsesInterface interface {
 	// GetApiSchemaJsonSchemaIdentifierLatestWithResponse request
 	GetApiSchemaJsonSchemaIdentifierLatestWithResponse(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*GetApiSchemaJsonSchemaIdentifierLatestResponse, error)
 
+	// GetApiSchemaJsonSchemaIdentifierLatestVersionWithResponse request
+	GetApiSchemaJsonSchemaIdentifierLatestVersionWithResponse(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*GetApiSchemaJsonSchemaIdentifierLatestVersionResponse, error)
+
 	// GetApiSchemaJsonSchemaIdentifierVersionVersionWithResponse request
 	GetApiSchemaJsonSchemaIdentifierVersionVersionWithResponse(ctx context.Context, identifier string, version string, reqEditors ...RequestEditorFn) (*GetApiSchemaJsonSchemaIdentifierVersionVersionResponse, error)
 
@@ -758,6 +810,28 @@ func (r GetApiSchemaJsonSchemaIdentifierLatestResponse) StatusCode() int {
 	return 0
 }
 
+type GetApiSchemaJsonSchemaIdentifierLatestVersionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *VersionParts
+}
+
+// Status returns HTTPResponse.Status
+func (r GetApiSchemaJsonSchemaIdentifierLatestVersionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetApiSchemaJsonSchemaIdentifierLatestVersionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type GetApiSchemaJsonSchemaIdentifierVersionVersionResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -867,6 +941,15 @@ func (c *ClientWithResponses) GetApiSchemaJsonSchemaIdentifierLatestWithResponse
 		return nil, err
 	}
 	return ParseGetApiSchemaJsonSchemaIdentifierLatestResponse(rsp)
+}
+
+// GetApiSchemaJsonSchemaIdentifierLatestVersionWithResponse request returning *GetApiSchemaJsonSchemaIdentifierLatestVersionResponse
+func (c *ClientWithResponses) GetApiSchemaJsonSchemaIdentifierLatestVersionWithResponse(ctx context.Context, identifier string, reqEditors ...RequestEditorFn) (*GetApiSchemaJsonSchemaIdentifierLatestVersionResponse, error) {
+	rsp, err := c.GetApiSchemaJsonSchemaIdentifierLatestVersion(ctx, identifier, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetApiSchemaJsonSchemaIdentifierLatestVersionResponse(rsp)
 }
 
 // GetApiSchemaJsonSchemaIdentifierVersionVersionWithResponse request returning *GetApiSchemaJsonSchemaIdentifierVersionVersionResponse
@@ -1024,6 +1107,32 @@ func ParseGetApiSchemaJsonSchemaIdentifierLatestResponse(rsp *http.Response) (*G
 	return response, nil
 }
 
+// ParseGetApiSchemaJsonSchemaIdentifierLatestVersionResponse parses an HTTP response from a GetApiSchemaJsonSchemaIdentifierLatestVersionWithResponse call
+func ParseGetApiSchemaJsonSchemaIdentifierLatestVersionResponse(rsp *http.Response) (*GetApiSchemaJsonSchemaIdentifierLatestVersionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetApiSchemaJsonSchemaIdentifierLatestVersionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest VersionParts
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseGetApiSchemaJsonSchemaIdentifierVersionVersionResponse parses an HTTP response from a GetApiSchemaJsonSchemaIdentifierVersionVersionWithResponse call
 func ParseGetApiSchemaJsonSchemaIdentifierVersionVersionResponse(rsp *http.Response) (*GetApiSchemaJsonSchemaIdentifierVersionVersionResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -1119,6 +1228,9 @@ type ServerInterface interface {
 	// Get latest version of a JSON schema
 	// (GET /api/schema/json-schema/{identifier}/latest)
 	GetApiSchemaJsonSchemaIdentifierLatest(w http.ResponseWriter, r *http.Request, identifier string)
+	// Get the version of the latest JSON Schema
+	// (GET /api/schema/json-schema/{identifier}/latest-version)
+	GetApiSchemaJsonSchemaIdentifierLatestVersion(w http.ResponseWriter, r *http.Request, identifier string)
 	// Get latest version of a JSON schema
 	// (GET /api/schema/json-schema/{identifier}/version/{version})
 	GetApiSchemaJsonSchemaIdentifierVersionVersion(w http.ResponseWriter, r *http.Request, identifier string, version string)
@@ -1242,6 +1354,31 @@ func (siw *ServerInterfaceWrapper) GetApiSchemaJsonSchemaIdentifierLatest(w http
 
 	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.GetApiSchemaJsonSchemaIdentifierLatest(w, r, identifier)
+	}))
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler.ServeHTTP(w, r)
+}
+
+// GetApiSchemaJsonSchemaIdentifierLatestVersion operation middleware
+func (siw *ServerInterfaceWrapper) GetApiSchemaJsonSchemaIdentifierLatestVersion(w http.ResponseWriter, r *http.Request) {
+
+	var err error
+
+	// ------------- Path parameter "identifier" -------------
+	var identifier string
+
+	err = runtime.BindStyledParameterWithOptions("simple", "identifier", r.PathValue("identifier"), &identifier, runtime.BindStyledParameterOptions{ParamLocation: runtime.ParamLocationPath, Explode: false, Required: true})
+	if err != nil {
+		siw.ErrorHandlerFunc(w, r, &InvalidParamFormatError{ParamName: "identifier", Err: err})
+		return
+	}
+
+	handler := http.Handler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.GetApiSchemaJsonSchemaIdentifierLatestVersion(w, r, identifier)
 	}))
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -1464,6 +1601,7 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}", wrapper.GetApiSchemaJsonSchemaIdentifier)
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}/channel/{channel}", wrapper.GetApiSchemaJsonSchemaIdentifierChannelChannel)
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}/latest", wrapper.GetApiSchemaJsonSchemaIdentifierLatest)
+	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}/latest-version", wrapper.GetApiSchemaJsonSchemaIdentifierLatestVersion)
 	m.HandleFunc("GET "+options.BaseURL+"/api/schema/json-schema/{identifier}/version/{version}", wrapper.GetApiSchemaJsonSchemaIdentifierVersionVersion)
 	m.HandleFunc("POST "+options.BaseURL+"/api/schema/json-schema/{identifier}/version/{version}", wrapper.PostApiSchemaJsonSchemaIdentifierVersionVersion)
 	m.HandleFunc("GET "+options.BaseURL+"/ui-config", wrapper.GetUiConfig)
@@ -1474,25 +1612,26 @@ func HandlerWithOptions(si ServerInterface, options StdHTTPServerOptions) http.H
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"H4sIAAAAAAAC/+xYS2/cNhD+KwTbo7zapLlUt22cFpsEqVHXLgrXh1lpdkVDIhmSsiEs9N8LPvRayetH",
-	"EqMtejItksNvvvlmONw9TUUpBUduNE32VKc5luCG75QSyg4gy5hhgkNxpoREZRhqmmyh0BhROfi0p9ju",
-	"yVCnikm7jSbeFClRa9ghjaipJdKEaqMY39GmiajCzxVTmNHkKhi57paJzQ2mhjYRfa8FP3cIT9EAK/QT",
-	"4Y1QHYI87f8jW6GIyWegRvQWlWaCO3vfK9zShH4X9yTGgcG4x3rZ7jh0tDN13Nc13wp72pf5QjwwAppo",
-	"NGRTu48FGNSGBCRz/rIMuWFbhjNxXXdzB6fMGfJHBTIeYi8sOwNlprwNIEUjRIeHHOf1I9PG4mAGyyeE",
-	"04Wj6SyDUlCPDQ98fII4b/tdx/Pj9lHeXQ50+kQPW/wzTl6s3wq+Zbsn+gaSfcB6VZn8HYdNYf041NIf",
-	"OZocFVmdrckHrAlUJrdhTsGpOAdNNoicYDDQYdsIUSDwCU3TM+cIGwntIafGiMNWolGiAoMZYdwIwowm",
-	"0pk7ZKGEm7nqeI4lWEeJm5/mIuMGd6gs2pLx4xbs/FELEkyaH7Hg5o9YOCDZu9QCa81PiW4iqjGtFDO1",
-	"05gnZOVCZEcbBIXqZ6FKMDShq7P1iZ2J/IXkwuxW9IhyYyRtrGEW6mMquIHUpTQHt+d3VgryG9YlcOtL",
-	"pYqwUSdxvGMmrzaLVJSxYaU4UX5d7HPgE2qnjzFNVpynuGWcdaV1sDyihpnCHjz62CU2vV0uXi1eW7NC",
-	"IgfJaEJ/WCwXS89c7kiJQbITLTFd1GVhP+zQ+SScypjg64wm9Bc0K8nOJaZ/lgW1QdFScO15fb1czoTY",
-	"1/+sg+/Z01VZgqq9SZd91ijbhsSzYC2iUCbiGy34SSjy92GzhfX9+a+fzkMzMY/Ohgu58eVBFuE8d0Df",
-	"iTy+aLUdgXPqwPMqTVHrbVWQDigd+24hEygKArfAClsuiPWAtP1Qcz8N8b6/j5qH4uV2DO6S4U0mQUGJ",
-	"BpWmydWeMgvdqoJGrZ5HF1+fhkZVGA0IO7w+rl8kAO46nWG/LZOOT7/0L2pl9Wb5ZqrSwSpyx0xOep8J",
-	"F4ZsRcUzOhVu20sRsSVArA9tK/LY0MVpDpxjEe/D4PnBfOsNhD/fMrTRrLG0O/jlRHJY8Cc6+OhbzWGA",
-	"h7XoK+th3Nh6VQwy2pVuIC1Rj9aIN/tsYXgO/sm5/u8K4+MDFyzE+zB4fnKHenbZtUgvnNx9b/a/Ku5T",
-	"RUSl0DOxPRP6PxrczxVq85PI6i+LazMRyqtp2N4qdM+dYfgC8PZm//GrNRj+Z6i5ri78nlEohKwmd6BJ",
-	"JQsBGWaj94aL26p7DNLk6rqJ9pa1XlTeIwKE492weQjXRBsVV20qdpJ2b+AxpIs18VNVaDKje0vMBQsP",
-	"6W/Ym3WP9Rn2bBpN4E4zzeQ4t6xp/g4AAP//HBIARDkUAAA=",
+	"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",
+	"AA==",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file
