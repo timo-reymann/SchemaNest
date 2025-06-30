@@ -22,7 +22,7 @@ export function CodeHighlight({
       style={{ background: style['pre[class*="language-"]'].background }}
     >
       <SyntaxHighlighter
-        className="lg:max-w-[500px] xl:max-w-[640px] sm:max-w-[500px] p-0"
+        className="max-w-[500px] p-0"
         language={language}
         style={style}
         wrapLongLines={true}
