@@ -1,3 +1,11 @@
+## [0.4.0](https://github.com/timo-reymann/SchemaNest/compare/v0.3.1...v0.4.0) (2025-06-30)
+
+
+### Features
+
+* **api:** Add support for retrieving latest version of a schema ([9e6223e](https://github.com/timo-reymann/SchemaNest/commit/9e6223ecd63939032dafc0ce66fca16c0fa526b3))
+* **ui:** Add latest resolve functionality for schema version page ([274248a](https://github.com/timo-reymann/SchemaNest/commit/274248aa4cbbd53c9ff5cefd68a1a69c0fa84765))
+
 ## [0.3.1](https://github.com/timo-reymann/SchemaNest/compare/v0.3.0...v0.3.1) (2025-06-30)
 
 
