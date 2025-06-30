@@ -1,3 +1,10 @@
+## [0.7.1](https://github.com/timo-reymann/SchemaNest/compare/v0.7.0...v0.7.1) (2025-06-30)
+
+
+### Bug Fixes
+
+* **ui:** Only show intro text for validate editor ([198f864](https://github.com/timo-reymann/SchemaNest/commit/198f8645089804967d322a45c039deaeccaecda0))
+
 ## [0.7.0](https://github.com/timo-reymann/SchemaNest/compare/v0.6.0...v0.7.0) (2025-06-30)
 
 
