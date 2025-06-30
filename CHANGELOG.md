@@ -1,3 +1,10 @@
+## [0.7.2](https://github.com/timo-reymann/SchemaNest/compare/v0.7.1...v0.7.2) (2025-06-30)
+
+
+### Bug Fixes
+
+* **ui:** Tweak code width ([3005511](https://github.com/timo-reymann/SchemaNest/commit/3005511a166f4cbbb4c84c5e13337f07b265ab96))
+
 ## [0.7.1](https://github.com/timo-reymann/SchemaNest/compare/v0.7.0...v0.7.1) (2025-06-30)
 
 
