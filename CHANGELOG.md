@@ -1,3 +1,10 @@
+## [0.6.0](https://github.com/timo-reymann/SchemaNest/compare/v0.5.0...v0.6.0) (2025-06-30)
+
+
+### Features
+
+* **cli:** Use entire file buffer for upload ([44e4672](https://github.com/timo-reymann/SchemaNest/commit/44e46725c8a24407953787d33c98e873dd77cd91))
+
 ## [0.5.0](https://github.com/timo-reymann/SchemaNest/compare/v0.4.0...v0.5.0) (2025-06-30)
 
 
