@@ -2816,12 +2816,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:22.16.1":
-  version: 22.16.1
-  resolution: "@types/node@npm:22.16.1"
+"@types/node@npm:22.16.3":
+  version: 22.16.3
+  resolution: "@types/node@npm:22.16.3"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/fdeee761de7f2f92a29328555af11a7aea7f0ee0d937b321e188e49babd067618acb7a395a7ca49b15ac2a74847fff9b1f2dd76e09f8d514c07c7aa9206493c2
+  checksum: 10c0/ea6829d0691713e216c15a767f87e412fa0f45c7ed4d49419098d967467e20a5dcdf66fee024e314deab2779f7e5282e1839ee918e845be27f14179247ec947a
   languageName: node
   linkType: hard
 
@@ -6283,7 +6283,7 @@ __metadata:
     "@react-aria/visually-hidden": "npm:3.8.25"
     "@react-types/shared": "npm:3.30.0"
     "@tailwindcss/postcss": "npm:^4.1.8"
-    "@types/node": "npm:22.16.1"
+    "@types/node": "npm:22.16.3"
     "@types/react": "npm:19.1.8"
     "@types/react-dom": "npm:19.1.6"
     "@typescript-eslint/eslint-plugin": "npm:8.36.0"
