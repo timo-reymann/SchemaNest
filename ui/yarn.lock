@@ -340,11 +340,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroui/checkbox@npm:2.3.22":
-  version: 2.3.22
-  resolution: "@heroui/checkbox@npm:2.3.22"
+"@heroui/checkbox@npm:2.3.23":
+  version: 2.3.23
+  resolution: "@heroui/checkbox@npm:2.3.23"
   dependencies:
-    "@heroui/form": "npm:2.1.22"
+    "@heroui/form": "npm:2.1.23"
     "@heroui/react-utils": "npm:2.1.12"
     "@heroui/shared-utils": "npm:2.1.10"
     "@heroui/use-callback-ref": "npm:2.1.8"
@@ -361,7 +361,7 @@ __metadata:
     "@heroui/theme": ">=2.4.17"
     react: ">=18 || >=19.0.0-rc.0"
     react-dom: ">=18 || >=19.0.0-rc.0"
-  checksum: 10c0/3acd65740b2db19f229a0b9a626e125627c061a004c1f38e31cea2a4f4947600aa33ed5f04b5f1da7d370ae08bb01f910eb8b3b717c7b57273dcf5e9ea5fa447
+  checksum: 10c0/9e782bbcfd1e50eb26cda5c824cbf94201088952ff299622b81177f685d209c38df0fa33ab114e06370d0a8e145bd7e770e21610e6fbebef09d5ebace0e1478d
   languageName: node
   linkType: hard
 
@@ -422,13 +422,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroui/form@npm:2.1.22":
-  version: 2.1.22
-  resolution: "@heroui/form@npm:2.1.22"
+"@heroui/form@npm:2.1.23":
+  version: 2.1.23
+  resolution: "@heroui/form@npm:2.1.23"
   dependencies:
     "@heroui/shared-utils": "npm:2.1.10"
     "@heroui/system": "npm:2.4.19"
-    "@heroui/theme": "npm:2.4.18"
+    "@heroui/theme": "npm:2.4.19"
     "@react-stately/form": "npm:3.1.5"
     "@react-types/form": "npm:3.7.13"
     "@react-types/shared": "npm:3.30.0"
@@ -437,7 +437,7 @@ __metadata:
     "@heroui/theme": ">=2.4.17"
     react: ">=18"
     react-dom: ">=18"
-  checksum: 10c0/c5b74264836606e4b8d6fd59ae966f6a07a56f7003e883709cd60395145c17c3452602252a2ddad4aa655f16db4970836f20ccd29dbb8b7966207bb6c78cc251
+  checksum: 10c0/745ac0036f022db99032182f17c5876be881632b0163381da57aa67e05d0b7ca215f6edb1ca488d83ef6ee998ce617bf1b4190f4f6c203102a20faa170602481
   languageName: node
   linkType: hard
 
@@ -455,11 +455,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroui/input@npm:2.4.23":
-  version: 2.4.23
-  resolution: "@heroui/input@npm:2.4.23"
+"@heroui/input@npm:2.4.24":
+  version: 2.4.24
+  resolution: "@heroui/input@npm:2.4.24"
   dependencies:
-    "@heroui/form": "npm:2.1.22"
+    "@heroui/form": "npm:2.1.23"
     "@heroui/react-utils": "npm:2.1.12"
     "@heroui/shared-icons": "npm:2.1.10"
     "@heroui/shared-utils": "npm:2.1.10"
@@ -476,7 +476,7 @@ __metadata:
     "@heroui/theme": ">=2.4.17"
     react: ">=18 || >=19.0.0-rc.0"
     react-dom: ">=18 || >=19.0.0-rc.0"
-  checksum: 10c0/45dfaeadf3fbd1cdee7082a92449c23ecb884864b2b76786aa825af13c579e4399028df5cc95db60d6f69cc3f01186a7c3504f1707faa044b9d8132a55e8afe5
+  checksum: 10c0/7bce0e64c013aa4e585d08ab1aa90baa0286fbacbd3fb679b59eda51453df5de0e1337784f290aa05200fb50c93c9027b0641794c46b1b16e2789b6ce650463e
   languageName: node
   linkType: hard
 
@@ -669,11 +669,11 @@ __metadata:
   linkType: hard
 
 "@heroui/select@npm:^2.4.20":
-  version: 2.4.23
-  resolution: "@heroui/select@npm:2.4.23"
+  version: 2.4.24
+  resolution: "@heroui/select@npm:2.4.24"
   dependencies:
     "@heroui/aria-utils": "npm:2.2.20"
-    "@heroui/form": "npm:2.1.22"
+    "@heroui/form": "npm:2.1.23"
     "@heroui/listbox": "npm:2.3.22"
     "@heroui/popover": "npm:2.3.23"
     "@heroui/react-utils": "npm:2.1.12"
@@ -697,7 +697,7 @@ __metadata:
     framer-motion: ">=11.5.6 || >=12.0.0-alpha.1"
     react: ">=18 || >=19.0.0-rc.0"
     react-dom: ">=18 || >=19.0.0-rc.0"
-  checksum: 10c0/b227d2ff226b0bdeacdaba8fa6c00649ed735865363daa22e2826039431030ff55589a8bdf20b5d3d8ac893e02ce36616e2bd9f70c9be924f2d62d29182a8e68
+  checksum: 10c0/110c22b55e54efa154641990af428988dca2df4671a929734afd8339f1e239750e8668dcf079be81e23d864e5f9fa308a60b9adfb7c92badb0806162cddbd160
   languageName: node
   linkType: hard
 
@@ -820,10 +820,10 @@ __metadata:
   linkType: hard
 
 "@heroui/table@npm:^2.2.19":
-  version: 2.2.22
-  resolution: "@heroui/table@npm:2.2.22"
+  version: 2.2.23
+  resolution: "@heroui/table@npm:2.2.23"
   dependencies:
-    "@heroui/checkbox": "npm:2.3.22"
+    "@heroui/checkbox": "npm:2.3.23"
     "@heroui/react-utils": "npm:2.1.12"
     "@heroui/shared-icons": "npm:2.1.10"
     "@heroui/shared-utils": "npm:2.1.10"
@@ -842,7 +842,7 @@ __metadata:
     "@heroui/theme": ">=2.4.17"
     react: ">=18 || >=19.0.0-rc.0"
     react-dom: ">=18 || >=19.0.0-rc.0"
-  checksum: 10c0/5cfdecf126b4144579d58f9c8b6f9659127668b51191dd3e13359cd71579b19b2743ca6e470b6a368be19049fa72b544a24a7e0e24db1ab81fe4d71c2e52e9f7
+  checksum: 10c0/873c4ddf799693dfc41f05b0e40da517f315618a4ca6e996a8f66c2bc61cab4df112d31be53a444a595d8352bb8f7b7c6aad0321b3eb45b7ef73dc258d531e9f
   languageName: node
   linkType: hard
 
@@ -870,9 +870,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@heroui/theme@npm:2.4.18":
-  version: 2.4.18
-  resolution: "@heroui/theme@npm:2.4.18"
+"@heroui/theme@npm:2.4.19":
+  version: 2.4.19
+  resolution: "@heroui/theme@npm:2.4.19"
   dependencies:
     "@heroui/shared-utils": "npm:2.1.10"
     clsx: "npm:^1.2.1"
@@ -884,7 +884,7 @@ __metadata:
     tailwind-variants: "npm:1.0.0"
   peerDependencies:
     tailwindcss: ">=4.0.0"
-  checksum: 10c0/c04bcfef3932bce98d94e0daa59854d5eb20897ede0c7ac03257611f08c14e92f8780f38c2351f6c216a9e9144a0ca40f0ff00eea545163227c598c8ee30cf68
+  checksum: 10c0/f5a57b01f2e74bc1f89abab89ea8f79ae2688e88d7c9bed6cda379275268614acd62d1f4d8afee4f3cbf9c0d9a4b5b747cc546341c944b7e7070ebea50738c74
   languageName: node
   linkType: hard
 
@@ -6272,7 +6272,7 @@ __metadata:
     "@heroui/card": "npm:^2.2.19"
     "@heroui/chip": "npm:^2.2.16"
     "@heroui/code": "npm:2.2.17"
-    "@heroui/input": "npm:2.4.23"
+    "@heroui/input": "npm:2.4.24"
     "@heroui/kbd": "npm:2.2.18"
     "@heroui/link": "npm:2.2.20"
     "@heroui/listbox": "npm:2.3.22"
@@ -6286,7 +6286,7 @@ __metadata:
     "@heroui/system": "npm:2.4.19"
     "@heroui/table": "npm:^2.2.19"
     "@heroui/tabs": "npm:^2.2.17"
-    "@heroui/theme": "npm:2.4.18"
+    "@heroui/theme": "npm:2.4.19"
     "@heroui/toast": "npm:^2.0.11"
     "@heroui/use-theme": "npm:^2.1.8"
     "@monaco-editor/react": "npm:^4.7.0"
