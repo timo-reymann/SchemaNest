@@ -1,3 +1,11 @@
+## [0.7.5](https://github.com/timo-reymann/SchemaNest/compare/v0.7.4...v0.7.5) (2025-07-15)
+
+
+### Bug Fixes
+
+* **deps:** update hero ui ([894775b](https://github.com/timo-reymann/SchemaNest/commit/894775b0fb81729aac933f930c49f36524f1c833))
+* **deps:** update module github.com/oapi-codegen/runtime to v1.1.2 ([673fd7d](https://github.com/timo-reymann/SchemaNest/commit/673fd7dc70785b54d7bc24f4ecd8c513f5b39178))
+
 ## [0.7.4](https://github.com/timo-reymann/SchemaNest/compare/v0.7.3...v0.7.4) (2025-07-14)
 
 
