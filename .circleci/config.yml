@@ -61,13 +61,13 @@ jobs:
     parameters:
       zig_version:
         type: string
-        default: zig-x86_64-linux-0.15.0-dev.1092+d772c0627
+        default: zig-x86_64-linux-0.14.1
     steps:
       - run:
           name: Download zig <<parameters.zig_version>>
           command: |
             mkdir -p .zig && cd .zig
-            curl https://ziglang.org/builds/<<parameters.zig_version>>.tar.xz --output zig.tar.xz
+            curl https://ziglang.org/download/<<parameters.zig_version>>/zig-x86_64-windows-<<parameters.zig_version>>.tar.xz --output zig.tar.xz
             tar -xf zig.tar.xz
             rm zig.tar.xz
             ln -s <<parameters.zig_version>> current
