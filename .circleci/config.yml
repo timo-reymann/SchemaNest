@@ -61,16 +61,29 @@ jobs:
     parameters:
       zig_version:
         type: string
-        default: zig-x86_64-linux-0.14.1
+        default: 0.14.1
     steps:
+      - restore_cache:
+          name: Restore Zig cache
+          keys:
+            - zig-cache-<<parameters.zig_version>>
       - run:
-          name: Download zig <<parameters.zig_version>>
+          name: Download Zig <<parameters.zig_version>> (if not cached)
           command: |
             mkdir -p .zig && cd .zig
-            curl https://ziglang.org/download/<<parameters.zig_version>>/zig-x86_64-windows-<<parameters.zig_version>>.tar.xz --output zig.tar.xz
-            tar -xf zig.tar.xz
-            rm zig.tar.xz
-            ln -s <<parameters.zig_version>> current
+            if [ ! -d "<<parameters.zig_version>>" ]; then
+              curl https://ziglang.org/download/<<parameters.zig_version>>/zig-x86_64-linux-<<parameters.zig_version>>.tar.xz --output zig.tar.xz
+              tar -xf zig.tar.xz
+              rm zig.tar.xz
+              ln -sfn <<parameters.zig_version>> current
+            else
+              echo "Zig <<parameters.zig_version>> already downloaded and extracted."
+            fi
+      - save_cache:
+          name: Save Zig cache
+          key: zig-cache-<<parameters.zig_version>>
+          paths:
+            - .zig
       - persist_to_workspace:
           root: ./
           paths:
