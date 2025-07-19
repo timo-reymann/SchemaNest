@@ -1,3 +1,10 @@
+## [0.7.8](https://github.com/timo-reymann/SchemaNest/compare/v0.7.7...v0.7.8) (2025-07-19)
+
+
+### Bug Fixes
+
+* **deps:** Update zig ([5bd9a82](https://github.com/timo-reymann/SchemaNest/commit/5bd9a82ca1dd9ca5ac84531e85711600333ef2c6))
+
 ## [0.7.7](https://github.com/timo-reymann/SchemaNest/compare/v0.7.6...v0.7.7) (2025-07-15)
 
 
