@@ -61,7 +61,7 @@ jobs:
     parameters:
       zig_version:
         type: string
-        default: zig-x86_64-linux-0.15.0-dev.777+6810ffa42
+        default: zig-x86_64-linux-0.15.0-dev.1092+d772c0627
     steps:
       - run:
           name: Download zig <<parameters.zig_version>>
