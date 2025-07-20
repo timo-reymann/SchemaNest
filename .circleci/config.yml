@@ -70,7 +70,7 @@ jobs:
             curl https://ziglang.org/download/<<parameters.zig_version>>/zig-x86_64-linux-<<parameters.zig_version>>.tar.xz --output zig.tar.xz
             tar -xf zig.tar.xz
             rm zig.tar.xz
-            ln -s <<parameters.zig_version>> current
+            ln -s zig-x86_64-linux-<<parameters.zig_version>> current
       - persist_to_workspace:
           root: ./
           paths:
