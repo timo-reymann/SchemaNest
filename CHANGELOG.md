@@ -1,3 +1,11 @@
+## [0.7.9](https://github.com/timo-reymann/SchemaNest/compare/v0.7.8...v0.7.9) (2025-07-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency framer-motion to v12.23.12 ([69a117d](https://github.com/timo-reymann/SchemaNest/commit/69a117da40f982b8b1618f4157246f4ee93d01c0))
+* **deps:** update module github.com/mattn/go-sqlite3 to v1.14.30 ([1130d42](https://github.com/timo-reymann/SchemaNest/commit/1130d42bd55aafd292d1916d4ffeadc75606e548))
+
 ## [0.7.8](https://github.com/timo-reymann/SchemaNest/compare/v0.7.7...v0.7.8) (2025-07-19)
 
 
