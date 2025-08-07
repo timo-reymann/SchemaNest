@@ -12,7 +12,6 @@ import {
 } from "@heroui/shared-icons";
 import { Chip } from "@heroui/chip";
 import NextLink from "next/link";
-import GearIcon from "next/dist/client/components/react-dev-overlay/ui/icons/gear-icon";
 
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useBoundStore } from "@/store/main";
@@ -24,6 +23,7 @@ import { JsonSchemaSetupInstructions } from "@/components/json-schema/JsonSchema
 import { JsonSchemaViewer } from "@/components/json-schema/JsonSchemaViewer";
 import { JsonSchemaLinks } from "@/components/json-schema/JsonSchemaLinks";
 import { JsonSchemaComparer } from "@/components/json-schema/JsonSchemaComparer";
+import GearIcon from "next/dist/next-devtools/dev-overlay/icons/gear-icon";
 
 export default function JsonSchemaVersionPage() {
   const { theme } = useTheme();
