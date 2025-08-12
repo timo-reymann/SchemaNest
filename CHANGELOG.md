@@ -1,3 +1,10 @@
+## [0.7.10](https://github.com/timo-reymann/SchemaNest/compare/v0.7.9...v0.7.10) (2025-08-12)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/urfave/cli/v3 to v3.4.0 ([1a7bbd1](https://github.com/timo-reymann/SchemaNest/commit/1a7bbd1cde2d3cb7843787d47b9b3dd6e67385d6))
+
 ## [0.7.9](https://github.com/timo-reymann/SchemaNest/compare/v0.7.8...v0.7.9) (2025-07-30)
 
 
