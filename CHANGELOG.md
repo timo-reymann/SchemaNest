@@ -1,3 +1,10 @@
+## [0.7.14](https://github.com/timo-reymann/SchemaNest/compare/v0.7.13...v0.7.14) (2025-08-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency react-syntax-highlighter to v15.6.5 ([51284cc](https://github.com/timo-reymann/SchemaNest/commit/51284cce00b28284f8c07c1290971888d7114966))
+
 ## [0.7.13](https://github.com/timo-reymann/SchemaNest/compare/v0.7.12...v0.7.13) (2025-08-25)
 
 
