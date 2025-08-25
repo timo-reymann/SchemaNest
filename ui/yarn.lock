@@ -6326,7 +6326,7 @@ __metadata:
     react-syntax-highlighter: "npm:^15.6.1"
     redoc: "npm:^2.5.0"
     styled-components: "npm:^6.1.18"
-    tailwind-variants: "npm:0.3.1"
+    tailwind-variants: "npm:3.1.0"
     tailwindcss: "npm:^3.4.16"
     typescript: "npm:5.9.2"
     zustand: "npm:^5.0.5"
@@ -7991,28 +7991,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-merge@npm:2.5.4":
-  version: 2.5.4
-  resolution: "tailwind-merge@npm:2.5.4"
-  checksum: 10c0/6c3d2a1d44344f373859f005e6366f0dbd7f66131d330a51dbe823dab08f71c388b2efcbb2b6a2170ca469581d27079c25cd40c234ca1356c4893ae99c2febb3
-  languageName: node
-  linkType: hard
-
 "tailwind-merge@npm:3.0.2":
   version: 3.0.2
   resolution: "tailwind-merge@npm:3.0.2"
   checksum: 10c0/73f528345e5130e7690c5c57701155849ae4f0834e0a4bf56bc03e25d4563d45d4905ff9c487a7dce9efdfa18689a223e78365962105ad0e2f2d1226216c66ef
-  languageName: node
-  linkType: hard
-
-"tailwind-variants@npm:0.3.1":
-  version: 0.3.1
-  resolution: "tailwind-variants@npm:0.3.1"
-  dependencies:
-    tailwind-merge: "npm:2.5.4"
-  peerDependencies:
-    tailwindcss: "*"
-  checksum: 10c0/2ad4a9282ea3d9b66443329ede844bd86b6737b98ede3f31d6b495e3d1f210677c57ba360af2dbffede00cce0026dd1105eeb1af936e825ebd14e715eb6cbc11
   languageName: node
   linkType: hard
 
@@ -8024,6 +8006,19 @@ __metadata:
   peerDependencies:
     tailwindcss: "*"
   checksum: 10c0/404b88293067009c72b5c22e662ad6994438278b7ebcf4dedf9782832d98206f56f2918e39e202c590e7bb4a99b6272e3482fae3058fcd1cb7cc6e1c9ccf2435
+  languageName: node
+  linkType: hard
+
+"tailwind-variants@npm:3.1.0":
+  version: 3.1.0
+  resolution: "tailwind-variants@npm:3.1.0"
+  peerDependencies:
+    tailwind-merge: ">=3.0.0"
+    tailwindcss: "*"
+  peerDependenciesMeta:
+    tailwind-merge:
+      optional: true
+  checksum: 10c0/b196ccc7ff4a8e932d27ded3e4c88797ed92b94e7695b31fe0e32385d5a474eed151c7df688215bb03908afeffc7cfc1b027d01625f08d77f92b08ca2f51ec7f
   languageName: node
   linkType: hard
 
