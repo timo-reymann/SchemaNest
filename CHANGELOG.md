@@ -1,3 +1,10 @@
+## [0.7.16](https://github.com/timo-reymann/SchemaNest/compare/v0.7.15...v0.7.16) (2025-08-31)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/golang-migrate/migrate/v4 to v4.19.0 ([478fdea](https://github.com/timo-reymann/SchemaNest/commit/478fdea0c51e54ecfda33af5966d9636c4968c2c))
+
 ## [0.7.15](https://github.com/timo-reymann/SchemaNest/compare/v0.7.14...v0.7.15) (2025-08-26)
 
 
