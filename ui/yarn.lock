@@ -1541,12 +1541,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/eslint-plugin-next@npm:15.3.5":
-  version: 15.3.5
-  resolution: "@next/eslint-plugin-next@npm:15.3.5"
+"@next/eslint-plugin-next@npm:15.5.2":
+  version: 15.5.2
+  resolution: "@next/eslint-plugin-next@npm:15.5.2"
   dependencies:
     fast-glob: "npm:3.3.1"
-  checksum: 10c0/fb86ead7d0c0b47cd670d866e4c1dfd28d288f30d2db8756a57b5c63a0e47db874202e69e5cf7990815a1e75fb012876acc602d90b43ad4eeeb2b167e20949b6
+  checksum: 10c0/5bafb42b15c23f8a1c5460e4eda4cb45b7c07832f80ce734cad138781606cd9c954ee37b93fd2a973b064ea39469dfc1409301cb2c90995ce5226a3b2b07a891
   languageName: node
   linkType: hard
 
@@ -4320,11 +4320,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-next@npm:15.3.5":
-  version: 15.3.5
-  resolution: "eslint-config-next@npm:15.3.5"
+"eslint-config-next@npm:15.5.2":
+  version: 15.5.2
+  resolution: "eslint-config-next@npm:15.5.2"
   dependencies:
-    "@next/eslint-plugin-next": "npm:15.3.5"
+    "@next/eslint-plugin-next": "npm:15.5.2"
     "@rushstack/eslint-patch": "npm:^1.10.3"
     "@typescript-eslint/eslint-plugin": "npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0"
     "@typescript-eslint/parser": "npm:^5.4.2 || ^6.0.0 || ^7.0.0 || ^8.0.0"
@@ -4340,7 +4340,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/fae92e297d834202ed327873946d279bda458041db663f1c7f4bbe7426af54a4de3c8f4b6a3193d2bebee32e48e138de044e4f05668e30c2fe0822e413f08117
+  checksum: 10c0/8453afa73211e368137c8d20d7ce31cd043306460f9f7f78d62a7cfd9c1d55f00f2ba96780d212638162002eef707640b4caa9f56d8744159b5b6ce5f656219c
   languageName: node
   linkType: hard
 
@@ -6295,7 +6295,7 @@ __metadata:
     "@heroui/toast": "npm:^2.0.11"
     "@heroui/use-theme": "npm:^2.1.8"
     "@monaco-editor/react": "npm:^4.7.0"
-    "@next/eslint-plugin-next": "npm:15.3.5"
+    "@next/eslint-plugin-next": "npm:15.5.2"
     "@react-aria/ssr": "npm:3.9.9"
     "@react-aria/visually-hidden": "npm:3.8.25"
     "@react-types/shared": "npm:3.30.0"
@@ -6308,7 +6308,7 @@ __metadata:
     autoprefixer: "npm:10.4.21"
     clsx: "npm:2.1.1"
     eslint: "npm:9.34.0"
-    eslint-config-next: "npm:15.3.5"
+    eslint-config-next: "npm:15.5.2"
     eslint-config-prettier: "npm:10.1.8"
     eslint-plugin-import: "npm:2.32.0"
     eslint-plugin-jsx-a11y: "npm:6.10.2"
