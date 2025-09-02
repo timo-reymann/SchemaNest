@@ -12,18 +12,18 @@ import {
 } from "@heroui/shared-icons";
 import { Chip } from "@heroui/chip";
 import NextLink from "next/link";
-import GearIcon from "next/dist/client/components/react-dev-overlay/ui/icons/gear-icon";
 
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useBoundStore } from "@/store/main";
 import { title } from "@/components/primitives";
 import { createHead } from "@/util/layoutHelpers";
 import { JsonSchemaDetails } from "@/store/jsonSchemas.slice";
-import { DiffIcon } from "@/components/icons";
+import { DiffIcon, GearIcon } from "@/components/icons";
 import { JsonSchemaSetupInstructions } from "@/components/json-schema/JsonSchemaSetupInstructions";
 import { JsonSchemaViewer } from "@/components/json-schema/JsonSchemaViewer";
 import { JsonSchemaLinks } from "@/components/json-schema/JsonSchemaLinks";
 import { JsonSchemaComparer } from "@/components/json-schema/JsonSchemaComparer";
+
 
 export default function JsonSchemaVersionPage() {
   const { theme } = useTheme();
