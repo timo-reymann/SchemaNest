@@ -1,3 +1,10 @@
+## [0.7.17](https://github.com/timo-reymann/SchemaNest/compare/v0.7.16...v0.7.17) (2025-09-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @tailwindcss/postcss to v4.1.13 ([315dae0](https://github.com/timo-reymann/SchemaNest/commit/315dae06f1bcda97b2f9803c8608f5c3ef515179))
+
 ## [0.7.16](https://github.com/timo-reymann/SchemaNest/compare/v0.7.15...v0.7.16) (2025-08-31)
 
 
