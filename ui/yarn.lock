@@ -6388,7 +6388,7 @@ __metadata:
     react-syntax-highlighter: "npm:^15.6.1"
     redoc: "npm:^2.5.0"
     styled-components: "npm:^6.1.18"
-    tailwind-variants: "npm:3.1.0"
+    tailwind-variants: "npm:3.1.1"
     tailwindcss: "npm:^3.4.16"
     typescript: "npm:5.9.2"
     zustand: "npm:^5.0.5"
@@ -8065,16 +8065,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-variants@npm:3.1.0":
-  version: 3.1.0
-  resolution: "tailwind-variants@npm:3.1.0"
+"tailwind-variants@npm:3.1.1":
+  version: 3.1.1
+  resolution: "tailwind-variants@npm:3.1.1"
   peerDependencies:
     tailwind-merge: ">=3.0.0"
     tailwindcss: "*"
   peerDependenciesMeta:
     tailwind-merge:
       optional: true
-  checksum: 10c0/b196ccc7ff4a8e932d27ded3e4c88797ed92b94e7695b31fe0e32385d5a474eed151c7df688215bb03908afeffc7cfc1b027d01625f08d77f92b08ca2f51ec7f
+  checksum: 10c0/58b4d50ac3d4abd67a8cb26cbae9ec83f3e4a48234aeedc0c9a0a23f7111495caad55c1641d4314dea242cd9aa71db2f0e6ceb2f914c393d570075d7f12a01ac
   languageName: node
   linkType: hard
 
