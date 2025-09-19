@@ -1,3 +1,10 @@
+## [0.7.22](https://github.com/timo-reymann/SchemaNest/compare/v0.7.21...v0.7.22) (2025-09-19)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/testcontainers/testcontainers-go to v0.39.0 ([1f23397](https://github.com/timo-reymann/SchemaNest/commit/1f233978005496d8370c91f518c607ee78b8cc14))
+
 ## [0.7.21](https://github.com/timo-reymann/SchemaNest/compare/v0.7.20...v0.7.21) (2025-09-18)
 
 
