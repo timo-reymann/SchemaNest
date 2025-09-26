@@ -6242,7 +6242,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mobx-react@npm:^9.1.1":
+"mobx-react@npm:9.2.0":
   version: 9.2.0
   resolution: "mobx-react@npm:9.2.0"
   dependencies:
@@ -7187,8 +7187,8 @@ __metadata:
   linkType: hard
 
 "redoc@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "redoc@npm:2.5.0"
+  version: 2.5.1
+  resolution: "redoc@npm:2.5.1"
   dependencies:
     "@redocly/openapi-core": "npm:^1.4.0"
     classnames: "npm:^2.3.2"
@@ -7199,7 +7199,7 @@ __metadata:
     lunr: "npm:^2.3.9"
     mark.js: "npm:^8.11.1"
     marked: "npm:^4.3.0"
-    mobx-react: "npm:^9.1.1"
+    mobx-react: "npm:9.2.0"
     openapi-sampler: "npm:^1.5.0"
     path-browserify: "npm:^1.0.1"
     perfect-scrollbar: "npm:^1.5.5"
@@ -7217,7 +7217,7 @@ __metadata:
     react: ^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0
     styled-components: ^4.1.1 || ^5.1.1 || ^6.0.5
-  checksum: 10c0/fb58e934e77d671dcbf4aa60d2369e194a649f25e58a14147882cab21dca673d3c32f1d5ffe9cada06846b6eb71d959b92e4467458c439f057aeff4eb4d11726
+  checksum: 10c0/3690b8edf6d6372f1757bfda4bb2b13c69ff88f489a58fb41fcf557bc1af0cb0c08ac8bcb8d72da004c90a46416b6473a0fac22d5e52a471c59cedc2cf17aaa7
   languageName: node
   linkType: hard
 
