@@ -1,3 +1,11 @@
+## [0.7.29](https://github.com/timo-reymann/SchemaNest/compare/v0.7.28...v0.7.29) (2025-10-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency intl-messageformat to v10.7.17 ([08ed52b](https://github.com/timo-reymann/SchemaNest/commit/08ed52b2edee1c50411df788ea9d8db7df3d8626))
+* **deps:** update react monorepo to v19.2.0 ([f9b89db](https://github.com/timo-reymann/SchemaNest/commit/f9b89db488218d9c5c4e2b8338cf6756b0520e9e))
+
 ## [0.7.28](https://github.com/timo-reymann/SchemaNest/compare/v0.7.27...v0.7.28) (2025-09-25)
 
 
