@@ -1,3 +1,12 @@
+## [0.7.30](https://github.com/timo-reymann/SchemaNest/compare/v0.7.29...v0.7.30) (2025-10-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency framer-motion to v12.23.24 ([4f91f86](https://github.com/timo-reymann/SchemaNest/commit/4f91f86d8e6c475b5b1ac9ea7a18a383b0d1643c))
+* **deps:** update dependency intl-messageformat to v10.7.18 ([01a6d7e](https://github.com/timo-reymann/SchemaNest/commit/01a6d7e38acedc4864b43177c9b9c0c78913f5e9))
+* **deps:** update nextjs monorepo to v15.5.5 ([deaafcc](https://github.com/timo-reymann/SchemaNest/commit/deaafcc45fe938b005705afa6e512b67d5e7b8e8))
+
 ## [0.7.29](https://github.com/timo-reymann/SchemaNest/compare/v0.7.28...v0.7.29) (2025-10-06)
 
 
