@@ -106,7 +106,9 @@ export default function SchemasPage() {
     if (pageQuery) {
       const parsedPag = Number.parseInt(pageQuery);
 
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setInitialPage(parsedPag);
+
       setPage(parsedPag);
     }
   }, [pageQuery]);
@@ -124,7 +126,9 @@ export default function SchemasPage() {
       MAX_PER_PAGE,
     );
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPageCount(totalPages);
+
     setResults(schemasToShow);
   }, [schemasLoading, page, search]);
 
