@@ -18,6 +18,7 @@ export function JsonSchemaSetupInstructions({
   version: string;
 }>) {
   const buildApiLink = useBuildApiLink();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [major, _, __] = version.split(".");
   const schemaLinkForTools = buildApiLink(
     `/schema/json-schema/${encodeURIComponent(identifier)}/channel/${major}.x`,

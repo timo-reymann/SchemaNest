@@ -24,7 +24,6 @@ import { JsonSchemaViewer } from "@/components/json-schema/JsonSchemaViewer";
 import { JsonSchemaLinks } from "@/components/json-schema/JsonSchemaLinks";
 import { JsonSchemaComparer } from "@/components/json-schema/JsonSchemaComparer";
 
-
 export default function JsonSchemaVersionPage() {
   const { theme } = useTheme();
   const router = useRouter();
@@ -64,8 +63,9 @@ export default function JsonSchemaVersionPage() {
         }
       })();
     }
-
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setComparedSchema(null);
+
     setComparedVersion(undefined);
     (async () => {
       try {
@@ -89,6 +89,7 @@ export default function JsonSchemaVersionPage() {
 
   useEffect(() => {
     if (router.query.tab) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTab(router.query.tab as string);
     }
   }, [router.isReady, router.query.tab]);
