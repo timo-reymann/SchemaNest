@@ -7086,14 +7086,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openapi-sampler@npm:^1.5.0":
-  version: 1.6.1
-  resolution: "openapi-sampler@npm:1.6.1"
+"openapi-sampler@npm:^1.6.2":
+  version: 1.6.2
+  resolution: "openapi-sampler@npm:1.6.2"
   dependencies:
     "@types/json-schema": "npm:^7.0.7"
     fast-xml-parser: "npm:^4.5.0"
     json-pointer: "npm:0.6.2"
-  checksum: 10c0/b5c95d03e3a035e06da514b3db3e9645e36029dd37551e44fdbdf162c764db52a4d4fe077ea1e02e96a95580b968924000fd9275ab03a1092c734f7862951c87
+  checksum: 10c0/02bdcc53b0cb7373369585a92b426f2728c7867fb185b8da4f23e699085e890d2e005cf015cdc3160305f3717aa54557835a5c1a3c422fa7f265d5ed9bfd546f
   languageName: node
   linkType: hard
 
@@ -7572,8 +7572,8 @@ __metadata:
   linkType: hard
 
 "redoc@npm:^2.5.0":
-  version: 2.5.1
-  resolution: "redoc@npm:2.5.1"
+  version: 2.5.2
+  resolution: "redoc@npm:2.5.2"
   dependencies:
     "@redocly/openapi-core": "npm:^1.4.0"
     classnames: "npm:^2.3.2"
@@ -7585,7 +7585,7 @@ __metadata:
     mark.js: "npm:^8.11.1"
     marked: "npm:^4.3.0"
     mobx-react: "npm:9.2.0"
-    openapi-sampler: "npm:^1.5.0"
+    openapi-sampler: "npm:^1.6.2"
     path-browserify: "npm:^1.0.1"
     perfect-scrollbar: "npm:^1.5.5"
     polished: "npm:^4.2.2"
@@ -7602,7 +7602,7 @@ __metadata:
     react: ^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.4 || ^17.0.0 || ^18.0.0 || ^19.0.0
     styled-components: ^4.1.1 || ^5.1.1 || ^6.0.5
-  checksum: 10c0/3690b8edf6d6372f1757bfda4bb2b13c69ff88f489a58fb41fcf557bc1af0cb0c08ac8bcb8d72da004c90a46416b6473a0fac22d5e52a471c59cedc2cf17aaa7
+  checksum: 10c0/751aa50ff0388db92f4c69bf0ba6bd391bad3348d60308984e52adb6412c984bfb9ea922a7df363e705b4e8ef4777837752b948a7cbf5b3960c07c90a4f4b869
   languageName: node
   linkType: hard
 
