@@ -7,9 +7,6 @@ const nextConfig: NextConfig = {
     cpus: 4,
     workerThreads: false,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
 };
 
 export default nextConfig;
