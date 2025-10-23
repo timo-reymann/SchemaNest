@@ -13,6 +13,7 @@ import globals from "globals";
 import tsParser from "@typescript-eslint/parser";
 import js from "@eslint/js";
 import { FlatCompat } from "@eslint/eslintrc";
+import nextPlugin from "@next/eslint-plugin-next";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -52,11 +53,11 @@ export default defineConfig([
         "plugin:prettier/recommended",
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
-        "plugin:@next/next/recommended",
       ),
     ),
 
     plugins: {
+      nextPlugin: fixupPluginRules(nextPlugin),
       react: fixupPluginRules(react),
       "unused-imports": unusedImports,
       import: fixupPluginRules(_import),
