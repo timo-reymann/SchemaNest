@@ -126,7 +126,7 @@ export function JsonSchemaSetupInstructions({
           subtitle="Using editor settings to get completion and validation"
           title="Visual Studio Code"
         >
-          <div className="xl:grid grid-cols-2 ">
+          <div className="grid sm:grid-cols-1 xl:grid-cols-2 gap-1">
             <article>
               <h2 className="text-xl font-bold">JSON</h2>
               <ol className="list-decimal ml-5">
