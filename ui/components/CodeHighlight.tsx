@@ -1,34 +1,25 @@
 import { useTheme } from "next-themes";
 import { Snippet } from "@heroui/snippet";
 import React from "react";
-// @ts-ignore
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-// @ts-ignore
-import { default as codeDark } from "react-syntax-highlighter/dist/esm/styles/prism/dracula";
-// @ts-ignore
-import { default as codeLight } from "react-syntax-highlighter/dist/esm/styles/prism/one-light";
+import ShikiHighlighter from "react-shiki";
 
 export function CodeHighlight({
   code,
   language,
 }: Readonly<{ code: string; language: string }>) {
   const theme = useTheme();
-  const style = theme.theme == "light" ? codeLight : codeDark;
+  const style = theme.theme == "light" ? "github-light" : "github-dark";
 
   return (
-    <Snippet
-      className="pt-0 pb-0 pl-0 pr-0"
-      hideSymbol={true}
-      style={{ background: style['pre[class*="language-"]'].background }}
-    >
-      <SyntaxHighlighter
-        className="max-w-[500px] p-0"
+    <Snippet className="pt-0 pb-0 pl-0 pr-0" hideSymbol={true}>
+      <ShikiHighlighter
+        className="max-w-full"
         language={language}
-        style={style}
-        wrapLongLines={true}
+        showLanguage={false}
+        theme={style}
       >
         {code}
-      </SyntaxHighlighter>
+      </ShikiHighlighter>
     </Snippet>
   );
 }

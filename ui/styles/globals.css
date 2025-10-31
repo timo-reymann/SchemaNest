@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.shiki .line span {
+   text-wrap-mode: wrap;
+}
