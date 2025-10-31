@@ -1,3 +1,11 @@
+## [0.7.35](https://github.com/timo-reymann/SchemaNest/compare/v0.7.34...v0.7.35) (2025-10-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency react-syntax-highlighter to v16 ([c9faa46](https://github.com/timo-reymann/SchemaNest/commit/c9faa46700389b92627efe3db23f9ae163d91a76))
+* Fix code overflow for vs code config guide ([b48d855](https://github.com/timo-reymann/SchemaNest/commit/b48d85534d1b7ad6e5a90f63e95ca3739ff6f19c))
+
 ## [0.7.34](https://github.com/timo-reymann/SchemaNest/compare/v0.7.33...v0.7.34) (2025-10-31)
 
 
