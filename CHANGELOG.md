@@ -1,3 +1,10 @@
+## [0.7.37](https://github.com/timo-reymann/SchemaNest/compare/v0.7.36...v0.7.37) (2025-11-10)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/urfave/cli/v3 to v3.6.0 ([b03aaa6](https://github.com/timo-reymann/SchemaNest/commit/b03aaa6703ffb9402e98cebf24a70ba1519a59ec))
+
 ## [0.7.36](https://github.com/timo-reymann/SchemaNest/compare/v0.7.35...v0.7.36) (2025-11-06)
 
 
