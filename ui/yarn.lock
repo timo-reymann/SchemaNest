@@ -7373,7 +7373,7 @@ __metadata:
     react-shiki: "npm:^0.9.0"
     redoc: "npm:^2.5.0"
     styled-components: "npm:^6.1.18"
-    tailwind-variants: "npm:3.1.1"
+    tailwind-variants: "npm:3.2.2"
     tailwindcss: "npm:^3.4.16"
     typescript: "npm:5.9.3"
     zustand: "npm:^5.0.5"
@@ -9137,16 +9137,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwind-variants@npm:3.1.1":
-  version: 3.1.1
-  resolution: "tailwind-variants@npm:3.1.1"
+"tailwind-variants@npm:3.2.2":
+  version: 3.2.2
+  resolution: "tailwind-variants@npm:3.2.2"
   peerDependencies:
     tailwind-merge: ">=3.0.0"
     tailwindcss: "*"
   peerDependenciesMeta:
     tailwind-merge:
       optional: true
-  checksum: 10c0/58b4d50ac3d4abd67a8cb26cbae9ec83f3e4a48234aeedc0c9a0a23f7111495caad55c1641d4314dea242cd9aa71db2f0e6ceb2f914c393d570075d7f12a01ac
+  checksum: 10c0/715a35b66c374f3bb234cd1e6737588cb7c0213c80a69bd62239d752d20c44377bec1d028c3ea7c28882d81384507fbae407813d348c142cb991c5a0ad063d48
   languageName: node
   linkType: hard
 
