@@ -1,3 +1,9 @@
+## [0.7.41](https://github.com/timo-reymann/SchemaNest/compare/v0.7.40...v0.7.41) (2025-11-27)
+
+### Bug Fixes
+
+* **deps:** update nextjs monorepo to v16.0.5 ([52387fd](https://github.com/timo-reymann/SchemaNest/commit/52387fdba950a1b0c88ad112e74bd940a620332b))
+
 ## [0.7.40](https://github.com/timo-reymann/SchemaNest/compare/v0.7.39...v0.7.40) (2025-11-25)
 
 ### Bug Fixes
