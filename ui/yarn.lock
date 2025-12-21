@@ -8152,8 +8152,8 @@ __metadata:
   linkType: hard
 
 "react-shiki@npm:^0.9.0":
-  version: 0.9.0
-  resolution: "react-shiki@npm:0.9.0"
+  version: 0.9.1
+  resolution: "react-shiki@npm:0.9.1"
   dependencies:
     clsx: "npm:^2.1.1"
     dequal: "npm:^2.0.3"
@@ -8170,7 +8170,7 @@ __metadata:
       optional: true
     "@types/react-dom":
       optional: true
-  checksum: 10c0/94dfbde78ada27fba073acfc2dc4f8f36bbe8f39d336ad29528e56d1438b7d9e4ce5da408a68a9c0aceb41f2a91c33f419122c2d0a7f69a051bde8ebdfe2162d
+  checksum: 10c0/e901749d6e4192d0a70685d5526893d9badb5bff1a583412483ae31d60d05e9a0fd4f0ddc101f423be1ae498060cdd3bb3a3f26dbee0c856422f1f12994b7333
   languageName: node
   linkType: hard
 
