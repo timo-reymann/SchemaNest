@@ -1,3 +1,10 @@
+## [0.7.48](https://github.com/timo-reymann/SchemaNest/compare/v0.7.47...v0.7.48) (2025-12-21)
+
+### Bug Fixes
+
+* **deps:** update module github.com/burntsushi/toml to v1.6.0 ([d9a46d6](https://github.com/timo-reymann/SchemaNest/commit/d9a46d68082ff8ec1f00b164cd16437a89faa35c))
+* **deps:** update react monorepo to v19.2.3 ([7662310](https://github.com/timo-reymann/SchemaNest/commit/766231014b479c0906c7057a102a911fef815d08))
+
 ## [0.7.47](https://github.com/timo-reymann/SchemaNest/compare/v0.7.46...v0.7.47) (2025-12-10)
 
 ### Bug Fixes
