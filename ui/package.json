@@ -57,7 +57,7 @@
     "@next/eslint-plugin-next": "16.1.1",
     "@react-types/shared": "3.30.0",
     "@types/node": "24.10.4",
-    "@types/react": "19.2.7",
+    "@types/react": "19.2.8",
     "@types/react-dom": "19.2.3",
     "@typescript-eslint/eslint-plugin": "8.52.0",
     "@typescript-eslint/parser": "8.52.0",
