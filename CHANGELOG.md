@@ -1,3 +1,11 @@
+## [0.7.58](https://github.com/timo-reymann/SchemaNest/compare/v0.7.57...v0.7.58) (2026-01-21)
+
+### Bug Fixes
+
+* **deps:** update dependency framer-motion to v12.28.1 ([5c87673](https://github.com/timo-reymann/SchemaNest/commit/5c8767319d0ed84aab1f0d0c1f8fb11ec6b3ac72))
+* **deps:** update module github.com/urfave/cli/v3 to v3.6.2 ([d80d392](https://github.com/timo-reymann/SchemaNest/commit/d80d39255a34d4ef0d6274a8ace16dc698584cdb))
+* **deps:** update nextjs monorepo to v16.1.4 ([bcc99d6](https://github.com/timo-reymann/SchemaNest/commit/bcc99d64482039afd2c4fd156fd9ec9968839c12))
+
 ## [0.7.57](https://github.com/timo-reymann/SchemaNest/compare/v0.7.56...v0.7.57) (2026-01-15)
 
 ### Bug Fixes
