@@ -1,3 +1,10 @@
+## [0.7.60](https://github.com/timo-reymann/SchemaNest/compare/v0.7.59...v0.7.60) (2026-01-27)
+
+### Bug Fixes
+
+* **deps:** update dependency framer-motion to v12.29.2 ([8d5c2b5](https://github.com/timo-reymann/SchemaNest/commit/8d5c2b50cd3fc9d5bbec503cc686385cde19d3ad))
+* **deps:** update nextjs monorepo to v16.1.5 ([f1e86ec](https://github.com/timo-reymann/SchemaNest/commit/f1e86ec98e172f563cef0bef826fc936afe6cf39))
+
 ## [0.7.59](https://github.com/timo-reymann/SchemaNest/compare/v0.7.58...v0.7.59) (2026-01-22)
 
 ### Bug Fixes
