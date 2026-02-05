@@ -1,3 +1,9 @@
+## [0.7.66](https://github.com/timo-reymann/SchemaNest/compare/v0.7.65...v0.7.66) (2026-02-05)
+
+### Bug Fixes
+
+* **deps:** update dependency framer-motion to v12.31.1 ([91c98c7](https://github.com/timo-reymann/SchemaNest/commit/91c98c74a46a17a9f620dca9552d01e55101c3f1))
+
 ## [0.7.65](https://github.com/timo-reymann/SchemaNest/compare/v0.7.64...v0.7.65) (2026-02-03)
 
 ### Bug Fixes
