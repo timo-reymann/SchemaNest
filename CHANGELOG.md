@@ -1,3 +1,9 @@
+## [0.7.70](https://github.com/timo-reymann/SchemaNest/compare/v0.7.69...v0.7.70) (2026-02-10)
+
+### Bug Fixes
+
+* **deps:** update module github.com/lib/pq to v1.11.2 ([95012b0](https://github.com/timo-reymann/SchemaNest/commit/95012b01ae3b634ea1f59d26569ef6b09b5182e6))
+
 ## [0.7.69](https://github.com/timo-reymann/SchemaNest/compare/v0.7.68...v0.7.69) (2026-02-09)
 
 ### Bug Fixes
