@@ -19,7 +19,7 @@ orbs:
 executors:
   go:
     docker:
-      - image: cimg/go:1.24
+      - image: cimg/go:1.26
   node:
     docker:
       - image: cimg/node:lts
