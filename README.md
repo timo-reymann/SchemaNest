@@ -193,8 +193,3 @@ make build
 - [Confluence Schema Registry (for Kafka)](https://github.com/confluentinc/schema-registry)
     - Confluent Schema Registry provides a serving layer for your metadata. It provides a RESTful interface for storing
       and retrieving your Avro®, JSON Schema, and Protobuf schemas. [...]
-
-
-
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftimo-reymann%2FSchemaNest.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftimo-reymann%2FSchemaNest?ref=badge_large)
