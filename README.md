@@ -12,6 +12,7 @@ SchemaNest
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=timo-reymann_SchemaNest&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=timo-reymann_SchemaNest)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=timo-reymann_SchemaNest&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=timo-reymann_SchemaNest)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=timo-reymann_SchemaNest&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=timo-reymann_SchemaNest)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftimo-reymann%2FSchemaNest.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftimo-reymann%2FSchemaNest?ref=badge_shield)
 
 <p align="center">
 	<img width="300" src="https://raw.githubusercontent.com/timo-reymann/SchemaNest/main/.github/images/NestHub.png">
@@ -193,3 +194,7 @@ make build
     - Confluent Schema Registry provides a serving layer for your metadata. It provides a RESTful interface for storing
       and retrieving your Avro®, JSON Schema, and Protobuf schemas. [...]
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftimo-reymann%2FSchemaNest.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftimo-reymann%2FSchemaNest?ref=badge_large)
