@@ -9088,8 +9088,8 @@ __metadata:
   linkType: hard
 
 "styled-components@npm:^6.1.18":
-  version: 6.3.10
-  resolution: "styled-components@npm:6.3.10"
+  version: 6.3.11
+  resolution: "styled-components@npm:6.3.11"
   dependencies:
     "@emotion/is-prop-valid": "npm:1.4.0"
     "@emotion/unitless": "npm:0.10.0"
@@ -9106,7 +9106,7 @@ __metadata:
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 10c0/60f60669ef22be0d6dcc800702c4cfb4527f37c35429bc130aef3335943d1552aad8c444c5c48b8d36963190b92acbb592c70cafc6efcc1a192b100d271e0e76
+  checksum: 10c0/26e9e6205b9cebb3db56cd1ffcd43d8b7cb0d2801cdd6cea7d361b11ac32a8de24a88279e6138816c6d922099dccd6a08a0a6aeacf08f2281095151169640595
   languageName: node
   linkType: hard
 
