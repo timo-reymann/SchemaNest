@@ -1,5 +1,5 @@
 resolutions:
   issues:
-    - message: "go: github.com/chenzhuoyu/iasm@v0.9.0: invalid version: unknown revision v0.9.0"
+    - message: ".*github.com/chenzhuoyu/iasm@v0.9.0:*"
       reason: "CANT_FIX_ISSUE"
       comment: "Is used as some peer dependency apparently, but not really used."
