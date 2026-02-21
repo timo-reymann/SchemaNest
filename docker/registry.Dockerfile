@@ -17,7 +17,7 @@ FROM chainguard/wolfi-base
 LABEL org.opencontainers.image.title="schemanest-registry"
 LABEL org.opencontainers.image.description="Registry for storing and managing schemas."
 LABEL org.opencontainers.image.ref.name="main"
-LABEL org.opencontainers.image.licenses='GPL v3'
+LABEL org.opencontainers.image.licenses='GPL-3.0'
 LABEL org.opencontainers.image.vendor="Timo Reymann <mail@timo-reymann.de>"
 LABEL org.opencontainers.image.authors="Timo Reymann <mail@timo-reymann.de>"
 LABEL org.opencontainers.image.url="https://github.com/timo-reymann/SchemaNest"
