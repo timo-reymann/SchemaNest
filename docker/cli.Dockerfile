@@ -1,3 +1,7 @@
+FROM scratch AS license
+COPY LICENSE LICENSE
+COPY NOTICE NOTICE
+
 FROM busybox AS bin
 COPY ./dist /dist
 RUN if [[ "$(arch)" == "x86_64" ]]; then \
@@ -19,6 +23,7 @@ LABEL org.opencontainers.image.authors="Timo Reymann <mail@timo-reymann.de>"
 LABEL org.opencontainers.image.url="https://github.com/timo-reymann/SchemaNest"
 LABEL org.opencontainers.image.documentation="https://github.com/timo-reymann/SchemaNest"
 LABEL org.opencontainers.image.source="https://github.com/timo-reymann/SchemaNest.git"
+COPY --from=license / /
 RUN adduser -D -u 1000 schemanest
 USER 1000
 COPY --from=bin /bin/schema-nest-cli /bin/schema-nest-cli
