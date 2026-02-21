@@ -96,3 +96,5 @@ tool (
 	github.com/go-bindata/go-bindata/go-bindata
 	github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen
 )
+
+replace github.com/chenzhuoyu/iasm v0.9.0 => github.com/cloudwego/iasm v0.2.0
