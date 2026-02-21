@@ -8,6 +8,7 @@ import { createHead } from "@/util/layoutHelpers";
 import {Button} from "@heroui/button";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@heroui/dropdown";
 import {router} from "next/client";
+import {Key} from "react";
 
 export default function Home() {
   return (
@@ -59,7 +60,7 @@ export default function Home() {
                         variant: "bordered",
                     })}>License Information</Button>
                 </DropdownTrigger>
-                <DropdownMenu aria-label="License Information" onAction={(key: string) => router.push(key)}>
+                <DropdownMenu aria-label="License Information" onAction={(key: Key) => router.push(key as string)}>
                     <DropdownItem key="/license">Open LICENSE</DropdownItem>
                     <DropdownItem key="/notice">Open NOTICE</DropdownItem>
                 </DropdownMenu>
