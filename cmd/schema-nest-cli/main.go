@@ -4,11 +4,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/Masterminds/semver"
-	"github.com/timo-reymann/SchemaNest/pkg/buildinfo"
-	"github.com/timo-reymann/SchemaNest/pkg/client"
 	"os"
 	"strings"
+
+	"github.com/Masterminds/semver"
+	schemanest_files "github.com/timo-reymann/SchemaNest"
+	"github.com/timo-reymann/SchemaNest/pkg/buildinfo"
+	"github.com/timo-reymann/SchemaNest/pkg/client"
 )
 import "github.com/urfave/cli/v3"
 
@@ -19,23 +21,29 @@ func main() {
 		Name:    "schema-nest-cli",
 		Version: buildinfo.Version,
 		Usage:   "Interact with the SchemaNest API with ease.",
-		Flags: []cli.Flag{
-			&cli.StringFlag{
-				Name:     "base-url",
-				Usage:    "Base URL including protocol for SchemaNest instance",
-				Required: true,
-			},
-			&cli.StringFlag{
-				Name:    "api-key",
-				Usage:   "API-Key for authentication",
-				Sources: cli.NewValueSourceChain(cli.EnvVar("SCHEMA_NEST_CLI_API_KEY")),
-			},
-		},
 		Commands: []*cli.Command{
+			{
+				Name:  "license",
+				Usage: "Show the NOTICE for SchemaNest with all relevant license information",
+				Action: func(ctx context.Context, command *cli.Command) error {
+					fmt.Printf("%s", schemanest_files.Notice)
+					return nil
+				},
+			},
 			{
 				Name:  "upload-json-schema",
 				Usage: "Upload a JSON schema file",
 				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:     "base-url",
+						Usage:    "Base URL including protocol for SchemaNest instance",
+						Required: true,
+					},
+					&cli.StringFlag{
+						Name:    "api-key",
+						Usage:   "API-Key for authentication",
+						Sources: cli.NewValueSourceChain(cli.EnvVar("SCHEMA_NEST_CLI_API_KEY")),
+					},
 					&cli.StringFlag{
 						Name:     "version",
 						Usage:    "Version of the schema to upload in format major.minor.patch",
