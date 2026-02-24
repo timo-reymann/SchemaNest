@@ -6,6 +6,28 @@ info:
     name: Timo Reymann
     url: https://github.com/timo-reymann/SchemaNest
 paths:
+  /notice:
+    get:
+      summary: Get the NOTICE file
+      operationId: getNotice
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+  /license:
+    get:
+      summary: Get the LICENSE file
+      operationId: getLicense
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
   /api/schema/json-schema:
     get:
       summary: List all available JSON schemas

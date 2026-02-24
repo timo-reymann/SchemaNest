@@ -5,6 +5,14 @@ import NextLink from "next/link";
 import { subtitle, title } from "@/components/primitives";
 import { Logo } from "@/components/icons";
 import { createHead } from "@/util/layoutHelpers";
+import {Button} from "@heroui/button";
+import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@heroui/dropdown";
+import {router} from "next/client";
+import {Key} from "react";
+
+const navigate = (key: Key) => {
+    router.push(key as string)
+}
 
 export default function Home() {
   return (
@@ -48,6 +56,19 @@ export default function Home() {
           >
             Schemas
           </NextLink>
+            <Dropdown>
+                <DropdownTrigger>
+                    <Button className={buttonStyles({
+                        color: "default",
+                        radius: "full",
+                        variant: "bordered",
+                    })}>License Information</Button>
+                </DropdownTrigger>
+                <DropdownMenu aria-label="License Information" onAction={(key: Key) => navigate(key)}>
+                    <DropdownItem key="/license">Open LICENSE</DropdownItem>
+                    <DropdownItem key="/notice">Open NOTICE</DropdownItem>
+                </DropdownMenu>
+            </Dropdown>
         </div>
       </section>
     </>
