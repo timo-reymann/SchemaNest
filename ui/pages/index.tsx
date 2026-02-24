@@ -10,6 +10,10 @@ import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from "@heroui/dro
 import {router} from "next/client";
 import {Key} from "react";
 
+const navigate = (key: Key) => {
+    router.push(key as string)
+}
+
 export default function Home() {
   return (
     <>
@@ -60,7 +64,7 @@ export default function Home() {
                         variant: "bordered",
                     })}>License Information</Button>
                 </DropdownTrigger>
-                <DropdownMenu aria-label="License Information" onAction={(key: Key) => router.push(key as string)}>
+                <DropdownMenu aria-label="License Information" onAction={(key: Key) => navigate(key)}>
                     <DropdownItem key="/license">Open LICENSE</DropdownItem>
                     <DropdownItem key="/notice">Open NOTICE</DropdownItem>
                 </DropdownMenu>
