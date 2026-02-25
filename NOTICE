@@ -11225,7 +11225,7 @@ OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 ----
 
-Package: autoprefixer:10.4.24
+Package: autoprefixer:10.4.27
 
 This package contains the file LICENSE with the following contents:
 
@@ -19566,7 +19566,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:eslint-plugin:8.56.1
+Package: @typescript-eslint:eslint-plugin:8.56.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -19616,7 +19616,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:parser:8.56.1
+Package: @typescript-eslint:parser:8.56.0
 
 This package contains the file LICENSE with the following contents:
 
