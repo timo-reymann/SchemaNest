@@ -7058,7 +7058,7 @@ SOFTWARE.
 
 ----
 
-Package: github.com/oapi-codegen/runtime:1.1.2
+Package: github.com/oapi-codegen/runtime:1.2.0
 
 This package contains the file LICENSE with the following contents:
 
