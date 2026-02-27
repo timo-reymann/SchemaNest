@@ -1,3 +1,9 @@
+## [0.7.73](https://github.com/timo-reymann/SchemaNest/compare/v0.7.72...v0.7.73) (2026-02-27)
+
+### Bug Fixes
+
+* **deps:** update module github.com/oapi-codegen/runtime to v1.2.0 ([7da3c70](https://github.com/timo-reymann/SchemaNest/commit/7da3c7055d85377fb47888e378e74f392767ab50))
+
 ## [0.7.72](https://github.com/timo-reymann/SchemaNest/compare/v0.7.71...v0.7.72) (2026-02-20)
 
 ### Bug Fixes
