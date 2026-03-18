@@ -720,7 +720,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ----
 
-Package: github.com/Azure/go-ansiterm:0.0.0-20230124172434-306776ec8161
+Package: github.com/Azure/go-ansiterm:0.0.0-20250102033503-faa5f7b0171c
 
 This package contains the file LICENSE with the following contents:
 
@@ -851,6 +851,35 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+----
+
+Package: github.com/cespare/xxhash/v2:2.3.0
+
+This package contains the file LICENSE.txt with the following contents:
+
+Copyright (c) 2016 Caleb Spare
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
@@ -1900,7 +1929,7 @@ Apache License
 
 ----
 
-Package: github.com/docker/docker:28.5.1
+Package: github.com/docker/docker:28.5.2
 
 This package contains the file LICENSE with the following contents:
 
@@ -3784,7 +3813,7 @@ This package contains the file LICENSE with the following contents:
 
 ----
 
-Package: github.com/ebitengine/purego:0.8.4
+Package: github.com/ebitengine/purego:0.10.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -5024,7 +5053,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: github.com/klauspost/compress:1.18.0
+Package: github.com/klauspost/compress:1.18.2
 
 This package contains the file LICENSE with the following contents:
 
@@ -5735,7 +5764,7 @@ This package contains the file LICENSE with the following contents:
 
 ----
 
-Package: github.com/moby/go-archive:0.1.0
+Package: github.com/moby/go-archive:0.2.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -6769,7 +6798,7 @@ This package contains the file LICENSE with the following contents:
 
 ----
 
-Package: github.com/moby/term:0.5.0
+Package: github.com/moby/term:0.5.2
 
 This package contains the file LICENSE with the following contents:
 
@@ -8409,28 +8438,33 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ----
 
-Package: github.com/power-devops/perfstat:0.0.0-20210106213030-5aafc221ea8c
+Package: github.com/power-devops/perfstat:0.0.0-20240221224432-82ca36839d55
 
-The following copyrights and licenses were found in the source code of this package:
+This package contains the file LICENSE with the following contents:
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+MIT License
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+Copyright (c) 2020 Power DevOps
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
 
 ----
 
@@ -8490,7 +8524,7 @@ SOFTWARE.
 
 ----
 
-Package: github.com/testcontainers/testcontainers-go:0.40.0
+Package: github.com/testcontainers/testcontainers-go:0.41.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -8518,7 +8552,7 @@ SOFTWARE.
 
 ----
 
-Package: github.com/tklauser/go-sysconf:0.3.12
+Package: github.com/tklauser/go-sysconf:0.3.16
 
 This package contains the file LICENSE with the following contents:
 
@@ -8554,7 +8588,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ----
 
-Package: github.com/tklauser/numcpus:0.6.1
+Package: github.com/tklauser/numcpus:0.11.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -8835,7 +8869,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: go.opentelemetry.io/auto/sdk:1.1.0
+Package: go.opentelemetry.io/auto/sdk:1.2.1
 
 This package contains the file LICENSE with the following contents:
 
@@ -9456,7 +9490,7 @@ This package contains the file LICENSE with the following contents:
 
 ----
 
-Package: go.opentelemetry.io/otel:1.37.0
+Package: go.opentelemetry.io/otel:1.41.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -9662,9 +9696,38 @@ This package contains the file LICENSE with the following contents:
    See the License for the specific language governing permissions and
    limitations under the License.
 
+--------------------------------------------------------------------------------
+
+Copyright 2009 The Go Authors.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+   * Neither the name of Google LLC nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ----
 
-Package: go.opentelemetry.io/otel/metric:1.37.0
+Package: go.opentelemetry.io/otel/metric:1.41.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -9870,9 +9933,38 @@ This package contains the file LICENSE with the following contents:
    See the License for the specific language governing permissions and
    limitations under the License.
 
+--------------------------------------------------------------------------------
+
+Copyright 2009 The Go Authors.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+   * Neither the name of Google LLC nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ----
 
-Package: go.opentelemetry.io/otel/trace:1.37.0
+Package: go.opentelemetry.io/otel/trace:1.41.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -10078,9 +10170,38 @@ This package contains the file LICENSE with the following contents:
    See the License for the specific language governing permissions and
    limitations under the License.
 
+--------------------------------------------------------------------------------
+
+Copyright 2009 The Go Authors.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with the
+distribution.
+   * Neither the name of Google LLC nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ----
 
-Package: golang.org/x/crypto:0.45.0
+Package: golang.org/x/crypto:0.48.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -10140,7 +10261,7 @@ shall terminate as of the date such litigation is filed.
 
 ----
 
-Package: golang.org/x/mod:0.29.0
+Package: golang.org/x/mod:0.32.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -10200,7 +10321,7 @@ shall terminate as of the date such litigation is filed.
 
 ----
 
-Package: golang.org/x/sync:0.18.0
+Package: golang.org/x/sync:0.19.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -10260,7 +10381,7 @@ shall terminate as of the date such litigation is filed.
 
 ----
 
-Package: golang.org/x/sys:0.38.0
+Package: golang.org/x/sys:0.41.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -10320,7 +10441,7 @@ shall terminate as of the date such litigation is filed.
 
 ----
 
-Package: golang.org/x/text:0.31.0
+Package: golang.org/x/text:0.34.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -10380,7 +10501,7 @@ shall terminate as of the date such litigation is filed.
 
 ----
 
-Package: golang.org/x/tools:0.38.0
+Package: golang.org/x/tools:0.41.0
 
 This package contains the file LICENSE with the following contents:
 
