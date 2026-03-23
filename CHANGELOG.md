@@ -1,3 +1,11 @@
+## [0.7.78](https://github.com/timo-reymann/SchemaNest/compare/v0.7.77...v0.7.78) (2026-03-23)
+
+### Bug Fixes
+
+* **deps:** update dependency framer-motion to v12.36.0 ([83adabc](https://github.com/timo-reymann/SchemaNest/commit/83adabcc2300f1417160681450f0a164a59b6829))
+* **deps:** update module github.com/getkin/kin-openapi to v0.134.0 ([607bf88](https://github.com/timo-reymann/SchemaNest/commit/607bf88c02d53cc742e0b711c3929e35b89dc534))
+* **deps:** update module github.com/testcontainers/testcontainers-go to v0.41.0 ([8a85066](https://github.com/timo-reymann/SchemaNest/commit/8a85066a4cd948001e6dc3fc5c32098f5c685441))
+
 ## [0.7.77](https://github.com/timo-reymann/SchemaNest/compare/v0.7.76...v0.7.77) (2026-03-20)
 
 ### Bug Fixes
