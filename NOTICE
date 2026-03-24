@@ -19591,7 +19591,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:eslint-plugin:8.57.0
+Package: @typescript-eslint:eslint-plugin:8.57.1
 
 This package contains the file LICENSE with the following contents:
 
@@ -19641,7 +19641,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:parser:8.57.0
+Package: @typescript-eslint:parser:8.57.1
 
 This package contains the file LICENSE with the following contents:
 
