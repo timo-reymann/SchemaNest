@@ -1,3 +1,9 @@
+## [0.7.80](https://github.com/timo-reymann/SchemaNest/compare/v0.7.79...v0.7.80) (2026-03-28)
+
+### Bug Fixes
+
+* **cli:** Optimize container layers ([78a1358](https://github.com/timo-reymann/SchemaNest/commit/78a1358651dd3c75d712d25f20947a9d7c2b1fcc))
+
 ## [0.7.79](https://github.com/timo-reymann/SchemaNest/compare/v0.7.78...v0.7.79) (2026-03-24)
 
 ### Bug Fixes
