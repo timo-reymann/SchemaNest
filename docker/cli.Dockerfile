@@ -14,16 +14,20 @@ RUN if [[ "$(arch)" == "x86_64" ]]; then \
     chown 1000:1000 /bin/schema-nest-cli
 
 FROM chainguard/wolfi-base
-LABEL org.opencontainers.image.title="schemanest-cli"
-LABEL org.opencontainers.image.description="Interact with the SchemaNest API with ease."
-LABEL org.opencontainers.image.ref.name="main"
-LABEL org.opencontainers.image.licenses='GPL-3.0'
-LABEL org.opencontainers.image.vendor="Timo Reymann <mail@timo-reymann.de>"
-LABEL org.opencontainers.image.authors="Timo Reymann <mail@timo-reymann.de>"
-LABEL org.opencontainers.image.url="https://github.com/timo-reymann/SchemaNest"
-LABEL org.opencontainers.image.documentation="https://github.com/timo-reymann/SchemaNest"
-LABEL org.opencontainers.image.source="https://github.com/timo-reymann/SchemaNest.git"
-COPY --from=license / /
+
 RUN adduser -D -u 1000 schemanest
 USER 1000
+
+COPY --from=license / /
+
+LABEL org.opencontainers.image.title="schemanest-cli" \
+      org.opencontainers.image.description="Interact with the SchemaNest API with ease." \
+      org.opencontainers.image.ref.name="main" \
+      org.opencontainers.image.licenses='GPL-3.0' \
+      org.opencontainers.image.vendor="Timo Reymann <mail@timo-reymann.de>" \
+      org.opencontainers.image.authors="Timo Reymann <mail@timo-reymann.de>" \
+      org.opencontainers.image.url="https://github.com/timo-reymann/SchemaNest" \
+      org.opencontainers.image.documentation="https://github.com/timo-reymann/SchemaNest" \
+      org.opencontainers.image.source="https://github.com/timo-reymann/SchemaNest.git"
+
 COPY --from=bin /bin/schema-nest-cli /bin/schema-nest-cli
