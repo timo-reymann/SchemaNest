@@ -12,7 +12,7 @@ require (
 	github.com/golang-migrate/migrate/v4 v4.19.1
 	github.com/lib/pq v1.11.2
 	github.com/mattn/go-sqlite3 v1.14.37
-	github.com/oapi-codegen/runtime v1.2.0
+	github.com/oapi-codegen/runtime v1.4.0
 	github.com/testcontainers/testcontainers-go v0.41.0
 	github.com/urfave/cli/v3 v3.6.2
 )
