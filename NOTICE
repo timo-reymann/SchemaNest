@@ -5413,7 +5413,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: github.com/lib/pq:1.11.2
+Package: github.com/lib/pq:1.12.3
 
 This package contains the file LICENSE with the following contents:
 
