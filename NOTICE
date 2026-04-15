@@ -7046,7 +7046,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: github.com/oapi-codegen/runtime:1.2.0
+Package: github.com/oapi-codegen/runtime:1.4.0
 
 This package contains the file LICENSE with the following contents:
 
