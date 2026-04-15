@@ -4047,7 +4047,7 @@ Copyright (c) 2016 Felix Geisendörfer (felix@debuggable.com)
 
 ----
 
-Package: github.com/getkin/kin-openapi:0.134.0
+Package: github.com/getkin/kin-openapi:0.135.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -7254,7 +7254,7 @@ This package contains the file LICENSE with the following contents:
 
 ----
 
-Package: github.com/oasdiff/yaml3:0.0.0-20260224194419-61cd415a242b
+Package: github.com/oasdiff/yaml3:0.0.9
 
 This package contains the file LICENSE with the following contents:
 
