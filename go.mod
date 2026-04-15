@@ -10,7 +10,7 @@ require (
 	github.com/getkin/kin-openapi v0.134.0
 	github.com/gobwas/glob v0.2.3
 	github.com/golang-migrate/migrate/v4 v4.19.1
-	github.com/lib/pq v1.11.2
+	github.com/lib/pq v1.12.3
 	github.com/mattn/go-sqlite3 v1.14.37
 	github.com/oapi-codegen/runtime v1.2.0
 	github.com/testcontainers/testcontainers-go v0.41.0
