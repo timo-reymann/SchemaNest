@@ -1,3 +1,13 @@
+## [0.7.81](https://github.com/timo-reymann/SchemaNest/compare/v0.7.80...v0.7.81) (2026-04-17)
+
+### Bug Fixes
+
+* **deps:** update dependency framer-motion to v12.38.0 ([204b885](https://github.com/timo-reymann/SchemaNest/commit/204b8856564c6b82090c970fc8743b0d9b575941))
+* **deps:** update module github.com/getkin/kin-openapi to v0.135.0 ([18af707](https://github.com/timo-reymann/SchemaNest/commit/18af707e6d4020c7091c618af2f2ce3a59425793))
+* **deps:** update module github.com/lib/pq to v1.12.3 ([d955444](https://github.com/timo-reymann/SchemaNest/commit/d9554445234d459185e65e2afd04580d7dcf208e))
+* **deps:** update module github.com/oapi-codegen/runtime to v1.4.0 ([7ff46ea](https://github.com/timo-reymann/SchemaNest/commit/7ff46eaab8ff05b2c7767544eceef532b7663180))
+* **deps:** update module github.com/urfave/cli/v3 to v3.8.0 ([6b028a9](https://github.com/timo-reymann/SchemaNest/commit/6b028a9e18115919b927a9a5e6bd0438ad06da10))
+
 ## [0.7.80](https://github.com/timo-reymann/SchemaNest/compare/v0.7.79...v0.7.80) (2026-03-28)
 
 ### Bug Fixes
