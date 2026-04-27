@@ -47,7 +47,7 @@ export function JsonSchemaSetupInstructions({
       - id: check-jsonschema
         args:
           - --schemafile
-          - http://localhost:8080/api/schema/json-schema/%40test%2Ffoo/channel/1.x
+          - ${schemaLinkForTools}
         name: Validate files for schema @test/foo
         files: ^.*/my_config\.(yaml|json)$
 `;
