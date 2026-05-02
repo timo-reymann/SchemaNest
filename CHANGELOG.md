@@ -1,3 +1,9 @@
+## [0.7.82](https://github.com/timo-reymann/SchemaNest/compare/v0.7.81...v0.7.82) (2026-05-02)
+
+### Bug Fixes
+
+* **ui:** Fix schema link for pre-commit ([3698e60](https://github.com/timo-reymann/SchemaNest/commit/3698e6020af937c77fec5d54c76d90298d0d1473))
+
 ## [0.7.81](https://github.com/timo-reymann/SchemaNest/compare/v0.7.80...v0.7.81) (2026-04-17)
 
 ### Bug Fixes
