@@ -13,10 +13,7 @@ RUN if [[ "$(arch)" == "x86_64" ]]; then \
     chmod +x /bin/schema-nest-cli && \
     chown 1000:1000 /bin/schema-nest-cli
 
-FROM chainguard/wolfi-base
-
-RUN adduser -D -u 1000 schemanest
-USER 1000
+FROM timoreymann/ubuntu-runtime:26.04
 
 COPY --from=license / /
 

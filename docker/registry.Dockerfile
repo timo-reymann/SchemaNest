@@ -13,10 +13,7 @@ RUN if [[ "$(arch)" == "x86_64" ]]; then \
     chmod +x /bin/schema-nest-registry && \
     chown 1000:1000 /bin/schema-nest-registry
 
-FROM chainguard/wolfi-base
-
-RUN adduser -D -u 1000 schema-nest
-USER 1000
+FROM timoreymann/ubuntu-runtime:26.04
 
 LABEL org.opencontainers.image.title="schemanest-registry" \
       org.opencontainers.image.description="Registry for storing and managing schemas." \
