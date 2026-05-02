@@ -19,7 +19,7 @@ orbs:
 executors:
   go:
     docker:
-      - image: cimg/go:1.26
+      - image: timoreymann/ci-go:1.26
   node:
     docker:
       - image: cimg/node:lts
@@ -57,25 +57,6 @@ jobs:
           command: |
             cd ui
             npm run lint
-  download-zig:
-    executor: go
-    parameters:
-      zig_version:
-        type: string
-        default: "0.14.1"
-    steps:
-      - run:
-          name: Download zig <<parameters.zig_version>>
-          command: |
-            mkdir -p .zig && cd .zig
-            curl https://ziglang.org/download/<<parameters.zig_version>>/zig-x86_64-linux-<<parameters.zig_version>>.tar.xz --output zig.tar.xz
-            tar -xf zig.tar.xz
-            rm zig.tar.xz
-            ln -s zig-x86_64-linux-<<parameters.zig_version>> current
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - .zig
   build:
     executor: go
     parameters:
@@ -179,15 +160,12 @@ workflows:
   version: 2
   release:
     jobs:
-      - download-zig:
-          <<: *job_only_tags
       - build-ui:
           <<: *job_only_tags
       - build:
           <<: *job_only_tags
           requires:
             - build-ui
-            - download-zig
           matrix:
             parameters:
               platform:
@@ -204,7 +182,6 @@ workflows:
             - build-linux
   main:
     jobs:
-      - download-zig
       - build-gh-pages:
           filters:
             branches:
@@ -218,7 +195,6 @@ workflows:
           requires:
             - test
             - build-ui
-            - download-zig
           matrix:
             parameters:
               platform:
