@@ -1,3 +1,9 @@
+## [0.7.83](https://github.com/timo-reymann/SchemaNest/compare/v0.7.82...v0.7.83) (2026-05-02)
+
+### Bug Fixes
+
+* Use slim base iamge ([06d0468](https://github.com/timo-reymann/SchemaNest/commit/06d0468c5719a65ed4b93b76186ca79d4b015b4f))
+
 ## [0.7.82](https://github.com/timo-reymann/SchemaNest/compare/v0.7.81...v0.7.82) (2026-05-02)
 
 ### Bug Fixes
