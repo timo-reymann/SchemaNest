@@ -1,3 +1,10 @@
+## [0.7.84](https://github.com/timo-reymann/SchemaNest/compare/v0.7.83...v0.7.84) (2026-05-04)
+
+### Bug Fixes
+
+* **deps:** update module github.com/testcontainers/testcontainers-go to v0.42.0 ([79c11df](https://github.com/timo-reymann/SchemaNest/commit/79c11dfadc70894f4f154529bf41d8a987d1c0c5))
+* **deps:** update nextjs monorepo to v16.2.4 ([e7380b4](https://github.com/timo-reymann/SchemaNest/commit/e7380b464fb3add2fafa6efb9ccca3929e749a4d))
+
 ## [0.7.83](https://github.com/timo-reymann/SchemaNest/compare/v0.7.82...v0.7.83) (2026-05-02)
 
 ### Bug Fixes
