@@ -15186,7 +15186,7 @@ SOFTWARE.
 
 ----
 
-Package: tailwindcss:4.2.2
+Package: tailwindcss:4.2.4
 
 This package contains the file LICENSE with the following contents:
 
@@ -18670,7 +18670,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: @tailwindcss:node:4.2.2
+Package: @tailwindcss:node:4.2.4
 
 This package contains the file LICENSE with the following contents:
 
@@ -18698,7 +18698,7 @@ SOFTWARE.
 
 ----
 
-Package: @tailwindcss:oxide:4.2.2
+Package: @tailwindcss:oxide:4.2.4
 
 This package contains the file LICENSE with the following contents:
 
@@ -18726,7 +18726,7 @@ SOFTWARE.
 
 ----
 
-Package: @tailwindcss:oxide-linux-x64-gnu:4.2.2
+Package: @tailwindcss:oxide-linux-x64-gnu:4.2.4
 
 This package contains the file LICENSE with the following contents:
 
@@ -18754,7 +18754,7 @@ SOFTWARE.
 
 ----
 
-Package: @tailwindcss:postcss:4.2.2
+Package: @tailwindcss:postcss:4.2.4
 
 This package contains the file LICENSE with the following contents:
 
