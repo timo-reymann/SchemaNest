@@ -66,10 +66,6 @@ jobs:
       - checkout
       - attach_workspace:
           at: ./
-      - run:
-          name: Install build dependencies
-          command: |
-            sudo apt-get update && sudo apt-get install -y clang
       - go/with-cache:
           steps:
             - go/mod-download-cached
