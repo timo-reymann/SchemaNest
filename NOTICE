@@ -4040,7 +4040,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: github.com/mattn/go-sqlite3:1.14.37
+Package: github.com/mattn/go-sqlite3:1.14.44
 
 This package contains the file LICENSE with the following contents:
 
