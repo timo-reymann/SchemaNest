@@ -1,3 +1,9 @@
+## [0.7.86](https://github.com/timo-reymann/SchemaNest/compare/v0.7.85...v0.7.86) (2026-05-07)
+
+### Bug Fixes
+
+* **deps:** update module github.com/mattn/go-sqlite3 to v1.14.44 ([c62cb4b](https://github.com/timo-reymann/SchemaNest/commit/c62cb4b4d0978564c8f7b0e50dd2b3576c47eea1))
+
 ## [0.7.85](https://github.com/timo-reymann/SchemaNest/compare/v0.7.84...v0.7.85) (2026-05-06)
 
 ### Bug Fixes
