@@ -1,3 +1,9 @@
+## [0.7.88](https://github.com/timo-reymann/SchemaNest/compare/v0.7.87...v0.7.88) (2026-05-14)
+
+### Bug Fixes
+
+* Rebuild with fixed base iamge ([3cf7bc1](https://github.com/timo-reymann/SchemaNest/commit/3cf7bc1e0cce811d10271d02d92d6f45fd46befe))
+
 ## [0.7.87](https://github.com/timo-reymann/SchemaNest/compare/v0.7.86...v0.7.87) (2026-05-14)
 
 ### Bug Fixes
