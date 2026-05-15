@@ -8213,7 +8213,7 @@ __metadata:
     react: "npm:19.2.3"
     react-dom: "npm:19.2.3"
     react-icons: "npm:^5.5.0"
-    react-shiki: "npm:^0.9.0"
+    react-shiki: "npm:^0.10.0"
     redoc: "npm:^2.5.0"
     styled-components: "npm:^6.1.18"
     tailwind-variants: "npm:3.2.2"
@@ -8949,26 +8949,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-shiki@npm:^0.9.0":
-  version: 0.9.3
-  resolution: "react-shiki@npm:0.9.3"
+"react-shiki@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "react-shiki@npm:0.10.0"
   dependencies:
     clsx: "npm:^2.1.1"
     dequal: "npm:^2.0.3"
     hast-util-to-jsx-runtime: "npm:^2.3.6"
-    shiki: "npm:^4.0.0"
+    shiki: "npm:^4.0.2"
     unist-util-visit: "npm:^5.1.0"
   peerDependencies:
-    "@types/react": ">=16.8.0"
-    "@types/react-dom": ">=16.8.0"
-    react: ">= 16.8.0"
-    react-dom: ">= 16.8.0"
+    "@types/react": ">=16.14.0"
+    "@types/react-dom": ">=16.14.0"
+    react: ">=16.14.0"
+    react-dom: ">=16.14.0"
   peerDependenciesMeta:
     "@types/react":
       optional: true
     "@types/react-dom":
       optional: true
-  checksum: 10c0/de141d4d75e83021f81b565b4558c8e8fd49e1f50918723901008e9cbc543130ba1a766e6e385302e66d9c59be029e78b2590b7154e834e3b845da76def8e039
+  checksum: 10c0/ad06cb8b3d760189b189266c9ba03aa49b7409478a5814cc87559a81a548b53b76bf6c176854c9149b11fd681c692c3d94f65e91be45d4df6a6cc40beca56bfd
   languageName: node
   linkType: hard
 
@@ -9450,7 +9450,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shiki@npm:^4.0.0":
+"shiki@npm:^4.0.2":
   version: 4.0.2
   resolution: "shiki@npm:4.0.2"
   dependencies:
