@@ -14,7 +14,7 @@ require (
 	github.com/mattn/go-sqlite3 v1.14.44
 	github.com/oapi-codegen/runtime v1.4.0
 	github.com/testcontainers/testcontainers-go v0.42.0
-	github.com/urfave/cli/v3 v3.8.0
+	github.com/urfave/cli/v3 v3.9.0
 )
 
 require (
