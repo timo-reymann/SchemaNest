@@ -13,7 +13,7 @@ RUN if [[ "$(arch)" == "x86_64" ]]; then \
     chmod +x /bin/schema-nest-cli && \
     chown 1000:1000 /bin/schema-nest-cli
 
-FROM timoreymann/ubuntu-runtime:26.04
+FROM timoreymann/ubuntu-runtime:26.8
 
 COPY --from=license / /
 
