@@ -1,3 +1,9 @@
+## [0.8.1](https://github.com/timo-reymann/SchemaNest/compare/v0.8.0...v0.8.1) (2026-05-29)
+
+### Bug Fixes
+
+* **deps:** update module github.com/getkin/kin-openapi to v0.139.0 ([523e92e](https://github.com/timo-reymann/SchemaNest/commit/523e92e260876b34710bc619cf5d31fef2a9cd24))
+
 ## [0.8.0](https://github.com/timo-reymann/SchemaNest/compare/v0.7.90...v0.8.0) (2026-05-29)
 
 ### Features
