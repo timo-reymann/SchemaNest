@@ -1,3 +1,9 @@
+## [0.8.0](https://github.com/timo-reymann/SchemaNest/compare/v0.7.90...v0.8.0) (2026-05-29)
+
+### Features
+
+* Use alpine as cli base image ([40407de](https://github.com/timo-reymann/SchemaNest/commit/40407de758d969758e1f6de121ed6293a3649221))
+
 ## [0.7.90](https://github.com/timo-reymann/SchemaNest/compare/v0.7.89...v0.7.90) (2026-05-28)
 
 ### Bug Fixes
