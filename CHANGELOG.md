@@ -1,3 +1,9 @@
+## [0.8.2](https://github.com/timo-reymann/SchemaNest/compare/v0.8.1...v0.8.2) (2026-06-03)
+
+### Bug Fixes
+
+* **deps:** update formatjs monorepo to v11 ([dba7626](https://github.com/timo-reymann/SchemaNest/commit/dba7626349ac9f114c20a33ed8cd85cdfb547e0c))
+
 ## [0.8.1](https://github.com/timo-reymann/SchemaNest/compare/v0.8.0...v0.8.1) (2026-05-29)
 
 ### Bug Fixes
