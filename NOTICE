@@ -17567,7 +17567,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ----
 
-Package: eslint:10.2.0
+Package: eslint:10.4.1
 
 This package contains the file LICENSE with the following contents:
 
@@ -33432,7 +33432,7 @@ This package contains the file packages/config-array/LICENSE with the following 
 
 ----
 
-Package: @eslint:config-helpers:0.5.5
+Package: @eslint:config-helpers:0.6.0
 
 This package contains the file packages/config-helpers/LICENSE with the following contents:
 
@@ -34316,7 +34316,7 @@ This package contains the file packages/object-schema/LICENSE with the following
 
 ----
 
-Package: @eslint:plugin-kit:0.7.1
+Package: @eslint:plugin-kit:0.7.2
 
 This package contains the file packages/plugin-kit/LICENSE with the following contents:
 
