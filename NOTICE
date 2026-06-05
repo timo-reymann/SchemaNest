@@ -17820,7 +17820,7 @@ SOFTWARE.
 
 ----
 
-Package: eslint-plugin-prettier:5.5.5
+Package: eslint-plugin-prettier:5.5.6
 
 This package contains the file LICENSE.md with the following contents:
 
@@ -29849,7 +29849,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ----
 
-Package: synckit:0.11.12
+Package: synckit:0.11.13
 
 This package contains the file LICENSE with the following contents:
 
@@ -40622,7 +40622,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: @pkgr:core:0.2.9
+Package: @pkgr:core:0.3.6
 
 This package contains the file LICENSE with the following contents:
 
