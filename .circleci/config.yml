@@ -132,12 +132,12 @@ jobs:
             make build-image -j2
       - docker/update_description:
           image: timoreymann/schemanest-cli
-          docker-username: DOCKER_USERNAME
-          docker-password: DOCKER_TOKEN
+          docker_username: DOCKER_USERNAME
+          docker_password: DOCKER_TOKEN
       - docker/update_description:
           image: timoreymann/schemanest-registry
-          docker-username: DOCKER_USERNAME
-          docker-password: DOCKER_TOKEN
+          docker_username: DOCKER_USERNAME
+          docker_password: DOCKER_TOKEN
   attach-artifacts-to-release:
     executor: go
     steps:
