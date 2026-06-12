@@ -3989,7 +3989,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ----
 
-Package: github.com/mattn/go-sqlite3:1.14.44
+Package: github.com/mattn/go-sqlite3:1.14.45
 
 This package contains the file LICENSE with the following contents:
 
