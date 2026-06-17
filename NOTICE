@@ -17693,7 +17693,7 @@ THE SOFTWARE.
 
 ----
 
-Package: eslint-config-next:16.2.6
+Package: eslint-config-next:16.2.9
 
 This package contains the file license.md with the following contents:
 
@@ -25403,7 +25403,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: next:16.2.6
+Package: next:16.2.9
 
 This package contains the file license.md with the following contents:
 
@@ -40296,7 +40296,7 @@ SOFTWARE.
 
 ----
 
-Package: @next:env:16.2.6
+Package: @next:env:16.2.9
 
 This package contains the file license.md with the following contents:
 
@@ -40324,7 +40324,7 @@ SOFTWARE.
 
 ----
 
-Package: @next:eslint-plugin-next:16.2.6
+Package: @next:eslint-plugin-next:16.2.9
 
 This package contains the file license.md with the following contents:
 
@@ -40352,7 +40352,7 @@ SOFTWARE.
 
 ----
 
-Package: @next:swc-linux-x64-gnu:16.2.6
+Package: @next:swc-linux-x64-gnu:16.2.9
 
 This package contains the file license.md with the following contents:
 
