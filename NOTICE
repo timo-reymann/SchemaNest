@@ -61917,7 +61917,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:eslint-plugin:8.61.0
+Package: @typescript-eslint:eslint-plugin:8.61.1
 
 This package contains the file packages/eslint-plugin/LICENSE with the following contents:
 
@@ -61973,7 +61973,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:parser:8.61.0
+Package: @typescript-eslint:parser:8.61.1
 
 This package contains the file packages/parser/LICENSE with the following contents:
 
@@ -62029,7 +62029,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:project-service:8.61.0
+Package: @typescript-eslint:project-service:8.61.1
 
 This package contains the file packages/project-service/LICENSE with the following contents:
 
@@ -62085,7 +62085,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:scope-manager:8.61.0
+Package: @typescript-eslint:scope-manager:8.61.1
 
 This package contains the file packages/scope-manager/LICENSE with the following contents:
 
@@ -62141,7 +62141,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:tsconfig-utils:8.61.0
+Package: @typescript-eslint:tsconfig-utils:8.61.1
 
 This package contains the file packages/tsconfig-utils/LICENSE with the following contents:
 
@@ -62197,7 +62197,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:type-utils:8.61.0
+Package: @typescript-eslint:type-utils:8.61.1
 
 This package contains the file packages/type-utils/LICENSE with the following contents:
 
@@ -62253,7 +62253,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:types:8.61.0
+Package: @typescript-eslint:types:8.61.1
 
 This package contains the file packages/types/LICENSE with the following contents:
 
@@ -62309,7 +62309,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:typescript-estree:8.61.0
+Package: @typescript-eslint:typescript-estree:8.61.1
 
 This package contains the file packages/typescript-estree/LICENSE with the following contents:
 
@@ -62365,7 +62365,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:utils:8.61.0
+Package: @typescript-eslint:utils:8.61.1
 
 This package contains the file packages/utils/LICENSE with the following contents:
 
@@ -62421,7 +62421,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:visitor-keys:8.61.0
+Package: @typescript-eslint:visitor-keys:8.61.1
 
 This package contains the file packages/visitor-keys/LICENSE with the following contents:
 
