@@ -1,3 +1,10 @@
+## [0.8.7](https://github.com/timo-reymann/SchemaNest/compare/v0.8.6...v0.8.7) (2026-06-23)
+
+### Bug Fixes
+
+* **deps:** update formatjs monorepo ([acd3366](https://github.com/timo-reymann/SchemaNest/commit/acd3366d57f4dbb745485e16550a88caa0f643cb))
+* **deps:** update module github.com/urfave/cli/v3 to v3.10.0 ([4a38dbc](https://github.com/timo-reymann/SchemaNest/commit/4a38dbc677ff16d13db075bc0f304b36b6024b20))
+
 ## [0.8.6](https://github.com/timo-reymann/SchemaNest/compare/v0.8.5...v0.8.6) (2026-06-18)
 
 ### Bug Fixes
