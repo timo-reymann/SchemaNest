@@ -13,7 +13,7 @@ RUN if [[ "$(arch)" == "x86_64" ]]; then \
     chmod +x /bin/schema-nest-cli && \
     chown 1000:1000 /bin/schema-nest-cli
 
-FROM alpine:3.23
+FROM alpine:3.24
 
 COPY --from=license / /
 
