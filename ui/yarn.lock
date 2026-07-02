@@ -9817,8 +9817,8 @@ __metadata:
   linkType: hard
 
 "styled-components@npm:^6.1.18":
-  version: 6.4.1
-  resolution: "styled-components@npm:6.4.1"
+  version: 6.4.3
+  resolution: "styled-components@npm:6.4.3"
   dependencies:
     "@emotion/is-prop-valid": "npm:1.4.0"
     css-to-react-native: "npm:3.2.0"
@@ -9836,7 +9836,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 10c0/33b43f55be02cecc4dd1904f0f4397c8a9f245ee67cd12893c9117651048a442555b527fdd25b4db8a0365701713cb0e91b09df16a4d46e175e3990041b45099
+  checksum: 10c0/158514feb0a502dfa7f95610a8270faa56be2572c12902b7bf5c2855bf9fdd5d76a5909d67dcbecf627ee40511f4161f8016b23f9fef22c14f7911337359647c
   languageName: node
   linkType: hard
 
