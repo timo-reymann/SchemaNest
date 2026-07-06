@@ -1,3 +1,11 @@
+## [0.8.10](https://github.com/timo-reymann/SchemaNest/compare/v0.8.9...v0.8.10) (2026-07-06)
+
+### Bug Fixes
+
+* **deps:** update dependency framer-motion to v12.42.0 ([99a433b](https://github.com/timo-reymann/SchemaNest/commit/99a433b118893e23e518a5c9a9393a1e029b1b7c))
+* **deps:** update dependency intl-messageformat to v11.2.9 ([e95fe61](https://github.com/timo-reymann/SchemaNest/commit/e95fe614adb1bb1a249706e38bfd9c9b51b979a6))
+* **deps:** update module github.com/oapi-codegen/runtime to v1.4.2 ([887626a](https://github.com/timo-reymann/SchemaNest/commit/887626afb3dc54a20766e9edb420289eaa9d6b3c))
+
 ## [0.8.9](https://github.com/timo-reymann/SchemaNest/compare/v0.8.8...v0.8.9) (2026-06-28)
 
 ### Bug Fixes
