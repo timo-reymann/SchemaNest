@@ -3989,7 +3989,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ----
 
-Package: github.com/mattn/go-sqlite3:1.14.45
+Package: github.com/mattn/go-sqlite3:1.14.46
 
 This package contains the file LICENSE with the following contents:
 
@@ -4434,7 +4434,7 @@ This package contains the file LICENSE with the following contents:
 
 ----
 
-Package: github.com/moby/moby/api:1.54.1
+Package: github.com/moby/moby/api:1.54.2
 
 This package contains the file api/LICENSE with the following contents:
 
@@ -5875,7 +5875,7 @@ This package contains the file LICENSE with the following contents:
 
 ----
 
-Package: github.com/oapi-codegen/runtime:1.4.1
+Package: github.com/oapi-codegen/runtime:1.4.2
 
 This package contains the file LICENSE with the following contents:
 
@@ -7502,7 +7502,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: github.com/shirou/gopsutil/v4:4.26.3
+Package: github.com/shirou/gopsutil/v4:4.26.5
 
 This package contains the file LICENSE with the following contents:
 
@@ -7625,7 +7625,7 @@ SOFTWARE.
 
 ----
 
-Package: github.com/testcontainers/testcontainers-go:0.42.0
+Package: github.com/testcontainers/testcontainers-go:0.43.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -7898,7 +7898,7 @@ This package contains the file LICENSE with the following contents:
 
 ----
 
-Package: github.com/urfave/cli/v3:3.10.0
+Package: github.com/urfave/cli/v3:3.10.1
 
 This package contains the file LICENSE with the following contents:
 
@@ -9080,7 +9080,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ----
 
-Package: golang.org/x/crypto:0.48.0
+Package: golang.org/x/crypto:0.51.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -9140,7 +9140,7 @@ shall terminate as of the date such litigation is filed.
 
 ----
 
-Package: golang.org/x/mod:0.33.0
+Package: golang.org/x/mod:0.35.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -9200,7 +9200,7 @@ shall terminate as of the date such litigation is filed.
 
 ----
 
-Package: golang.org/x/sync:0.19.0
+Package: golang.org/x/sync:0.20.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -9260,7 +9260,7 @@ shall terminate as of the date such litigation is filed.
 
 ----
 
-Package: golang.org/x/sys:0.42.0
+Package: golang.org/x/sys:0.45.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -9320,7 +9320,7 @@ shall terminate as of the date such litigation is filed.
 
 ----
 
-Package: golang.org/x/text:0.34.0
+Package: golang.org/x/text:0.37.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -9380,7 +9380,7 @@ shall terminate as of the date such litigation is filed.
 
 ----
 
-Package: golang.org/x/tools:0.42.0
+Package: golang.org/x/tools:0.44.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -17667,7 +17667,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ----
 
-Package: eslint:10.5.0
+Package: eslint:10.6.0
 
 This package contains the file LICENSE with the following contents:
 
@@ -20103,7 +20103,7 @@ SOFTWARE.
 
 ----
 
-Package: framer-motion:12.38.0
+Package: framer-motion:12.42.2
 
 This package contains the file LICENSE.md with the following contents:
 
@@ -21147,7 +21147,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ----
 
-Package: intl-messageformat:11.2.8
+Package: intl-messageformat:11.2.9
 
 This package contains the file package/LICENSE.md with the following contents:
 
@@ -25210,7 +25210,7 @@ SOFTWARE.
 
 ----
 
-Package: motion-dom:12.38.0
+Package: motion-dom:12.42.2
 
 This package contains the file LICENSE.md with the following contents:
 
@@ -25238,7 +25238,7 @@ SOFTWARE.
 
 ----
 
-Package: motion-utils:12.36.0
+Package: motion-utils:12.39.0
 
 This package contains the file LICENSE.md with the following contents:
 
@@ -27149,7 +27149,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: postcss:8.5.15
+Package: postcss:8.5.16
 
 This package contains the file LICENSE with the following contents:
 
@@ -27371,7 +27371,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: prettier:3.8.4
+Package: prettier:3.9.4
 
 This package contains the file LICENSE with the following contents:
 
@@ -30143,7 +30143,7 @@ SOFTWARE.
 
 ----
 
-Package: tailwindcss:4.3.1
+Package: tailwindcss:4.3.2
 
 This package contains the file LICENSE with the following contents:
 
@@ -34911,7 +34911,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ----
 
-Package: @formatjs:icu-messageformat-parser:3.5.11
+Package: @formatjs:icu-messageformat-parser:3.5.12
 
 This package contains the file packages/icu-messageformat-parser/LICENSE.md with the following contents:
 
@@ -61358,7 +61358,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ----
 
-Package: @tailwindcss:node:4.3.1
+Package: @tailwindcss:node:4.3.2
 
 This package contains the file LICENSE with the following contents:
 
@@ -61386,7 +61386,7 @@ SOFTWARE.
 
 ----
 
-Package: @tailwindcss:oxide:4.3.1
+Package: @tailwindcss:oxide:4.3.2
 
 This package contains the file LICENSE with the following contents:
 
@@ -61414,7 +61414,7 @@ SOFTWARE.
 
 ----
 
-Package: @tailwindcss:oxide-linux-x64-gnu:4.3.1
+Package: @tailwindcss:oxide-linux-x64-gnu:4.3.2
 
 This package contains the file LICENSE with the following contents:
 
@@ -61442,7 +61442,7 @@ SOFTWARE.
 
 ----
 
-Package: @tailwindcss:postcss:4.3.1
+Package: @tailwindcss:postcss:4.3.2
 
 This package contains the file LICENSE with the following contents:
 
@@ -61971,7 +61971,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:eslint-plugin:8.61.1
+Package: @typescript-eslint:eslint-plugin:8.62.1
 
 This package contains the file packages/eslint-plugin/LICENSE with the following contents:
 
@@ -62027,7 +62027,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:parser:8.61.1
+Package: @typescript-eslint:parser:8.62.1
 
 This package contains the file packages/parser/LICENSE with the following contents:
 
@@ -62083,7 +62083,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:project-service:8.61.1
+Package: @typescript-eslint:project-service:8.62.1
 
 This package contains the file packages/project-service/LICENSE with the following contents:
 
@@ -62139,7 +62139,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:scope-manager:8.61.1
+Package: @typescript-eslint:scope-manager:8.62.1
 
 This package contains the file packages/scope-manager/LICENSE with the following contents:
 
@@ -62195,7 +62195,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:tsconfig-utils:8.61.1
+Package: @typescript-eslint:tsconfig-utils:8.62.1
 
 This package contains the file packages/tsconfig-utils/LICENSE with the following contents:
 
@@ -62251,7 +62251,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:type-utils:8.61.1
+Package: @typescript-eslint:type-utils:8.62.1
 
 This package contains the file packages/type-utils/LICENSE with the following contents:
 
@@ -62307,7 +62307,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:types:8.61.1
+Package: @typescript-eslint:types:8.62.1
 
 This package contains the file packages/types/LICENSE with the following contents:
 
@@ -62363,7 +62363,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:typescript-estree:8.61.1
+Package: @typescript-eslint:typescript-estree:8.62.1
 
 This package contains the file packages/typescript-estree/LICENSE with the following contents:
 
@@ -62419,7 +62419,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:utils:8.61.1
+Package: @typescript-eslint:utils:8.62.1
 
 This package contains the file packages/utils/LICENSE with the following contents:
 
@@ -62475,7 +62475,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:visitor-keys:8.61.1
+Package: @typescript-eslint:visitor-keys:8.62.1
 
 This package contains the file packages/visitor-keys/LICENSE with the following contents:
 
