@@ -6240,11 +6240,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:12.42.0":
-  version: 12.42.0
-  resolution: "framer-motion@npm:12.42.0"
+"framer-motion@npm:12.42.2":
+  version: 12.42.2
+  resolution: "framer-motion@npm:12.42.2"
   dependencies:
-    motion-dom: "npm:^12.42.0"
+    motion-dom: "npm:^12.42.2"
     motion-utils: "npm:^12.39.0"
     tslib: "npm:^2.4.0"
   peerDependencies:
@@ -6258,7 +6258,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10c0/c425fa953615f3a54a0a3bb1dd7030d68613436aec1357bdb8b4752e9c46e0c9afe3c6d7ec2c2e730ff1978900575060480cb57ac1957baecd35093108e711bc
+  checksum: 10c0/2e514e0e303c0c01bc7d6a1028f7722ec17fc307922c6770a8dc5f7782521c60254f9c265329b887a29b32e2c730742328ecae468be626406afa5db1e6c0aa01
   languageName: node
   linkType: hard
 
@@ -8027,7 +8027,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion-dom@npm:^12.42.0":
+"motion-dom@npm:^12.42.2":
   version: 12.42.2
   resolution: "motion-dom@npm:12.42.2"
   dependencies:
@@ -8156,7 +8156,7 @@ __metadata:
     eslint-plugin-react: "npm:7.37.5"
     eslint-plugin-react-hooks: "npm:7.0.1"
     eslint-plugin-unused-imports: "npm:4.4.1"
-    framer-motion: "npm:12.42.0"
+    framer-motion: "npm:12.42.2"
     globals: "npm:17.5.0"
     intl-messageformat: "npm:11.2.9"
     mobx: "npm:^6.13.7"
