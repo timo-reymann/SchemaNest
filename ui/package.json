@@ -39,7 +39,7 @@
     "@tailwindcss/postcss": "^4.1.8",
     "clsx": "2.1.1",
     "framer-motion": "12.42.0",
-    "intl-messageformat": "11.2.9",
+    "intl-messageformat": "11.2.11",
     "mobx": "^6.13.7",
     "next": "16.2.9",
     "next-themes": "0.4.6",
