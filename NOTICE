@@ -61965,7 +61965,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:eslint-plugin:8.62.1
+Package: @typescript-eslint:eslint-plugin:8.64.0
 
 This package contains the file packages/eslint-plugin/LICENSE with the following contents:
 
@@ -62021,7 +62021,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:parser:8.62.1
+Package: @typescript-eslint:parser:8.64.0
 
 This package contains the file packages/parser/LICENSE with the following contents:
 
@@ -62077,7 +62077,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:project-service:8.62.1
+Package: @typescript-eslint:project-service:8.64.0
 
 This package contains the file packages/project-service/LICENSE with the following contents:
 
@@ -62133,7 +62133,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:scope-manager:8.62.1
+Package: @typescript-eslint:scope-manager:8.64.0
 
 This package contains the file packages/scope-manager/LICENSE with the following contents:
 
@@ -62189,7 +62189,35 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:tsconfig-utils:8.62.1
+Package: @typescript-eslint:tsconfig-utils:8.64.0
+
+This package contains the file packages/tsconfig-utils/LICENSE with the following contents:
+
+MIT License
+
+Copyright (c) 2025 typescript-eslint and other contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+----
+
+Package: @typescript-eslint:tsconfig-utils:8.65.0
 
 This package contains the file packages/tsconfig-utils/LICENSE with the following contents:
 
@@ -62245,7 +62273,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:type-utils:8.62.1
+Package: @typescript-eslint:type-utils:8.64.0
 
 This package contains the file packages/type-utils/LICENSE with the following contents:
 
@@ -62301,7 +62329,35 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:types:8.62.1
+Package: @typescript-eslint:types:8.64.0
+
+This package contains the file packages/types/LICENSE with the following contents:
+
+MIT License
+
+Copyright (c) 2019 typescript-eslint and other contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+----
+
+Package: @typescript-eslint:types:8.65.0
 
 This package contains the file packages/types/LICENSE with the following contents:
 
@@ -62357,7 +62413,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:typescript-estree:8.62.1
+Package: @typescript-eslint:typescript-estree:8.64.0
 
 This package contains the file packages/typescript-estree/LICENSE with the following contents:
 
@@ -62413,7 +62469,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:utils:8.62.1
+Package: @typescript-eslint:utils:8.64.0
 
 This package contains the file packages/utils/LICENSE with the following contents:
 
@@ -62469,7 +62525,7 @@ SOFTWARE.
 
 ----
 
-Package: @typescript-eslint:visitor-keys:8.62.1
+Package: @typescript-eslint:visitor-keys:8.64.0
 
 This package contains the file packages/visitor-keys/LICENSE with the following contents:
 
