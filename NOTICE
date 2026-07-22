@@ -21147,7 +21147,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ----
 
-Package: intl-messageformat:11.2.9
+Package: intl-messageformat:11.2.11
 
 This package contains the file package/LICENSE.md with the following contents:
 
@@ -34879,7 +34879,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ----
 
-Package: @formatjs:fast-memoize:3.1.6
+Package: @formatjs:fast-memoize:3.1.7
 
 This package contains the file package/LICENSE.md with the following contents:
 
@@ -34911,7 +34911,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ----
 
-Package: @formatjs:icu-messageformat-parser:3.5.12
+Package: @formatjs:icu-messageformat-parser:3.5.14
 
 This package contains the file packages/icu-messageformat-parser/LICENSE.md with the following contents:
 
@@ -34943,7 +34943,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ----
 
-Package: @formatjs:icu-skeleton-parser:2.1.10
+Package: @formatjs:icu-skeleton-parser:2.1.11
 
 This package contains the file packages/icu-skeleton-parser/LICENSE.md with the following contents:
 
