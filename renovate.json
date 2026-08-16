@@ -1,7 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "github>timo-reymann/renovate-config"
+    "github>timo-reymann/renovate-config",
+    "local>timo-reymann/renovate-config//presets/ecosystems/go",
+    "local>timo-reymann/renovate-config//presets/ecosystems/npm",
+    "local>timo-reymann/renovate-config//presets/ecosystems/circleci",
+    "local>timo-reymann/renovate-config//presets/groups/go-openapi-codegen",
+    "local>timo-reymann/renovate-config//presets/groups/go-db-drivers",
+    "local>timo-reymann/renovate-config//presets/groups/go-testcontainers-isolated"
   ],
   "packageRules": [
     {
