@@ -1,6 +1,6 @@
 module github.com/timo-reymann/SchemaNest
 
-go 1.25.0
+go 1.25.11
 
 toolchain go1.26.5
 
@@ -9,9 +9,9 @@ require (
 	github.com/Masterminds/semver v1.5.0
 	github.com/getkin/kin-openapi v0.142.0
 	github.com/gobwas/glob v0.2.3
-	github.com/golang-migrate/migrate/v4 v4.19.1
+	github.com/golang-migrate/migrate/v4 v4.20.1
 	github.com/lib/pq v1.12.3
-	github.com/mattn/go-sqlite3 v1.14.49
+	github.com/mattn/go-sqlite3 v1.14.52
 	github.com/oapi-codegen/runtime v1.5.0
 	github.com/testcontainers/testcontainers-go v0.44.0
 	github.com/urfave/cli/v3 v3.10.1
@@ -45,7 +45,7 @@ require (
 	github.com/go-openapi/swag v0.23.0 // indirect
 	github.com/go-openapi/swag/jsonname v0.26.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3 // indirect
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.1 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/klauspost/compress v1.18.6 // indirect
 	github.com/lufia/plan9stats v0.0.0-20260330125221-c963978e514e // indirect
