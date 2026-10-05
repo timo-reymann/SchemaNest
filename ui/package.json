@@ -38,9 +38,9 @@
     "@react-aria/visually-hidden": "3.8.25",
     "@tailwindcss/postcss": "^4.1.8",
     "clsx": "2.1.1",
-    "framer-motion": "12.42.0",
-    "intl-messageformat": "11.2.11",
-    "mobx": "^6.13.7",
+    "framer-motion": "13.4.4",
+    "intl-messageformat": "12.1.2",
+    "mobx": "^7.0.0",
     "next": "16.2.12",
     "next-themes": "0.4.6",
     "react": "19.2.3",
@@ -77,8 +77,8 @@
     "postcss": "^8.5.4",
     "prettier": "3.9.6",
     "tailwind-variants": "3.2.2",
-    "tailwindcss": "^3.4.16",
-    "typescript": "5.9.3"
+    "tailwindcss": "^4.0.0",
+    "typescript": "7.0.2"
   },
   "packageManager": "yarn@4.17.1"
 }
