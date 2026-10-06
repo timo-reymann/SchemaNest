@@ -2,6 +2,7 @@ module github.com/timo-reymann/SchemaNest
 
 go 1.25.0
 
+
 toolchain go1.27.1
 
 require (
