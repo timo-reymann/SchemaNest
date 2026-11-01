@@ -1,3 +1,20 @@
+## [0.8.11](https://github.com/timo-reymann/SchemaNest/compare/v0.8.10...v0.8.11) (2026-11-01)
+
+### Bug Fixes
+
+* **ci:** use node 24 ([ec04bbb](https://github.com/timo-reymann/SchemaNest/commit/ec04bbbc04a700034065aab0d3b77aca969b935a))
+* **deps:** update dependency intl-messageformat to v11.2.11 ([72224b1](https://github.com/timo-reymann/SchemaNest/commit/72224b1e0652b9ac9e5000c5df1ec1b8bd0f9877))
+* **deps:** update go non-major ([#581](https://github.com/timo-reymann/SchemaNest/issues/581)) ([2f554a5](https://github.com/timo-reymann/SchemaNest/commit/2f554a53147cf8f041ad35adbdea9b47c093008a))
+* **deps:** update go non-major ([#588](https://github.com/timo-reymann/SchemaNest/issues/588)) ([d007eee](https://github.com/timo-reymann/SchemaNest/commit/d007eee08b883bad5e56b944175e6d3d10a18129))
+* **deps:** update module github.com/getkin/kin-openapi to v0.142.0 ([7b855c6](https://github.com/timo-reymann/SchemaNest/commit/7b855c6e49a851d7e32bccadd4b3b5c4d76ed3d0))
+* **deps:** update module github.com/mattn/go-sqlite3 to v1.14.49 ([#575](https://github.com/timo-reymann/SchemaNest/issues/575)) ([2280d71](https://github.com/timo-reymann/SchemaNest/commit/2280d7177651e02ae0f82fa10e5eb87d841345ad))
+* **deps:** update module github.com/oapi-codegen/runtime to v1.5.0 ([c85d4f0](https://github.com/timo-reymann/SchemaNest/commit/c85d4f04ac5ea14f4cc91869e1de8d20458db773))
+* **deps:** update module github.com/testcontainers/testcontainers-go to v0.44.0 ([#576](https://github.com/timo-reymann/SchemaNest/issues/576)) ([d48b093](https://github.com/timo-reymann/SchemaNest/commit/d48b093712f2644cd2b4a1996c8f9960d6812ebb))
+* **deps:** update module github.com/urfave/cli/v3 to v3.10.1 ([31f01d5](https://github.com/timo-reymann/SchemaNest/commit/31f01d58444e6c02b894f49dc09fa2131cb6009a))
+* **deps:** update nextjs monorepo to v16.2.12 ([d6c7755](https://github.com/timo-reymann/SchemaNest/commit/d6c7755dde3a5d2bb34ce1fd0c0797283a081d0d))
+* **deps:** update npm non-major ([#582](https://github.com/timo-reymann/SchemaNest/issues/582)) ([f88b3d0](https://github.com/timo-reymann/SchemaNest/commit/f88b3d0d8ea1b6e242478276b8e433c60c86f77a))
+* **server:** Fix runtime image version ([6eb7cee](https://github.com/timo-reymann/SchemaNest/commit/6eb7cee26be8bfec3b0c6527e847c771e183f88b))
+
 ## [0.8.10](https://github.com/timo-reymann/SchemaNest/compare/v0.8.9...v0.8.10) (2026-07-06)
 
 ### Bug Fixes
