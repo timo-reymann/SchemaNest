@@ -22,7 +22,7 @@ executors:
       - image: timoreymann/ci-go:1.26
   node:
     docker:
-      - image: cimg/node:lts
+      - image: cimg/node:24
 
 jobs:
   test:
